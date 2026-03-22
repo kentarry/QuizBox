@@ -1,0 +1,2169 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kentarry — 溫柔地認識自己</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Gochi+Hand&family=Lora:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fdf9f6;--surface:#ffffff;--ink:#2e2320;--muted:#9a8a84;--border:rgba(46,35,32,.09);
+  --rose:#f2a8b4;--rose-l:#fdeef1;--rose-d:#d96878;
+  --mint:#96d4c0;--mint-l:#e8f7f3;--mint-d:#3daa8a;
+  --lav:#b8a4e0;--lav-l:#f0ecfa;--lav-d:#7b5cc8;
+  --gold:#e8c068;--gold-l:#fdf5e0;--gold-d:#c4922a;
+  --coral:#f0a882;--coral-l:#fdf0e8;--coral-d:#c46840;
+  --sky:#88c4e8;--sky-l:#e4f3fc;--sky-d:#2888c8;
+  --sage:#a4cc94;--sage-l:#edf6e8;--sage-d:#4a9440;
+  --blush:#e8a8c8;--blush-l:#fceef7;--blush-d:#c84888;
+  --sand:#d4c0a4;--sand-l:#f8f4ee;--sand-d:#9a7a4a;
+  --ice:#a4d4e8;--ice-l:#e8f6fc;--ice-d:#2894c4;
+  --peach:#f4c4a0;--peach-l:#fdf4ec;--peach-d:#d4844a;
+  --lilac:#c8aee0;--lilac-l:#f4eefb;--lilac-d:#8850c8;
+}
+
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC','Lora',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;min-height:100vh}
+
+/* ── AMBIENT BLOBS ── */
+.ambient{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.amb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.22;animation:ambf 20s ease-in-out infinite}
+.amb1{width:600px;height:600px;background:var(--rose);top:-150px;left:-100px;animation-duration:18s}
+.amb2{width:500px;height:500px;background:var(--mint);bottom:-100px;right:-120px;animation-duration:22s;animation-direction:reverse}
+.amb3{width:350px;height:350px;background:var(--lav);top:40%;left:35%;animation-duration:14s;animation-delay:3s}
+.amb4{width:300px;height:300px;background:var(--gold);top:15%;right:10%;animation-duration:16s;animation-delay:1s}
+@keyframes ambf{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(20px,-30px) scale(1.07)}66%{transform:translate(-15px,20px) scale(.95)}}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;padding:.9rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(253,249,246,.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(242,168,180,.2)}
+.nav-logo{display:flex;align-items:center;gap:.6rem;cursor:pointer;text-decoration:none}
+.nav-logo-mark{width:32px;height:32px;background:linear-gradient(135deg,var(--rose),var(--lav));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.95rem;box-shadow:0 3px 10px rgba(242,168,180,.4)}
+.nav-logo-text{font-family:'Gochi Hand',cursive;font-size:1.4rem;color:var(--ink)}.nav-logo-text b{color:var(--rose-d)}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.nav-tag{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:.3rem .8rem;background:var(--rose-l);border-radius:100px;color:var(--rose-d)}
+.nav-cta{background:var(--ink);color:var(--bg);border:none;padding:.5rem 1.3rem;border-radius:100px;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .25s;font-family:'Noto Sans TC',sans-serif;letter-spacing:.03em}
+.nav-cta:hover{background:var(--rose-d);transform:translateY(-1px)}
+
+/* ══════════════════════
+   HOME PAGE
+══════════════════════ */
+#pg-home{position:relative;z-index:1}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding:7rem 5rem 4rem;max-width:1400px;margin:0 auto}
+
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--rose-d);background:var(--rose-l);padding:.35rem 1rem;border-radius:100px;margin-bottom:1.8rem;border:1px solid rgba(242,168,180,.3)}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--rose-d);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-h1{font-family:'Lora',serif;font-size:clamp(2.5rem,5vw,4.5rem);line-height:1.12;letter-spacing:-.02em;margin-bottom:1.2rem;font-weight:600}
+.hero-h1 em{font-style:italic;color:var(--rose-d)}
+.hero-h1 .underline{position:relative;display:inline-block}
+.hero-h1 .underline::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:3px;background:linear-gradient(to right,var(--rose-d),var(--lav-d));border-radius:100px}
+.hero-desc{font-size:1.05rem;color:var(--muted);line-height:1.8;max-width:440px;margin-bottom:2.5rem;font-weight:300}
+.hero-btns{display:flex;gap:.9rem;flex-wrap:wrap}
+.btn-primary{background:linear-gradient(135deg,var(--rose-d),var(--lav-d));color:#fff;border:none;padding:.9rem 2.2rem;border-radius:100px;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .3s;font-family:'Noto Sans TC',sans-serif;box-shadow:0 8px 24px rgba(217,104,120,.3);display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(217,104,120,.4)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid rgba(46,35,32,.2);padding:.87rem 1.8rem;border-radius:100px;font-size:.92rem;font-weight:500;cursor:pointer;transition:all .25s;font-family:'Noto Sans TC',sans-serif}
+.btn-ghost:hover{border-color:var(--rose-d);color:var(--rose-d)}
+
+/* hero right — floating cards */
+.hero-right{position:relative;height:480px}
+.hero-float-card{position:absolute;background:var(--surface);border-radius:20px;padding:1.2rem 1.4rem;box-shadow:0 12px 40px rgba(46,35,32,.1);border:1px solid var(--border);transition:transform .3s ease}
+.hfc1{top:0;left:10%;width:220px;animation:hfloat 6s ease-in-out infinite}
+.hfc2{top:120px;right:5%;width:200px;animation:hfloat 8s ease-in-out infinite 1.5s}
+.hfc3{bottom:60px;left:0;width:210px;animation:hfloat 7s ease-in-out infinite 3s}
+.hfc4{bottom:0;right:15%;width:190px;animation:hfloat 9s ease-in-out infinite .8s}
+@keyframes hfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hfc-icon{font-size:1.8rem;margin-bottom:.5rem}
+.hfc-title{font-family:'Lora',serif;font-size:.95rem;font-weight:600;margin-bottom:.25rem;color:var(--ink)}
+.hfc-sub{font-size:.72rem;color:var(--muted);font-weight:400}
+.hfc-tag{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.18rem .55rem;border-radius:100px;margin-top:.5rem}
+
+/* STATS BAR */
+.stats-band{background:var(--ink);color:rgba(253,249,246,.7);padding:1.4rem 5rem;display:flex;justify-content:center;gap:5rem;position:relative;z-index:1}
+.sband-item{text-align:center}
+.sband-num{font-family:'Lora',serif;font-size:1.8rem;font-weight:600;color:var(--rose);line-height:1}
+.sband-lbl{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;margin-top:.2rem;opacity:.6}
+
+/* QUIZ SECTION */
+.quiz-sec{position:relative;z-index:1;padding:5rem 5rem;max-width:1400px;margin:0 auto}
+.sec-header{margin-bottom:3rem}
+.sec-kicker{font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--rose-d);margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem}
+.sec-kicker::before{content:'';width:24px;height:2px;background:var(--rose-d);border-radius:100px}
+.sec-title{font-family:'Lora',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:600;letter-spacing:-.02em;line-height:1.2;margin-bottom:.7rem}
+.sec-title em{font-style:italic;color:var(--rose-d)}
+.sec-desc{font-size:.92rem;color:var(--muted);line-height:1.7;max-width:500px}
+
+/* CATEGORY TABS */
+.cat-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.ctab{display:flex;align-items:center;gap:.4rem;padding:.45rem 1.1rem;border-radius:100px;border:1.5px solid var(--border);background:var(--surface);font-size:.8rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all .22s;font-family:'Noto Sans TC',sans-serif}
+.ctab:hover{border-color:var(--rose);color:var(--rose-d)}
+.ctab.on{background:var(--rose-l);border-color:var(--rose);color:var(--rose-d)}
+
+/* QUIZ CARD GRID — 3 cols */
+.qgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+@media(max-width:1100px){.qgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.qgrid{grid-template-columns:1fr}}
+
+/* QUIZ CARD */
+.qcard{background:var(--surface);border-radius:24px;padding:1.8rem;border:1.5px solid var(--border);cursor:pointer;position:relative;overflow:hidden;transition:transform .32s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;opacity:0;transform:translateY(16px)}
+.qcard.show{animation:cin .5s cubic-bezier(.34,1.56,.64,1) forwards}
+@keyframes cin{to{opacity:1;transform:none}}
+.qcard:hover{transform:translateY(-7px)}
+/* accent stripe */
+.qcard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;border-radius:24px 24px 0 0;transition:height .25s}
+.qcard:hover::before{height:6px}
+
+/* card colour sets */
+.cc-rose::before{background:linear-gradient(to right,var(--rose),var(--rose-d))}.cc-rose:hover{box-shadow:0 16px 44px rgba(242,168,180,.28)}
+.cc-mint::before{background:linear-gradient(to right,var(--mint),var(--mint-d))}.cc-mint:hover{box-shadow:0 16px 44px rgba(150,212,192,.28)}
+.cc-lav::before{background:linear-gradient(to right,var(--lav),var(--lav-d))}.cc-lav:hover{box-shadow:0 16px 44px rgba(184,164,224,.28)}
+.cc-gold::before{background:linear-gradient(to right,var(--gold),var(--gold-d))}.cc-gold:hover{box-shadow:0 16px 44px rgba(232,192,104,.28)}
+.cc-coral::before{background:linear-gradient(to right,var(--coral),var(--coral-d))}.cc-coral:hover{box-shadow:0 16px 44px rgba(240,168,130,.28)}
+.cc-sky::before{background:linear-gradient(to right,var(--sky),var(--sky-d))}.cc-sky:hover{box-shadow:0 16px 44px rgba(136,196,232,.28)}
+.cc-sage::before{background:linear-gradient(to right,var(--sage),var(--sage-d))}.cc-sage:hover{box-shadow:0 16px 44px rgba(164,204,148,.28)}
+.cc-blush::before{background:linear-gradient(to right,var(--blush),var(--blush-d))}.cc-blush:hover{box-shadow:0 16px 44px rgba(232,168,200,.28)}
+.cc-sand::before{background:linear-gradient(to right,var(--sand),var(--sand-d))}.cc-sand:hover{box-shadow:0 16px 44px rgba(212,192,164,.28)}
+.cc-ice::before{background:linear-gradient(to right,var(--ice),var(--ice-d))}.cc-ice:hover{box-shadow:0 16px 44px rgba(164,212,232,.28)}
+.cc-peach::before{background:linear-gradient(to right,var(--peach),var(--peach-d))}.cc-peach:hover{box-shadow:0 16px 44px rgba(244,196,160,.28)}
+.cc-lilac::before{background:linear-gradient(to right,var(--lilac),var(--lilac-d))}.cc-lilac:hover{box-shadow:0 16px 44px rgba(200,174,224,.28)}
+
+.qcard-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.2rem;padding-top:.6rem}
+.qcard-icon{width:50px;height:50px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.qcard:hover .qcard-icon{transform:rotate(-8deg) scale(1.12)}
+
+/* icon bg per color */
+.ic-rose{background:var(--rose-l)}.ic-mint{background:var(--mint-l)}.ic-lav{background:var(--lav-l)}.ic-gold{background:var(--gold-l)}.ic-coral{background:var(--coral-l)}.ic-sky{background:var(--sky-l)}.ic-sage{background:var(--sage-l)}.ic-blush{background:var(--blush-l)}.ic-sand{background:var(--sand-l)}.ic-ice{background:var(--ice-l)}.ic-peach{background:var(--peach-l)}.ic-lilac{background:var(--lilac-l)}
+
+.qcard-badge{font-size:.62rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:.22rem .65rem;border-radius:100px}
+.bd-rose{background:var(--rose-l);color:var(--rose-d)}.bd-mint{background:var(--mint-l);color:var(--mint-d)}.bd-lav{background:var(--lav-l);color:var(--lav-d)}.bd-gold{background:var(--gold-l);color:var(--gold-d)}.bd-coral{background:var(--coral-l);color:var(--coral-d)}.bd-sky{background:var(--sky-l);color:var(--sky-d)}.bd-sage{background:var(--sage-l);color:var(--sage-d)}.bd-blush{background:var(--blush-l);color:var(--blush-d)}.bd-sand{background:var(--sand-l);color:var(--sand-d)}.bd-ice{background:var(--ice-l);color:var(--ice-d)}.bd-peach{background:var(--peach-l);color:var(--peach-d)}.bd-lilac{background:var(--lilac-l);color:var(--lilac-d)}
+
+.qcard-title{font-family:'Lora',serif;font-size:1.15rem;font-weight:600;line-height:1.3;margin-bottom:.5rem}
+.qcard-desc{font-size:.8rem;color:var(--muted);line-height:1.6;margin-bottom:1.1rem}
+.qcard-meta{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.qpill{font-size:.67rem;font-weight:600;color:var(--muted);background:var(--bg);border:1px solid var(--border);border-radius:100px;padding:.18rem .6rem}
+.qcard-footer{display:flex;justify-content:space-between;align-items:center}
+.qcard-start{border:none;color:#fff;padding:.48rem 1.1rem;border-radius:100px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .25s;font-family:'Noto Sans TC',sans-serif;letter-spacing:.02em}
+.qcard-start:hover{transform:scale(1.06);filter:brightness(1.1)}
+.bs-rose{background:var(--rose-d)}.bs-mint{background:var(--mint-d)}.bs-lav{background:var(--lav-d)}.bs-gold{background:var(--gold-d)}.bs-coral{background:var(--coral-d)}.bs-sky{background:var(--sky-d)}.bs-sage{background:var(--sage-d)}.bs-blush{background:var(--blush-d)}.bs-sand{background:var(--sand-d)}.bs-ice{background:var(--ice-d)}.bs-peach{background:var(--peach-d)}.bs-lilac{background:var(--lilac-d)}
+.qcard-count{font-size:.72rem;color:var(--muted);font-weight:600}.qcard-count strong{color:var(--ink)}
+
+/* FOOTER */
+.home-footer{position:relative;z-index:1;background:var(--ink);padding:1.8rem 5rem;display:flex;justify-content:space-between;align-items:center;color:rgba(253,249,246,.45);font-size:.75rem}
+.hf-logo{font-family:'Gochi Hand',cursive;font-size:1.1rem;color:#fff}.hf-logo b{color:var(--rose)}
+
+/* ══════════════════════
+   QUIZ PAGE
+══════════════════════ */
+#pg-quiz{display:none;position:relative;z-index:1;min-height:100vh;padding:5.5rem 2rem 4rem}
+.quiz-shell{max-width:660px;margin:0 auto}
+
+/* top bar */
+.qshell-top{display:flex;align-items:center;gap:1rem;margin-bottom:2rem}
+.back-btn{width:40px;height:40px;border-radius:50%;background:var(--surface);border:1.5px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all .22s;flex-shrink:0}
+.back-btn:hover{background:var(--rose-l);border-color:var(--rose)}
+.prog-wrap{flex:1}
+.prog-top{display:flex;justify-content:space-between;font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:.4rem}
+.prog-track{height:7px;background:rgba(46,35,32,.07);border-radius:100px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(to right,var(--rose-d),var(--lav-d));border-radius:100px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+
+/* Question card */
+.q-box{background:var(--surface);border-radius:28px;padding:2.4rem;border:1.5px solid var(--border);box-shadow:0 6px 32px rgba(46,35,32,.07);animation:qfade .35s ease}
+@keyframes qfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.q-scene{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--rose-d);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem}
+.q-scene::before{content:'';width:20px;height:2px;background:var(--rose-d);border-radius:100px}
+.q-situation{background:linear-gradient(135deg,var(--rose-l),var(--lav-l));border-radius:16px;padding:1.1rem 1.3rem;margin-bottom:1.4rem;font-size:.9rem;line-height:1.7;color:var(--ink);border-left:3px solid var(--rose-d);font-style:italic}
+.q-ask{font-family:'Lora',serif;font-size:clamp(1.05rem,2.5vw,1.35rem);font-weight:600;line-height:1.4;margin-bottom:1.6rem;color:var(--ink)}
+.opts{display:flex;flex-direction:column;gap:.7rem}
+.opt{background:var(--bg);border:2px solid var(--border);border-radius:16px;padding:1rem 1.2rem;cursor:pointer;display:flex;align-items:flex-start;gap:.9rem;transition:all .22s;font-size:.9rem;line-height:1.55;color:var(--ink);font-weight:400}
+.opt:hover{border-color:var(--rose);background:var(--rose-l);transform:translateX(4px)}
+.opt.sel{border-color:var(--rose-d);background:linear-gradient(135deg,var(--rose-l),var(--lav-l));box-shadow:0 4px 14px rgba(217,104,120,.18)}
+.opt.sel .opt-key{background:var(--rose-d);color:#fff;border-color:var(--rose-d)}
+.opt-key{width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(46,35,32,.15);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;transition:all .22s;margin-top:.05rem}
+.opt-body{flex:1}
+
+/* nav */
+.q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.2rem}
+.q-prev{background:var(--surface);border:1.5px solid var(--border);padding:.65rem 1.4rem;border-radius:100px;font-size:.85rem;font-weight:600;cursor:pointer;color:var(--muted);transition:all .2s;font-family:'Noto Sans TC',sans-serif}
+.q-prev:hover{border-color:var(--ink);color:var(--ink)}.q-prev:disabled{opacity:.3;cursor:not-allowed}
+.q-next{background:linear-gradient(135deg,var(--rose-d),var(--lav-d));border:none;padding:.7rem 2rem;border-radius:100px;font-size:.88rem;font-weight:700;color:#fff;cursor:pointer;transition:all .25s;font-family:'Noto Sans TC',sans-serif;box-shadow:0 6px 18px rgba(217,104,120,.35)}
+.q-next:hover{transform:scale(1.04)}.q-next:disabled{opacity:.35;cursor:not-allowed;transform:none}
+
+/* ══════════════════════
+   RESULT PAGE
+══════════════════════ */
+#pg-result{display:none;position:relative;z-index:1;min-height:100vh;padding:5.5rem 2rem 4rem}
+.res-shell{max-width:640px;margin:0 auto}
+.res-hero{text-align:center;margin-bottom:2rem}
+.res-orb{width:96px;height:96px;border-radius:28px;margin:0 auto 1.2rem;display:flex;align-items:center;justify-content:center;font-size:2.8rem;background:linear-gradient(135deg,var(--rose-l),var(--lav-l));box-shadow:0 10px 36px rgba(217,104,120,.28);animation:orbPop .65s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes orbPop{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+.res-cat{font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--rose-d);margin-bottom:.5rem}
+.res-name{font-family:'Lora',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:600;letter-spacing:-.02em;line-height:1.18;margin-bottom:.8rem}
+.res-sub{font-size:.95rem;color:var(--muted);line-height:1.75;max-width:480px;margin:0 auto 2rem;font-weight:300}
+.res-card{background:var(--surface);border-radius:22px;padding:1.8rem;border:1.5px solid var(--border);margin-bottom:1.2rem;box-shadow:0 4px 24px rgba(46,35,32,.06)}
+.res-card-title{font-family:'Lora',serif;font-size:1rem;font-weight:600;margin-bottom:1.2rem;display:flex;align-items:center;gap:.5rem;color:var(--ink)}
+.trait-row{display:flex;align-items:center;gap:.9rem;margin-bottom:.85rem}
+.trait-name{font-size:.78rem;font-weight:700;min-width:80px;color:var(--ink)}
+.trait-track{flex:1;height:7px;background:rgba(46,35,32,.07);border-radius:100px;overflow:hidden}
+.trait-fill{height:100%;border-radius:100px;background:linear-gradient(to right,var(--rose-d),var(--lav-d));width:0;transition:width 1.3s cubic-bezier(.4,0,.2,1) .4s}
+.trait-val{font-size:.72rem;font-weight:700;color:var(--rose-d);min-width:30px;text-align:right}
+.tips-list{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+.tips-list li{display:flex;gap:.7rem;font-size:.86rem;line-height:1.6;color:var(--ink)}
+.tips-list li::before{content:'✦';color:var(--rose-d);font-size:.65rem;flex-shrink:0;margin-top:.22rem}
+.res-actions{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.8rem}
+.ra-main{background:linear-gradient(135deg,var(--rose-d),var(--lav-d));color:#fff;border:none;padding:.85rem 2rem;border-radius:100px;font-size:.9rem;font-weight:700;cursor:pointer;font-family:'Noto Sans TC',sans-serif;box-shadow:0 8px 22px rgba(217,104,120,.35);transition:all .25s}
+.ra-main:hover{transform:translateY(-2px) scale(1.03)}
+.ra-sec{background:var(--surface);color:var(--ink);border:1.5px solid var(--border);padding:.82rem 1.6rem;border-radius:100px;font-size:.88rem;font-weight:600;cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:all .2s}
+.ra-sec:hover{border-color:var(--rose-d);color:var(--rose-d)}
+
+/* utils */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding:6rem 1.5rem 3rem}.hero-right{display:none}.stats-band{padding:1.2rem 1.5rem;gap:2rem;flex-wrap:wrap}.quiz-sec{padding:3.5rem 1.5rem}.home-footer{padding:1.5rem;flex-direction:column;gap:.6rem;text-align:center}}
+@media(max-width:640px){.q-box{padding:1.5rem}.qshell-top{margin-bottom:1.4rem}}
+
+/* ═══════════════════════════════════════════════════════════
+   廣告系統 — 圖片輪播版
+   修改方式：找到下方的 AD_IMAGES 區塊，修改圖片和連結即可
+═══════════════════════════════════════════════════════════ */
+
+/* ── 共用：X 關閉按鈕 ── */
+.ad-close-btn{
+  position:absolute;top:10px;right:10px;width:28px;height:28px;
+  border-radius:50%;background:rgba(0,0,0,.45);border:none;
+  color:#fff;font-size:.9rem;cursor:pointer;display:flex;
+  align-items:center;justify-content:center;
+  transition:background .2s;z-index:10;line-height:1;
+  font-family:sans-serif;
+}
+.ad-close-btn:hover{background:rgba(0,0,0,.7)}
+
+/* ── 共用：廣告標籤（左上角小字）── */
+.ad-badge-img{
+  position:absolute;top:10px;left:10px;
+  font-size:.55rem;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;background:rgba(0,0,0,.5);
+  color:rgba(255,255,255,.8);padding:.18rem .5rem;
+  border-radius:4px;pointer-events:none;z-index:10;
+}
+/* ── 共用：廣告名稱標籤（圖片下方）── */
+.ad-name-bar{
+  background:linear-gradient(135deg,var(--rose-l),var(--lav-l));
+  padding:.55rem 1rem;display:flex;align-items:center;
+  justify-content:space-between;gap:.5rem;
+  border-top:1px solid rgba(217,104,120,.15);
+}
+.ad-name-text{
+  font-size:.82rem;font-weight:700;color:var(--ink);
+  font-family:'Noto Sans TC',sans-serif;
+}
+.ad-name-cta{
+  font-size:.7rem;font-weight:700;color:var(--rose-d);
+  white-space:nowrap;opacity:.8;
+}
+
+/* ── 共用：圖片容器 ── */
+.ad-img-wrap{
+  position:relative;overflow:hidden;border-radius:16px;
+  cursor:pointer;display:block;
+}
+.ad-img-wrap img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .4s ease;
+}
+.ad-img-wrap:hover img{transform:scale(1.03)}
+
+/* ── 共用：輪播圓點 ── */
+.ad-dots{
+  display:flex;justify-content:center;gap:5px;
+  position:absolute;bottom:10px;left:0;right:0;z-index:5;
+}
+.ad-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,.5);border:none;padding:0;cursor:pointer;
+  transition:all .25s;
+}
+.ad-dot.on{background:#fff;width:18px;border-radius:3px;}
+
+/* ════════════════════════════════════════════════
+   位置一：底部常駐橫幅（橫向圖片）
+════════════════════════════════════════════════ */
+#ad-sticky{
+  position:fixed;bottom:0;left:0;right:0;z-index:400;
+  transform:translateY(100%);
+  transition:transform .55s cubic-bezier(.34,1.2,.64,1);
+}
+#ad-sticky.visible{transform:translateY(0)}
+.sticky-img-wrap{
+  width:100%;height:80px;position:relative;
+  overflow:hidden;cursor:pointer;display:block;
+}
+.sticky-img-wrap img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .4s;
+}
+.sticky-img-wrap:hover img{transform:scale(1.02)}
+.sticky-close{
+  position:absolute;top:6px;right:8px;width:26px;height:26px;
+  border-radius:50%;background:rgba(0,0,0,.5);border:none;
+  color:#fff;font-size:.85rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  z-index:10;transition:background .2s;
+}
+.sticky-close:hover{background:rgba(0,0,0,.75)}
+.sticky-ad-label{
+  position:absolute;top:6px;left:8px;
+  font-size:.5rem;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;background:rgba(0,0,0,.45);
+  color:rgba(255,255,255,.75);padding:.15rem .45rem;
+  border-radius:4px;pointer-events:none;z-index:10;
+}
+@media(max-width:640px){.sticky-img-wrap{height:64px}}
+body.ad-on{padding-bottom:80px}
+
+/* ════════════════════════════════════════════════
+   位置二：答題中間插頁（方形 / 直式圖片）
+════════════════════════════════════════════════ */
+.ad-inter{
+  position:relative;border-radius:16px;overflow:hidden;
+  margin:1rem 0;box-shadow:0 6px 24px rgba(46,35,32,.14);
+  animation:adIn .4s cubic-bezier(.34,1.2,.64,1) both;
+}
+@keyframes adIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.inter-img-link{display:block;width:100%;}
+.inter-img-link img{
+  width:100%;max-height:300px;object-fit:cover;display:block;
+  transition:transform .4s;
+}
+.inter-img-link:hover img{transform:scale(1.02)}
+
+/* ════════════════════════════════════════════════
+   位置三：結果頁推廣卡（寬圖）
+════════════════════════════════════════════════ */
+.ad-res-card{
+  position:relative;border-radius:20px;overflow:hidden;
+  margin-bottom:1.2rem;box-shadow:0 8px 32px rgba(46,35,32,.18);
+  animation:orbPop .5s cubic-bezier(.34,1.56,.64,1) .2s both;
+}
+.result-img-link{display:block;width:100%;}
+.result-img-link img{
+  width:100%;max-height:220px;object-fit:cover;display:block;
+  transition:transform .4s;
+}
+.result-img-link:hover img{transform:scale(1.02)}
+</style>
+</head>
+<body>
+
+<div class="ambient">
+  <div class="amb amb1"></div><div class="amb amb2"></div>
+  <div class="amb amb3"></div><div class="amb amb4"></div>
+</div>
+
+<nav>
+  <a class="nav-logo" onclick="goHome()">
+    <div class="nav-logo-mark">🌸</div>
+    <div class="nav-logo-text">Ken<b>tarry</b></div>
+  </a>
+  <div class="nav-right">
+    <span class="nav-tag">25 種測驗</span>
+    <button class="nav-cta" onclick="goHome();setTimeout(()=>document.getElementById('quiz-section').scrollIntoView({behavior:'smooth'}),100)">開始探索</button>
+  </div>
+</nav>
+
+<!-- ═════════════ HOME ═════════════ -->
+<div id="pg-home">
+
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow"><span class="dot"></span>免費 · 情境式 · 科學設計</div>
+      <h1 class="hero-h1">溫柔地，<br>認識<em> <span class="underline">真實的</span></em><br>你自己</h1>
+      <p class="hero-desc">12 種涵蓋心理、性格、職涯與生活的深度測驗。每一道情境題，都是一次溫柔的自我對話。</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="document.getElementById('quiz-section').scrollIntoView({behavior:'smooth'})">選擇測驗 →</button>
+        <button class="btn-ghost" onclick="document.getElementById('quiz-section').scrollIntoView({behavior:'smooth'})">瀏覽全部</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-float-card hfc1">
+        <div class="hfc-icon">🧠</div>
+        <div class="hfc-title">壓力與情緒測驗</div>
+        <div class="hfc-sub">了解你的心理狀態</div>
+        <span class="hfc-tag" style="background:var(--rose-l);color:var(--rose-d)">心理</span>
+      </div>
+      <div class="hero-float-card hfc2">
+        <div class="hfc-icon">🌿</div>
+        <div class="hfc-title">MBTI 性格測試</div>
+        <div class="hfc-sub">16 種人格深度分析</div>
+        <span class="hfc-tag" style="background:var(--mint-l);color:var(--mint-d)">性格</span>
+      </div>
+      <div class="hero-float-card hfc3">
+        <div class="hfc-icon">🧭</div>
+        <div class="hfc-title">職業性向測驗</div>
+        <div class="hfc-sub">找到最適合你的路</div>
+        <span class="hfc-tag" style="background:var(--gold-l);color:var(--gold-d)">職涯</span>
+      </div>
+      <div class="hero-float-card hfc4">
+        <div class="hfc-icon">💌</div>
+        <div class="hfc-title">愛情語言測驗</div>
+        <div class="hfc-sub">你最需要哪種愛</div>
+        <span class="hfc-tag" style="background:var(--blush-l);color:var(--blush-d)">生活</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-band">
+    <div class="sband-item"><div class="sband-num">25</div><div class="sband-lbl">測驗種類</div></div>
+    <div class="sband-item"><div class="sband-num">8–12</div><div class="sband-lbl">題 / 份</div></div>
+    <div class="sband-item"><div class="sband-num">情境式</div><div class="sband-lbl">題目設計</div></div>
+    <div class="sband-item"><div class="sband-num">免費</div><div class="sband-lbl">完全免費</div></div>
+  </div>
+
+  <section class="quiz-sec" id="quiz-section">
+    <div class="sec-header reveal">
+      <div class="sec-kicker">精選測驗</div>
+      <h2 class="sec-title">選一個，<em>開始你的旅程</em></h2>
+      <p class="sec-desc">每一份測驗都以真實情境為出發點，讓你在「如果是我…」的思考中，看見自己真正的模樣。</p>
+    </div>
+    <div class="cat-tabs reveal" id="cat-tabs">
+      <button class="ctab on" data-c="all">✦ 全部</button>
+      <button class="ctab" data-c="心理">🧠 心理情感</button>
+      <button class="ctab" data-c="性格">🌿 性格人格</button>
+      <button class="ctab" data-c="職涯">🧭 職涯能力</button>
+      <button class="ctab" data-c="生活">💫 生活風格</button>
+    </div>
+    <div class="qgrid" id="qgrid"></div>
+  </section>
+
+  <footer class="home-footer">
+    <div class="hf-logo">Ken<b>tarry</b> 🌸</div>
+    <div>© 2025 Kentarry · 溫柔地認識自己</div>
+    <div>以心理學研究為基礎設計</div>
+  </footer>
+</div>
+
+<!-- ═════════════ QUIZ ═════════════ -->
+<div id="pg-quiz">
+  <div class="quiz-shell">
+    <div class="qshell-top">
+      <button class="back-btn" onclick="goHome()">←</button>
+      <div class="prog-wrap">
+        <div class="prog-top"><span id="prog-lbl">第 1 題</span><span id="prog-frac">1 / 10</span></div>
+        <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:10%"></div></div>
+      </div>
+    </div>
+    <div id="q-box-wrap"></div>
+    <div class="q-nav">
+      <button class="q-prev" id="q-prev" onclick="prevQ()">← 上一題</button>
+      <button class="q-next" id="q-next" onclick="nextQ()" disabled>下一題 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════════ RESULT ═════════════ -->
+<div id="pg-result">
+  <div class="res-shell" id="res-shell"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  BLOOMIND QUIZ DATA — 25 Scenario-Based Quizzes
+//  每份測驗均附理論依據、情境題目、計分邏輯、個人化結果
+// ═══════════════════════════════════════════════════════
+
+const DB = [
+
+// ╔══════════════════════════════╗
+// ║  A. 心理與情感類 (7份)       ║
+// ╚══════════════════════════════╝
+
+// ── A1. 壓力評估 ─────────────────────────────────────────
+{id:'stress',cat:'心理',color:'rose',icon:'😮‍💨',
+ title:'你的壓力值有多高？',
+ theory:'Cohen et al. (1983) 感知壓力量表 PSS-10，評估個體對壓力的主觀感知程度',
+ desc:'改編自 Cohen 等人的感知壓力量表（PSS-10），透過 10 個真實生活情境，科學評估你近期的心理壓力程度。',
+ time:'約 5 分鐘',count:'10 題',tag:'PSS 壓力量表',pop:78,cnt:71,
+ qs:[
+  {sc:'剛結束一個充滿會議的忙碌工作日，你走出辦公室。',ask:'這時你的感受最接近哪個描述？',
+   opts:['身體疲憊，但心情還算平靜，能區分疲倦和情緒','整個人被掏空，心裡也跟著沉沉的','還好，偶爾這樣而已，完全能應對','非常疲憊，但不想讓任何人知道']},
+  {sc:'朋友邀你週末一起出去，但你其實很想獨自在家休息。',ask:'你通常會怎麼做？',
+   opts:['誠實說「我需要充電，下次吧」','硬撐著去，怕讓人失望','答應後又後悔，糾結了好幾天','一口答應，去了反而比沒去更累']},
+  {sc:'工作上一個重要計畫突然出問題，需要你今晚加班處理。',ask:'你的第一個內心反應是？',
+   opts:['深呼吸，列出優先順序，一步一步來','腦子一片空白，不知道從哪裡開始','感到煩躁，但還是逼自己坐下來','胃部一緊，擔心會出現更多連鎖問題']},
+  {sc:'你已經連續三個週末都沒有真正休息，只是換個地方繼續工作。',ask:'這件事對你來說意味著什麼？',
+   opts:['代表我最近確實太忙，應該調整一下','理所當然，生活本來就是這樣','感到疲憊，但說不清楚哪裡出了問題','開始覺得事情失控，有點莫名焦慮']},
+  {sc:'睡前，你發現腦子停不下來，一直在想明天要做的事。',ask:'這種情況多久發生一次？',
+   opts:['偶爾，通常能在 15 分鐘內放鬆入睡','幾乎每天，但我已經習慣了','不是每天，但發生時會影響隔天狀態','幾乎每晚，睡眠品質因此很差']},
+  {sc:'有人對你說了一句負面的評論，只是一個不算大的事情。',ask:'你通常的反應是？',
+   opts:['聽進去，判斷是否有建設性，然後放下','反覆想了很多次，內心非常難受','感到有點不舒服，幾小時後就沒事了','直接防禦，或把情緒壓下去不表現出來']},
+  {sc:'你注意到自己最近對身邊的人比平常更不耐煩，說話也更刻薄。',ask:'你怎麼解釋這個現象？',
+   opts:['可能是累了，但還在可控範圍內','這是我壓力過大的明顯信號，需要休息','沒特別想過，可能只是心情不好','我試著控制，但有時候就是控制不住']},
+  {sc:'你有一個讓你很有壓力的重要簡報，在它開始之前的一小時。',ask:'你通常處於什麼狀態？',
+   opts:['有點緊張，但能夠準備好迎接','胸口發悶，很難集中精神閱讀資料','小幅緊張，做幾次深呼吸就能調整','焦慮到影響了前一天晚上的睡眠']},
+  {sc:'週末終於來了，但你發現自己根本沒辦法放鬆，腦子還是在轉。',ask:'這個情況讓你有什麼感受？',
+   opts:['有點惱火，但接受這只是暫時的狀態','感到沮喪，這種情況已持續一段時間','覺得正常，工作的人本來就是這樣','對未來感到隱隱不安，不確定何時能改善']},
+  {sc:'如果用一個畫面描述你最近的心理狀態，你會選哪一個？',ask:'哪個最像你現在的感覺？',
+   opts:['平靜的湖面，偶爾有漣漪但很快恢復','被浪打來打去的浮板，起伏不定','還能站穩的船，但海浪越來越大','隨時快要沉下去的木筏']},
+ ],
+ score(a){const w=[0,1,2,3];let s=0;a.forEach(v=>s+=w[v-1]);return s},
+ result(s){
+  if(s<=8)return{emoji:'😌',name:'壓力低 — 你很自在',
+   sub:'根據 PSS-10 量表，你目前的壓力感知處於健康低位。你對生活有良好的掌控感，情緒調節能力出色。',
+   traits:[{n:'掌控感',v:88},{n:'情緒穩定',v:85},{n:'身心平衡',v:90},{n:'復原力',v:84}],
+   tips:['繼續保持你的調適習慣，它們在發揮作用','偶爾也幫助身邊壓力較高的朋友','注意不要因為「感覺還好」就忽視小信號']}
+  if(s<=18)return{emoji:'🌤️',name:'壓力中等 — 留意平衡',
+   sub:'你的壓力處於 PSS 中等區間，有些情況讓你感到吃力，這是身心發出的溫柔提醒，適度調整節奏很重要。',
+   traits:[{n:'掌控感',v:68},{n:'情緒穩定',v:58},{n:'身心平衡',v:62},{n:'復原力',v:65}],
+   tips:['每天留 15 分鐘做「什麼都不想」的靜默時間','嘗試腹式呼吸：吸 4 秒、屏 4 秒、吐 8 秒','把讓你焦慮的事寫下來，分成能控制／不能控制']}
+  return{emoji:'🌧️',name:'壓力高 — 請好好照顧自己',
+   sub:'你的得分落在 PSS 高壓區間。你的身心都在發出信號，這不是軟弱，是勇敢承認自己需要支持的時刻。',
+   traits:[{n:'掌控感',v:30},{n:'情緒穩定',v:28},{n:'身心平衡',v:25},{n:'復原力',v:38}],
+   tips:['每天只要做好三件事，其他的暫時放下','主動告訴一個信任的人你的狀態，不要獨撐','規律運動 20 分鐘對壓力的神經生理效果有實證支持','若持續兩週以上建議諮詢心理師，這是明智的選擇']}
+ }
+},
+
+// ── A2. 情緒調節風格 ──────────────────────────────────────
+{id:'emotion',cat:'心理',color:'lav',icon:'🌊',
+ title:'你如何面對自己的情緒？',
+ theory:'Gross & John (2003) 情緒調節問卷（ERQ），區分認知重評與表達抑制兩大策略',
+ desc:'根據 Gross & John 的情緒調節研究，透過 10 個真實情境，探索你的情緒處理模式是「認知重評」還是「表達抑制」類型。',
+ time:'約 6 分鐘',count:'10 題',tag:'情緒調節 ERQ',pop:74,cnt:68,
+ qs:[
+  {sc:'你在咖啡店等人，對方遲到了半小時也沒有任何通知。',ask:'你在等待過程中最可能的內心狀態是？',
+   opts:['焦慮升起，但我試著轉換想法：也許有原因','開始幻想各種最壞的情境，越想越不安','有點不耐煩，但壓住不讓自己想太多','平靜地等待，等對方說明再評斷']},
+  {sc:'你把一件重要的事搞砸了，影響到了整個團隊的進度。',ask:'事後你通常怎麼對待自己？',
+   opts:['反省哪裡出了問題，但不讓自責延續太久','長時間自責，覺得自己真的很差勁','快速道歉補救，然後努力不去多想','把情緒藏起來，繼續假裝一切如常']},
+  {sc:'你看到一則讓你非常難過的新聞，例如天災或社會不公。',ask:'你通常怎麼處理這份沉重的感受？',
+   opts:['允許自己感受，然後去做一件能讓自己好過的事','沉浸很久，很難把情緒從事件上移開','盡量不去看這類新聞，不讓自己接觸到','找一件可以做的小事（捐款、分享）轉化這個感受']},
+  {sc:'你和某個親近的人發生了誤解，對方似乎在生你的氣，但沒說出來。',ask:'你會怎麼做？',
+   opts:['直接問對方「你還好嗎？發生什麼事了？」','在腦子裡不斷猜測，越想越焦慮不安','等對方先開口，我不會主動去碰這個話題','假裝沒注意到，繼續照常互動']},
+  {sc:'你獨自在家，突然感到一陣莫名的空虛或低落，找不到原因。',ask:'你最可能的反應是？',
+   opts:['讓自己靜靜感受，也許散散步或寫寫日記','立刻找事情做，絕對不讓自己閒著','找人說話，需要有人陪著才能好過','長時間躺著滑手機，任由情緒漂著']},
+  {sc:'你在公開場合被別人批評，讓你感到非常難堪。',ask:'這個情境最容易讓你出現哪種反應？',
+   opts:['當下不舒服，但之後能理性地重新評估這件事','很長時間後還是會在心裡反覆播放這一幕','表面保持冷靜，但內心已經翻騰','回家後才讓情緒完全爆發出來']},
+  {sc:'朋友向你傾訴了很多負面情緒，你在聆聽後感到非常疲憊。',ask:'你通常怎麼處理這種感受？',
+   opts:['承認自己需要一點時間恢復，這是正常的','吸收了對方的情緒，好幾天都受其影響','繼續假裝沒事，等下次見面再說','感到內疚，擔心自己不夠支持對方']},
+  {sc:'你設定了一個努力三週的目標，但沒有看到任何成果。',ask:'你最容易出現的情緒反應是？',
+   opts:['挫折，但重新評估方法，思考哪裡可以調整','開始懷疑自己根本沒有能力做這件事','換個目標，不想繼續承受這份失落感','暫時放下，給自己一段情緒空間再說']},
+  {sc:'你突然收到一個比預期還要好的好消息。',ask:'你通常如何回應這份喜悅？',
+   opts:['真實地表達出來，開心就開心','先懷疑是否搞錯，擔心太早高興','很想分享，但怕別人覺得在炫耀','享受當下，但很快把情緒調回平常']},
+  {sc:'睡前，你回顧今天，發現有些對話讓你感到不舒服。',ask:'你通常怎麼結束這一天？',
+   opts:['把不舒服的點想清楚，允許自己放下','反覆想這些對話，輾轉難以入睡','刷手機轉移注意力，讓大腦先停下來','告訴自己「今天就這樣了」，接受它']},
+ ],
+ score(a){const cnt=[0,0,0,0];a.forEach(v=>cnt[v-1]++);return cnt.indexOf(Math.max(...cnt))},
+ result(s){
+  const R=[
+   {emoji:'🌿',name:'認知重評型（Cognitive Reappraisal）',
+    sub:'你傾向在感受情緒之前，先重新詮釋事件的意義（這是 Gross 理論中最健康的調節策略）。你能夠保持情緒彈性，不輕易被情緒淹沒，長期心理健康指標較佳。',
+    traits:[{n:'情緒彈性',v:90},{n:'自我同情',v:85},{n:'情緒整合',v:88},{n:'調節效能',v:86}],
+    tips:['繼續練習在情緒激動時暫停並問：「還有哪種解讀方式？」','研究顯示認知重評者人際關係品質更好，善用這個優勢','偶爾允許自己直接感受，不一定每次都要先重評']},
+   {emoji:'🌊',name:'情緒淹沒型（Emotional Flooding）',
+    sub:'你的情緒反應強烈而深入，容易沉浸在感受中。神經科學研究顯示，強烈的情緒體驗會短暫影響前額葉的調節功能，這不是你的錯，而是需要練習的技能。',
+    traits:[{n:'情感深度',v:92},{n:'情緒辨識',v:65},{n:'恢復速度',v:40},{n:'情緒容忍',v:42}],
+    tips:['練習「情緒衝浪」：觀察情緒的升起和退去，不試圖阻止','在情緒高峰時，先不做任何重要決定（等 24 小時）','身體技術有效：冷水洗臉、深呼吸能啟動副交感神經']},
+   {emoji:'🔒',name:'表達抑制型（Expressive Suppression）',
+    sub:'你習慣在感受情緒後，抑制它的表達。Gross 的研究發現，長期表達抑制會增加心血管負擔，並降低人際親密感，但你的外表控制能力是真實的優點。',
+    traits:[{n:'情緒辨識',v:55},{n:'外表控制',v:88},{n:'情緒表達',v:28},{n:'內在真實',v:42}],
+    tips:['從「小感受」開始練習說出口，例如「今天有點累」','找到一個安全對象練習真實表達，哪怕只是一個人','寫私人日記是低風險的情緒表達出口，效果有實證']},
+   {emoji:'🌫️',name:'情緒迴避型（Avoidant Coping）',
+    sub:'你傾向透過行動或分心來迴避直接接觸情緒。研究顯示，情緒迴避短期有效，但未消化的情緒往往在某個時間點以更大的方式出現。',
+    traits:[{n:'行動力',v:85},{n:'情緒接觸',v:30},{n:'自我覺察',v:42},{n:'情緒消化',v:32}],
+    tips:['試著每天 5 分鐘靜坐，只是問自己：今天感受如何？','「承認情緒存在」不等於「被情緒控制」','正念冥想（MBSR）對迴避型有良好的實證效果']}
+  ];return R[s];
+ }
+},
+
+// ── A3. 依附風格 ──────────────────────────────────────────
+{id:'attach',cat:'心理',color:'blush',icon:'💞',
+ title:'你的親密關係依附風格',
+ theory:'Bowlby (1969) 依附理論 + Bartholomew & Horowitz (1991) 成人四型依附模型，基於「自我模型」與「他人模型」兩個維度',
+ desc:'根據 Bartholomew & Horowitz 的成人依附四型模型（安全、焦慮、拒絕迴避、恐懼迴避），透過情境題找出你的依附模式。',
+ time:'約 6 分鐘',count:'10 題',tag:'成人依附理論',pop:88,cnt:84,
+ qs:[
+  {sc:'你傳了一則訊息給很在意的人，過了兩小時還沒收到回覆。',ask:'你最有可能的內心反應是？',
+   opts:['注意到了，但繼續做自己的事，知道對方可能在忙','開始擔心是不是說錯了什麼，反覆看自己的訊息','完全不在意，對方一定有在忙，我不需要立刻回應','感到不安，但刻意壓制這個感受，不讓自己多想']},
+  {sc:'伴侶說需要一個人的時間，這個週末想自己待著充電。',ask:'這句話讓你有什麼感覺？',
+   opts:['完全理解，我也很享受個人的獨處空間','心裡有點慌，擔心對方是否不再喜歡我','感到輕鬆，我也剛好想做自己的事','表面說沒關係，但內心有點隱隱受傷']},
+  {sc:'剛開始交往不久，對方主動說「我非常在乎你，很慶幸遇到你」。',ask:'你內心的第一個反應是？',
+   opts:['感到溫暖，也真實地回應自己同樣的感受','又喜悅又不安，怕之後期望越高失望越深','感到有點壓迫感，覺得太快了','感動，但立刻擔心自己是否能讓對方持續這樣在乎']},
+  {sc:'你們吵了一架，還沒解決，對方先沉默不說話了。',ask:'你通常接下來會做什麼？',
+   opts:['給彼此一些冷靜時間，之後主動提出談清楚','不斷嘗試獲得回應，沉默讓我非常不安','也選擇沉默，不想先開口，等對方來找我','心裡很難受，但繼續若無其事過日子']},
+  {sc:'你的伴侶最近很忙，一個月以來陪伴的時間明顯減少了。',ask:'這對你的影響是？',
+   opts:['雖然想念，但能夠理解這只是暫時的階段','開始質疑這段關係是不是出了什麼問題','反而享受多了一點的個人空間和自由','表面接受，但內心越來越委屈和落寞']},
+  {sc:'你非常在意某人，但你察覺對方對你的在意程度比你淺。',ask:'你最可能的選擇是？',
+   opts:['坦率地和對方聊一聊這個感受和現況','更努力付出，想辦法讓對方更在乎我','逐漸保持距離，保護自己不要受更深的傷','繼續假裝沒問題，希望時間能改變什麼']},
+  {sc:'你的前任突然聯絡你，說很想你，想重新開始。',ask:'你最直接的心理反應是？',
+   opts:['認真思考雙方的實際情況再做決定','心裡掀起大波瀾，又想要又害怕再次受傷','感到冷靜，清楚知道自己不想回去','感到困惑，不確定自己真正想要的是什麼']},
+  {sc:'朋友問你：「你覺得自己是一個在感情裡很容易受傷的人嗎？」',ask:'你最誠實的回答是？',
+   opts:['不太容易，我對感情有清楚的自我認識','是的，我很在乎，所以很怕失去','還好，我不太讓感情影響到自己的生活','說不清楚，有時很在乎，有時又想保持距離']},
+  {sc:'你很投入了一段感情，但最終還是以分手告終。',ask:'你通常如何走過這段失落期？',
+   opts:['給自己時間悲傷，然後慢慢回到生活軌道','很長時間陷在其中，很難重新找回生活重心','相對快地調整，用充實自己轉移注意力','在「想念他」和「對他生氣」之間反覆搖擺']},
+  {sc:'你和伴侶有一段非常深度的、脆弱的對話。',ask:'結束後你的感受是？',
+   opts:['感到更靠近對方了，這種連結讓我安心','很溫暖，但也有點擔心暴露太多會被傷害','有點不自在，不太習慣這麼深度的情感接觸','很感動，但之後反而想保持更多距離']},
+ ],
+ score(a){const cnt=[0,0,0,0];a.forEach(v=>cnt[v-1]++);return cnt.indexOf(Math.max(...cnt))},
+ result(s){
+  const R=[
+   {emoji:'🌿',name:'安全型 Secure Attachment',
+    sub:'Bartholomew 模型中的安全型，代表正向的自我模型（我有價值）和正向的他人模型（他人是可信的）。你在關係中能夠真實投入，也保有自我，是最有利於長期關係品質的依附類型。',
+    traits:[{n:'安全感',v:90},{n:'情感真實',v:85},{n:'自主性',v:80},{n:'信任他人',v:88}],
+    tips:['你穩定的依附模式是關係中的基礎','對依附類型不同的伴侶多一點理解和耐心','研究顯示安全型者的長期關係滿意度顯著較高']},
+   {emoji:'😰',name:'焦慮型 Anxious Attachment',
+    sub:'對應 Bartholomew 模型的「癡迷型」，具負向自我模型（我不夠好）與正向他人模型（他人是我需要的）。研究顯示焦慮依附者對威脅信號的杏仁核活化程度較高，容易過度警覺。',
+    traits:[{n:'情感強度',v:90},{n:'安全感',v:32},{n:'自主性',v:30},{n:'信任自己',v:38}],
+    tips:['練習「自我安撫」：在焦慮時問「現在有具體的危險嗎？」','把對安全感的需求清楚說出來，而不是用行為試探','CBT（認知行為療法）對焦慮依附有很好的實證效果']},
+   {emoji:'🦋',name:'拒絕迴避型 Dismissing Avoidant',
+    sub:'Bartholomew 模型中具正向自我模型（我能獨立）和負向他人模型（他人是不可靠的）。研究顯示此型者強調自給自足，傾向壓抑依附需求，但這需要持續的情緒管理能量。',
+    traits:[{n:'獨立性',v:93},{n:'安全感',v:60},{n:'情感表達',v:28},{n:'信任他人',v:32}],
+    tips:['你的獨立是優點，但也允許自己偶爾需要他人','練習在安全的情況下，讓自己被看見和被支持','「靠近他人」不等於失去獨立，兩者可以共存']},
+   {emoji:'🌀',name:'恐懼迴避型 Fearful Avoidant',
+    sub:'Bartholomew 模型中負向自我模型與負向他人模型的組合，同時渴望親密又恐懼受傷。研究顯示此型與早期創傷經驗較相關，也更容易出現情緒調節困難。',
+    traits:[{n:'情感複雜度',v:88},{n:'安全感',v:28},{n:'一致性',v:25},{n:'信任他人',v:30}],
+    tips:['建議嘗試依附取向的心理治療，效果有充分實證','從小的信任練習開始，建立對自己感受的信任','給自己充分的時間，複雜的模式是可以改變的']}
+  ];return R[s];
+ }
+},
+
+// ── A4. 情緒智力 EQ ──────────────────────────────────────
+{id:'eq',cat:'心理',color:'coral',icon:'💜',
+ title:'你的情緒智力有多高？',
+ theory:'Mayer & Salovey (1990, 1997) 情緒智力四分支模型：知覺、整合、理解、調節情緒；並參考 Bar-On (1997) EQ-i 量表',
+ desc:'依據 Mayer & Salovey 情緒智力四分支模型（知覺、整合、理解、調節），透過情境題評估你的情緒智力各面向。',
+ time:'約 6 分鐘',count:'10 題',tag:'Mayer-Salovey EI',pop:82,cnt:77,
+ qs:[
+  {sc:'你剛開完一個讓你感到沮喪的會議，下一個任務是需要創意的文案工作。',ask:'你通常如何轉換狀態？',
+   opts:['意識到情緒的存在，讓它短暫停留再繼續工作','切換不了，沮喪的心情影響了接下來的工作品質','直接強迫自己開始，靠紀律推動','先做幾個簡單的任務，等情緒自然消退']},
+  {sc:'你的好朋友說完一段話後，雖然面帶笑容，但你感覺哪裡不太對。',ask:'你的直覺準確率通常是？',
+   opts:['很高，我常常能從細節感知到對方未說出口的感受','有時準確，但我不確定是直覺還是過度解讀','不太準，我比較依賴別人直接說出來','幾乎沒辦法，我不擅長讀出表面訊息以外的東西']},
+  {sc:'你在爭論中被對方的一句話徹底激怒了。',ask:'你最可能的反應是？',
+   opts:['感覺到憤怒升起，深呼吸後選擇如何回應','直接爆發，說了一些後來後悔的話','完全壓制，表面冷靜但內心沸騰','暫時離開現場，稍後再回來談']},
+  {sc:'你需要理解為什麼一個朋友在不該生氣的時候突然發飆。',ask:'你的分析方式通常是？',
+   opts:['試著連結他最近發生的事和這次反應的關係','感到困惑，不知道怎麼理解這個情緒','直接問他：「你怎麼了？發生什麼事？」','先讓他冷靜，等他想說的時候再說']},
+  {sc:'你在表達一個對你而言非常重要的感受，但對方似乎沒有聽進去。',ask:'你會怎麼做？',
+   opts:['換一種方式重新說，試著讓對方更容易理解','感到受傷，可能就不再嘗試了','加強語氣，確保對方理解這件事對我的重量','接受對方的限制，找其他人傾訴這件事']},
+  {sc:'你感到非常焦慮，但又找不到明確的原因。',ask:'你通常怎麼處理這種「說不清楚」的情緒？',
+   opts:['坐下來試著找出是哪些事觸發了這份焦慮','讓它停在那裡，等它自己過去','找事做讓自己忙起來，轉移注意力','告訴自己「不要想」，試圖用意志力壓制']},
+  {sc:'一個你很在意的人批評了你花了很多心力的工作。',ask:'你接收批評的方式通常是？',
+   opts:['感到難受，但能分辨「這個反饋」和「我這個人」','難以區分，批評工作讓我感覺是在批評我','立刻防禦，想解釋或反駁','表面接受，但內心非常不舒服']},
+  {sc:'你發現團隊成員最近沉默寡言，表現也開始下滑。',ask:'你的第一個行動是？',
+   opts:['私下關心問候，了解他最近的狀況','等他自己說，不想打擾別人的私人事務','直接告訴他表現出了問題，請他調整','觀察多一段時間，確認這不只是偶發情況']},
+  {sc:'你需要在重要的談判中保持冷靜，但對方的態度讓你非常不舒服。',ask:'你如何調節自己的狀態？',
+   opts:['在心裡重新框架：「這是他的策略，不是針對我」','很難，那份不舒服讓我難以維持最好的狀態','把注意力放在目標上，強迫自己聚焦','暫停一下，說「讓我想一想」，爭取時間調整']},
+  {sc:'你完成了一個讓你非常自豪的作品，但發表後反應平淡。',ask:'你如何維持動力繼續創作？',
+   opts:['讓自己感受失落，然後重新連結做這件事的內在動機','動力受到明顯影響，需要一段時間才能恢復','外部反饋對我不那麼重要，我繼續做','感到沮喪，思考是否值得繼續']},
+ ],
+ score(a){const w=[3,2,1,0];let s=0;a.forEach(v=>s+=w[v-1]);return s},
+ result(s){
+  if(s>=22)return{emoji:'💜',name:'情緒智力高 — 你的情感是一種智慧',
+   sub:'根據 Mayer-Salovey 模型，你在情緒知覺、整合、理解和調節四個面向都展現出高度能力。研究顯示高 EQ 者在領導力、人際關係和心理健康指標上都有顯著優勢。',
+   traits:[{n:'情緒知覺',v:90},{n:'情緒整合',v:87},{n:'情緒理解',v:88},{n:'情緒調節',v:85}],
+   tips:['你的 EQ 是一種可以持續深化的領導力','在高壓情境中，你的情緒調節能力是最大的資產','考慮協助身邊的人發展情緒智力']}
+  if(s>=12)return{emoji:'🌱',name:'情緒智力中等 — 持續成長中',
+   sub:'你在情緒管理上有不錯的基礎，也有可以進一步強化的面向。EQ 是可以透過刻意練習提升的能力，這一點已有大量研究支持。',
+   traits:[{n:'情緒知覺',v:68},{n:'情緒整合',v:60},{n:'情緒理解',v:72},{n:'情緒調節',v:65}],
+   tips:['練習情緒命名：用精確的詞彙描述感受（不只是「好」或「不好」）','嘗試「非暴力溝通（NVC）」的表達句型','在衝突中，先重複對方說的話再回應']}
+  return{emoji:'🌿',name:'情緒智力待發展 — 這是起點',
+   sub:'情緒智力是可以學習的技能。Mayer 的研究指出，EQ 不是固定的特質而是可以訓練的能力。目前在辨識或表達情緒上感到困難，是成長最有潛力的起點。',
+   traits:[{n:'情緒知覺',v:40},{n:'情緒整合',v:35},{n:'情緒理解',v:45},{n:'情緒調節',v:38}],
+   tips:['從每天命名一個情緒開始：「現在我感到___」','閱讀《EQ：決定一生幸福與成就的永恆力量》（Goleman）','考慮找心理諮詢師協助情緒能力的探索']}
+ }
+},
+
+// ── A5. 心理韌性 ─────────────────────────────────────────
+{id:'resilience',cat:'心理',color:'sage',icon:'🌱',
+ title:'你的心理韌性有多強？',
+ theory:'Connor & Davidson (2003) CD-RISC 韌性量表，測量個體在逆境中恢復與成長的能力；結合 Bonanno (2004) 的韌性路徑研究',
+ desc:'根據 Connor-Davidson 韌性量表（CD-RISC）改編，透過情境題評估你面對逆境時的恢復力、適應力與成長潛力。',
+ time:'約 7 分鐘',count:'10 題',tag:'CD-RISC 韌性量表',pop:69,cnt:65,
+ qs:[
+  {sc:'你努力了三個月的計畫，在最後一刻因為不可抗力的原因必須取消。',ask:'在這件事發生後的一週，你的狀態通常是？',
+   opts:['難過了幾天，但開始想接下來可以怎麼做','需要很長的時間才能從這種失落中站起來','幾乎沒有太大的情緒波動，接受就繼續','沮喪，但這也讓我開始思考是否有更好的方向']},
+  {sc:'你在一個重要時期遭遇了多重打擊——工作、感情、健康同時出問題。',ask:'在壓力疊加時，你通常的應對方式是？',
+   opts:['嘗試找出最緊急的那一件事先處理','感到幾乎無法承受，需要外部幫助才能撐住','比平常更平靜——壓力反而讓我更專注','情緒崩潰，需要一段時間才能重新站起來']},
+  {sc:'你曾經歷過一個讓你非常痛苦的時期，比如失業、失戀或喪失。',ask:'你如何描述自己從那段時期走出來的方式？',
+   opts:['慢慢地，但我找到了新的意義和方向','還沒完全走出來，那段經歷還是會影響現在','我走出來了，但沒有特別大的改變','那段經歷以某種方式讓我變得更強大了']},
+  {sc:'你接受了一個遠超過目前能力的新挑戰，你感到明顯的不確定感。',ask:'你對這份「不確定」的態度是？',
+   opts:['把它視為成長的機會，不確定感是學習的起點','感到相當焦慮，不確定感讓我很難開始行動','接受它是常態，告訴自己邊做邊學就好','把它分解成小步驟，降低整體的不確定感']},
+  {sc:'你的一個很好的朋友或前同事取得了你也渴望的成就。',ask:'你的內心反應最接近哪個？',
+   opts:['真心替他高興，也用這個激勵自己繼續努力','感到有點羨慕，但試著不去太深想','感到受刺激，這讓我更想達成同樣的事','有點失落，但告訴自己時機不同']},
+  {sc:'你必須獨自面對一個你過去從未遇過的困境，沒有人可以問。',ask:'你最自然的反應是？',
+   opts:['試著靠自己找資源或方法，相信自己能想出辦法','感到不知所措，希望有人可以告訴我該怎麼做','把它當作一個有趣的問題來解決','承認自己不知道，但接受「摸索」是過程的一部分']},
+  {sc:'你被要求對一個你認為不公平的結果做出接受。',ask:'你通常如何和「不公平感」共處？',
+   opts:['感受這份憤怒，然後評估我能夠改變什麼','很難放下，不公平感讓我持續感到憤怒','快速接受，把精力放在接下來能做的事','用行動回應，試圖改變這個不公平的情況']},
+  {sc:'你剛犯了一個讓你感到非常羞愧的錯誤，大家都知道了。',ask:'你如何恢復自我感？',
+   opts:['承認錯誤，道歉，然後提醒自己錯誤不定義我','羞愧感持續很久，很難讓它過去','快速轉向，專注在補救行動','允許自己一段時間的自責，然後讓它過去']},
+  {sc:'你嘗試了一件很在意的事，但結果遠低於你的預期。',ask:'你對自己說了什麼？',
+   opts:['「這次沒成功，下次我會知道怎麼做得更好。」','「我就知道我不夠好。」','「至少我試過了，這很重要。」','「讓我搞清楚哪裡出了問題，重新來過。」']},
+  {sc:'你的生活在短期內需要做出很大的改變，你幾乎沒有緩衝的時間。',ask:'你面對這種急速變化的方式是？',
+   opts:['接受變化是生命的常態，盡快找到新的節奏','感到非常不安，需要時間才能調整','把能量集中在能控制的部分，其他先放下','向信任的人尋求支持，不獨自承受這個轉變']},
+ ],
+ score(a){const w=[3,0,1,2];let s=0;a.forEach(v=>s+=w[v-1]);return s},
+ result(s){
+  if(s>=22)return{emoji:'🌳',name:'高度韌性 — 你是一棵能彎不會斷的樹',
+   sub:'根據 CD-RISC 指標，你展現出高度的心理韌性。Bonanno 的研究指出，高韌性者能在面對逆境時維持相對穩定的功能，並常常從困境中發現成長的契機（PTG：創傷後成長）。',
+   traits:[{n:'逆境恢復',v:90},{n:'適應彈性',v:88},{n:'自我效能',v:85},{n:'意義建構',v:87}],
+   tips:['你的韌性是真實的資源，在困難時記得提醒自己','考慮分享你的經驗，幫助身邊韌性較低的朋友','持續培養社會支持網絡，這是韌性最重要的保護因子']}
+  if(s>=12)return{emoji:'🌱',name:'中等韌性 — 你在持續成長',
+   sub:'你在面對逆境時有一定的恢復能力，但在某些情境下可能需要更多時間或支持。韌性不是天生的，研究顯示它可以透過練習和刻意的心理技巧來提升。',
+   traits:[{n:'逆境恢復',v:65},{n:'適應彈性',v:62},{n:'自我效能',v:68},{n:'意義建構',v:58}],
+   tips:['練習「成長型心態」：用「我還不會，但我可以學」取代「我做不到」','建立強健的社交支持網絡是提升韌性最有效的方法','正念練習（每天 10 分鐘）有實證能提升韌性指標']}
+  return{emoji:'🌿',name:'韌性成長空間大 — 這是你的起點',
+   sub:'你目前在面對逆境時感到吃力，這不代表你脆弱，而代表你尚未發展出足夠的心理工具。韌性的好消息是：它是可以學習和培養的能力。',
+   traits:[{n:'逆境恢復',v:40},{n:'適應彈性',v:35},{n:'自我效能',v:42},{n:'意義建構',v:38}],
+   tips:['從每週設定一個小挑戰開始，逐步建立「我可以的」的感受','尋求心理諮詢是提升韌性最有效的起點之一','研究表明，社會連結是韌性最強的預測因子，先維護好一段關係']}
+ }
+},
+
+// ── A6. 自尊量表 ──────────────────────────────────────────
+{id:'selfesteem',cat:'心理',color:'peach',icon:'🪞',
+ title:'你的自我價值感如何？',
+ theory:'Rosenberg (1965) 自尊量表（RSE），全球最廣泛使用的自尊測量工具，測量整體的自我接納與自我價值感',
+ desc:'改編自 Rosenberg 自尊量表（RSE）並以情境題呈現，測量你對自身價值的整體感知與在不同場景中的自我接納程度。',
+ time:'約 5 分鐘',count:'8 題',tag:'Rosenberg 自尊量表',pop:71,cnt:69,
+ qs:[
+  {sc:'你正在一個聚會上，周圍都是看起來非常優秀的人：高學歷、成就亮眼。',ask:'你最可能的內心狀態是？',
+   opts:['自在，我有自己的優點，不需要比較','有點不自信，覺得自己沒什麼特別的','欣賞他們，但不會因此覺得自己差','感到焦慮，擔心自己顯得不夠好']},
+  {sc:'你做了一件你認為正確的決定，但周圍的人都不認同。',ask:'面對多數人的反對，你通常的立場是？',
+   opts:['雖然有壓力，但能夠堅持自己的判斷','開始懷疑自己是不是真的錯了','聆聽後重新評估，如果認為對就繼續堅持','傾向調整，不舒服與多數人不同的感覺']},
+  {sc:'你最近犯了一個讓自己懊惱的錯誤。',ask:'你通常如何看待這個錯誤？',
+   opts:['承認錯誤，但不讓它定義我的整體價值','感到羞愧，這個錯誤反映了我這個人的問題','分析哪裡出了問題，下次怎麼改進','努力說服自己這不是大事，但心裡很在意']},
+  {sc:'有人對你說了一句真誠的讚美，說你某件事做得非常好。',ask:'你通常如何接受這個讚美？',
+   opts:['謝謝，我也覺得這件事我做得不錯','有點不自在，傾向貶低說「只是運氣好」','自然地接受，這確認了我對自己的認識','很開心，因為我有點依賴這樣的肯定']},
+  {sc:'你想嘗試一件很想做但完全沒有把握的事，例如創業或學樂器。',ask:'你內心最深的聲音說的是？',
+   opts:['「試試看，就算失敗也能學到什麼。」','「萬一我搞砸了，別人怎麼看我？」','「我先評估一下，再決定值不值得冒這個風險。」','「也許我沒有這方面的天份，還是算了。」']},
+  {sc:'你和一個長期批評你的人（可能是家人或前上司）在一個場合重逢。',ask:'面對這個人，你的內心狀態是？',
+   opts:['相對平靜，他們的評價已經不再左右我對自己的看法','還是會感到不舒服，不自覺地想要證明什麼','有點警戒，但能夠保持自己的界線','感到焦慮，擔心他們又會說什麼']},
+  {sc:'你被問到「你最欣賞自己的哪一點？」這個問題。',ask:'你的反應是？',
+   opts:['能夠相對自然地說出一兩個真實的優點','感到有點為難，第一個念頭是「我哪有什麼值得欣賞的」','想了一下，能說出一個自己確實在乎的特質','說出來，但有點不好意思，怕顯得自大']},
+  {sc:'你把一段時間比較了一下現在的自己和過去的自己。',ask:'你最誠實的評估是？',
+   opts:['整體而言，我對自己的成長感到滿意，雖然也有遺憾','覺得沒什麼進步，甚至某些地方退步了','有成長，也有遺憾，但都是我的一部分','比較輕鬆地接受：就是這樣，繼續吧']},
+ ],
+ score(a){const w=[3,0,2,1];let s=0;a.forEach(v=>s+=w[v-1]);return s},
+ result(s){
+  if(s>=18)return{emoji:'🌟',name:'健康自尊 — 你接納自己的全部',
+   sub:'你的得分落在 Rosenberg 量表的健康自尊範圍。你對自己的整體評價是正向的，能夠接受自己的不完美，且不過度依賴外部的認可。研究顯示健康自尊與較低的焦慮、更好的人際關係品質正相關。',
+   traits:[{n:'自我接納',v:88},{n:'自我效能',v:85},{n:'獨立判斷',v:82},{n:'情緒穩定',v:84}],
+   tips:['健康的自尊需要持續的自我關照，不是一次達到就永遠在','對自己的成就誠實承認，這是維持健康自尊的方式','當你感到不確定時，回到「我是誰」的核心，而非外部評價']}
+  if(s>=9)return{emoji:'🌤️',name:'自尊波動中 — 情境影響較大',
+   sub:'你的自我價值感在不同情境下有明顯波動——這在心理學上稱為「情境性自尊」。你並非缺乏自我價值感，而是它還沒有完全穩固在一個不受外部影響的基礎上。',
+   traits:[{n:'自我接納',v:60},{n:'自我效能',v:58},{n:'獨立判斷',v:55},{n:'情緒穩定',v:52}],
+   tips:['練習「自我慈悲（Self-Compassion）」：用對待朋友的態度對待自己','Neff 的 MSC 課程對波動性自尊有良好的實證效果','建立一個「核心價值清單」，讓它成為你的錨點']}
+  return{emoji:'🌱',name:'低自尊 — 你值得更多自我接納',
+   sub:'你目前對自己的整體評價偏向負面，這在心理學上與成長環境、批評性的內在聲音和早期經驗有關。重要的是：低自尊不是你的本質，它是可以改變的。',
+   traits:[{n:'自我接納',v:35},{n:'自我效能',v:32},{n:'獨立判斷',v:38},{n:'情緒穩定',v:30}],
+   tips:['「自我批評」的聲音是習慣，不是真理——它可以被改變','Kristin Neff 的自我慈悲練習是低自尊治療中效果最好的技術之一','心理諮詢（特別是 ACT 或 CBT 取向）對提升自尊有充分的實證']}
+ }
+},
+
+// ── A7. 正念覺察 ─────────────────────────────────────────
+{id:'mindful',cat:'心理',color:'mint',icon:'🍃',
+ title:'你的日常正念程度',
+ theory:'Baer et al. (2006) 五面向正念量表（FFMQ）：觀察、描述、有覺察地行動、不評判、不反應；源自 Kabat-Zinn (1990) MBSR 程式',
+ desc:'根據 Baer 等人的五面向正念量表（FFMQ），透過情境題評估你在日常生活中的正念覺察程度與非評判觀察能力。',
+ time:'約 5 分鐘',count:'8 題',tag:'FFMQ 正念量表',pop:62,cnt:62,
+ qs:[
+  {sc:'你一邊吃午餐，一邊滑手機看新聞，突然意識到已經吃完了，但幾乎不記得吃了什麼。',ask:'這種情況在你的生活中多常發生？',
+   opts:['偶爾，我大多數時候能覺察自己在做什麼','幾乎每天，我很少真正「在」我所做的事情裡','我會注意到，然後選擇專注回來','很常，但我沒有特別把這件事當成問題']},
+  {sc:'你正在走路，突然意識到在過去 5 分鐘你完全不記得自己走了什麼路，因為你在思考別的事情。',ask:'你如何回應這個發現？',
+   opts:['注意到了，把注意力帶回腳踩在地上的感覺','繼續想那些事，走路反正也不需要特別專注','覺得有點好笑，意識到自己剛剛「心不在焉」','完全沒有這種覺察的習慣']},
+  {sc:'你感到非常憤怒，然後你意識到「我現在很憤怒」。',ask:'你和這份憤怒的關係通常是？',
+   opts:['我能夠同時感受憤怒，並觀察它的存在','憤怒讓我完全陷入其中，無法觀察','我試著觀察，但很難不被帶著走','我傾向壓制，不讓自己停留在憤怒中']},
+  {sc:'你的腦子裡有一個反覆出現的擔憂，大約每隔幾小時就會出現一次。',ask:'你和這個擔憂的互動方式是？',
+   opts:['注意到它出現，不評判地讓它存在，不過度分析','每次出現都會認真想一遍，看看有沒有解決方案','試著趕走它，但它還是不斷回來','我幾乎沒有注意到這個模式的存在']},
+  {sc:'有人說了一句讓你不舒服的話，你的情緒立刻升起。',ask:'在情緒反應和行動之間，你通常有多少「空間」？',
+   opts:['有一定的空間，我能夠感受後選擇如何回應','幾乎沒有空間，反應幾乎是立即的','空間有時有有時沒有，視情境而定','我有意識地練習這個空間，雖然不總是成功']},
+  {sc:'你在進行一個例行的日常動作，比如刷牙或泡咖啡。',ask:'你通常的狀態是？',
+   opts:['有時我會注意到這個動作的細節——手的感覺、香氣','幾乎都在想別的事，動作是自動完成的','偶爾會突然注意到「我正在做這件事」','我偶爾刻意讓自己完全投入在當下的動作中']},
+  {sc:'你在休假或放假，但發現自己一直在思考工作或還沒做完的事。',ask:'你對這種「人在但心不在」的狀態，態度是？',
+   opts:['注意到了，試著讓自己回到當下的場景','接受這是正常的，假期還是假期','感到有點失落，但沒有太多力氣去改變','這讓我感到煩躁，想趕快「解決」那些讓我分心的事']},
+  {sc:'你在嘗試一個新的冥想或靜坐練習，但腦子一直在飄。',ask:'你對「分心」這件事的態度是？',
+   opts:['接受分心是正常的，每次注意到就溫和地帶回來','感到很挫敗，覺得自己「做不好冥想」','分心幾次後就放棄了這次練習','沒有試過，這類練習對我不太有吸引力']},
+ ],
+ score(a){const w=[3,0,2,1];let s=0;a.forEach(v=>s+=w[v-1]);return s},
+ result(s){
+  if(s>=18)return{emoji:'🍃',name:'高度正念 — 你活在當下',
+   sub:'你的正念覺察程度相當高。研究顯示高 FFMQ 得分者壓力感知較低、情緒調節能力較強、對痛苦的耐受力也較好。你已發展出在日常生活中保持覺察的習慣。',
+   traits:[{n:'當下覺察',v:90},{n:'非評判觀察',v:87},{n:'情緒距離',v:85},{n:'有意識行動',v:88}],
+   tips:['繼續保持，正念是一種需要持續練習的能力','在高壓時刻，你的正念能力是最有效的緩衝器','考慮深化練習，例如完整的 MBSR 8 週課程']}
+  if(s>=9)return{emoji:'🌤️',name:'中等正念 — 偶爾在，偶爾飄',
+   sub:'你有一定的正念覺察能力，但在某些情境下（特別是情緒激動或習慣性行為時）容易失去當下的連結。這是大多數人的狀態，也是最有成長空間的位置。',
+   traits:[{n:'當下覺察',v:62},{n:'非評判觀察',v:58},{n:'情緒距離',v:60},{n:'有意識行動',v:55}],
+   tips:['每天一個「正念錨點」時刻：例如第一口咖啡時完全投入','設定手機提醒，每天一次問：「我現在在哪裡？」','Headspace 或 Insight Timer 這類 App 的 10 分鐘練習已有實證效果']}
+  return{emoji:'🌱',name:'正念初探 — 你的覺察之旅才開始',
+   sub:'目前你大部分的時間處於「自動導航」模式，這是現代生活的常態，但也是許多壓力和情緒問題的根源之一。正念不是要「控制思想」，而是學習「注意到」。',
+   traits:[{n:'當下覺察',v:35},{n:'非評判觀察',v:30},{n:'情緒距離',v:32},{n:'有意識行動',v:28}],
+   tips:['最簡單的開始：每天吃一顆食物時完全專注在味道和口感上','Kabat-Zinn 的「無論你去哪裡，你都在那裡」是入門正念的好書','每週 3 次、每次 10 分鐘的正念練習在 8 週後有可量測的效果']}
+ }
+},
+
+// ╔══════════════════════════════╗
+// ║  B. 性格與人格類 (7份)       ║
+// ╚══════════════════════════════╝
+
+// ── B1. MBTI ──────────────────────────────────────────────
+{id:'mbti',cat:'性格',color:'mint',icon:'🌿',
+ title:'你是哪種人格類型？',
+ theory:'Myers & Briggs (1962) MBTI，以 Jung (1921) 心理類型論為基礎，測量 E/I、S/N、T/F、J/P 四個維度，形成 16 種人格類型',
+ desc:'基於 Myers-Briggs 類型指標（MBTI）的四大維度，透過 10 個真實情境，識別你的核心性格偏好。',
+ time:'約 8 分鐘',count:'10 題',tag:'MBTI 16 型人格',pop:92,cnt:92,
+ qs:[
+  {sc:'你被邀請去一個你只認識兩個人的派對，有 30 多個陌生人。',ask:'對你來說，這個場景通常意味著什麼？',
+   opts:['令你期待——認識新朋友讓你充滿活力','可以接受，但你會大多時間待在認識的人旁邊','讓你有點疲憊，但你會找到屬於自己的角落','讓你想找個禮貌的藉口不去']},
+  {sc:'你在公園散步，看到一片落葉飄下來。',ask:'你的腦子最自然地會想到什麼？',
+   opts:['葉子變色的具體科學過程','這讓我想到了某段記憶或某個人','秋天了，生活中將有什麼改變？','就讓眼睛享受這一刻的美就好']},
+  {sc:'你最好的朋友向你傾訴一個讓他非常困擾的問題。',ask:'你最自然的第一反應是？',
+   opts:['分析情況，找出幾個可能的解決方案','先確保他感到被理解和支持','問「你希望我怎麼幫你，是說說感受還是想想辦法？」','認真傾聽，然後問問題幫他想清楚']},
+  {sc:'你有一個兩週後要執行的計畫。',ask:'你會怎麼準備？',
+   opts:['詳細規劃每一步和時間點，越具體越安心','設定大方向，讓細節保持彈性','前一兩天才開始認真準備','幾乎不提前規劃，到時候隨機應變']},
+  {sc:'你正在做一個影響很大的人生決定，例如是否要移居海外。',ask:'你最主要依賴什麼做選擇？',
+   opts:['客觀地列出所有利弊，用邏輯和數據推導','聆聽內心的感受，考慮這對我和在乎的人的意義','先分析後用直覺確認，兩者缺一不可','直覺——感覺對了就去做']},
+  {sc:'你在一個討論激烈的會議中，有人提出了你認為明顯有問題的觀點。',ask:'你最容易做的是？',
+   opts:['當下直接點出問題並邏輯地反駁','考慮場合，選擇之後再私下討論','用問題引導：「這個方向你怎麼看待 X 風險？」','保持沉默，除非被明確問到你的看法']},
+  {sc:'你精心安排的計畫突然因為外力被打亂，需要完全重來。',ask:'你的第一反應通常是？',
+   opts:['感到明顯干擾，需要時間重新整理心情','相對快速地接受，評估新的可能性','有點不舒服，但能在幾小時內重新調整','你反而有點喜歡這種意外的轉折']},
+  {sc:'你的一個任務需要你在「快速完成」和「追求完美」之間做選擇。',ask:'你通常傾向哪一邊？',
+   opts:['快速完成，完成比完美更重要','追求完美，做就要做到最好','評估截止時間後決定——有時快，有時精','讓直覺決定，不同情境感覺不同']},
+  {sc:'有一整個週末完全屬於你，沒有任何義務。',ask:'最讓你感到「充電」的方式是？',
+   opts:['約幾個朋友出去，社交讓我精力充沛','和一兩個最親密的人深度相處','一個人安靜地做自己喜歡的事，不需要對話','混合：部分社交，但也需要完整的獨處時間']},
+  {sc:'你和朋友有一個計畫，但前一天對方說想改到下週。',ask:'你通常的反應是？',
+   opts:['有點困擾——我喜歡事情按計畫進行','沒問題，彈性調整就好','視原因而定，合理的話我可以接受','完全不介意，計畫本來就只是參考']},
+ ],
+ score(a){
+  let E=0,N=0,T=0,J=0;
+  if(a[0]<=1)E+=2;if(a[8]<=1)E+=2;if(a[0]===2)E++;
+  if(a[1]===3||a[1]===2)N++;if(a[4]===4||a[4]===3)N++;if(a[1]===1)N--;
+  if(a[2]===1)T++;if(a[5]===1||a[5]===3)T++;if(a[4]===1)T++;
+  if(a[3]===1||a[3]===3)J++;if(a[6]===1)J++;if(a[7]===1)J++;if(a[9]===1||a[9]===3)J++;
+  const t=(E>=3?'E':'I')+(N>=2?'N':'S')+(T>=2?'T':'F')+(J>=3?'J':'P');
+  return t;
+ },
+ result(s){
+  const TYPES={
+   INTJ:{e:'🔭',n:'建築師',d:'以策略眼光和獨立意志聞名。你的思維精確而深刻，在實現願景時毫不妥協。全球人口中約佔 2%。'},
+   INTP:{e:'🧩',n:'思考者',d:'邏輯嚴謹、充滿求知慾，享受深入探索理論與可能性。對知識的追求沒有終點。'},
+   ENTJ:{e:'👑',n:'統帥',d:'天生的領導者，充滿決斷力，擅長看出機會並帶領人們朝目標前進。'},
+   ENTP:{e:'⚡',n:'辯論家',d:'思維敏捷，喜歡用新奇的方式挑戰現有框架，對所有想法充滿好奇。'},
+   INFJ:{e:'🌙',n:'提倡者',d:'稀有的理想主義者，有深刻的同理心和對未來的洞察力，致力讓世界更好。全球最稀少的類型之一（約 1-3%）。'},
+   INFP:{e:'🌸',n:'調停者',d:'充滿創意與同情心，對自己的價值觀極為忠誠，用溫柔而深刻的方式感受世界。'},
+   ENFJ:{e:'🌟',n:'主人公',d:'天生的激勵者，對他人充滿熱情與關懷，擅長帶動群體朝更好的方向成長。'},
+   ENFP:{e:'🦋',n:'競選者',d:'充滿熱情與創意，到處尋找生命的意義，讓每個人都感受到可能性的美好。'},
+   ISTJ:{e:'📋',n:'物流師',d:'可靠有責任感，注重細節與原則，是組織和社群中不可或缺的穩定力量。'},
+   ISFJ:{e:'🛡️',n:'守衛者',d:'溫柔體貼、盡職盡責，默默支撐著每一個人，是最值得信賴的存在。'},
+   ESTJ:{e:'⚖️',n:'總監',d:'務實高效，重視秩序與責任，是推動事情有條不紊進行的關鍵人物。'},
+   ESFJ:{e:'💌',n:'執政官',d:'熱心腸、重視和諧，用真心照顧每一個人，是社群的凝聚核心。'},
+   ISTP:{e:'🔧',n:'鑑賞家',d:'冷靜實際、動手能力強，擅長在混亂中找到最簡潔直接的解決方案。'},
+   ISFP:{e:'🎨',n:'探險家',d:'溫和、充滿藝術感，用自己獨特的方式探索並體驗生命的每一種美。'},
+   ESTP:{e:'🏄',n:'企業家',d:'充滿活力、反應敏捷，喜歡在當下採取行動，把每個挑戰都變成機會。'},
+   ESFP:{e:'🎉',n:'表演者',d:'熱情、外向、充滿感染力，讓每一個場合都充滿歡笑和美好的回憶。'},
+  };
+  const t=TYPES[s]||{e:'🌟',n:'獨特個體',d:'你的性格組合融合了多種特質，難以被單一類型定義。'};
+  return{emoji:t.e,name:`${s} — ${t.n}`,sub:t.d,
+   traits:[{n:'外向性',v:s[0]==='E'?76:35},{n:'直覺力',v:s[1]==='N'?80:50},{n:'邏輯性',v:s[2]==='T'?82:45},{n:'計畫性',v:s[3]==='J'?80:42}],
+   tips:['了解你類型的典型盲點，是最快的成長路徑','與性格互補的類型合作，能創造最強的組合','善用你的核心強項，打造你個人的獨特風格']};
+ }
+},
+
+// ── B2. 九型人格 ──────────────────────────────────────────
+{id:'ennea',cat:'性格',color:'gold',icon:'🔮',
+ title:'你是哪一型的靈魂？',
+ theory:'Riso & Hudson (1996) 九型人格理論（Enneagram），測量九種由核心恐懼和核心渴望驅動的人格類型；並參考 IEQ9 評估工具',
+ desc:'根據 Riso-Hudson 九型人格體系，透過情境題探索你的核心動機、核心恐懼以及在壓力和成長時的反應模式。',
+ time:'約 8 分鐘',count:'9 題',tag:'Enneagram 九型人格',pop:80,cnt:69,
+ qs:[
+  {sc:'你剛完成了一件費時費力的工作，收到的反饋是「不錯，但有幾點可以更好」。',ask:'你的第一個內心反應最接近哪個？',
+   opts:['立刻想到「哪裡還可以更完美？」，忍不住要修改','感到一絲失落：「我這麼努力，只換來這個？」','快速評估：「這樣的成果能讓我往下一步走嗎？」','思考：「這件事真的符合我想表達的本質嗎？」']},
+  {sc:'你最好的朋友陷入了困難，但沒有主動找你幫忙。',ask:'你最可能的反應是？',
+   opts:['主動聯繫，確認對方狀況並準備好支持他','感到被排除在外——為什麼不找我？','從他的角度評估，他現在最需要什麼樣的幫助','感到難過，他的痛苦讓我也感受到同樣的重量']},
+  {sc:'你被告知你一個重要計畫需要「全部重來」。',ask:'你最直接的情緒反應是？',
+   opts:['憤怒——有人做了錯誤的判斷，違背了正確的原則','焦慮——我可能無法滿足所有人的期待了','快速分析——損失是什麼？最有效的補救方案是什麼？','沮喪——我在這件事上放了很多自我認同和心血']},
+  {sc:'在一個圓桌討論中，氣氛凝結，沒有人願意先開口。',ask:'你最有可能做什麼？',
+   opts:['感到不舒服，開始尋找讓所有人都能接受的方向','主動打破沉默，帶動話題往前走','在心裡評估：現在的沉默對這個場合有什麼影響？','靜靜感受房間裡每個人的情緒和壓力狀態']},
+  {sc:'你在旅行中完全迷路，手機快沒電，而且找不到充電的地方。',ask:'你最自然的應對方式是？',
+   opts:['保持冷靜，系統性地解決：問路、找店充電、看地圖','感到有點不安，但這個意外也帶著一絲刺激感','享受這個意外，看看它會把我帶到哪裡','開始在腦中推演各種可能的最壞情境']},
+  {sc:'你花了很多心力準備一個驚喜，但對方的反應沒有你期待的熱烈。',ask:'你內心最深的聲音說的是？',
+   opts:['有點受傷，但更想確認對方是否真的喜歡','感到被輕視——我為你做了這些，你的反應是這樣？','分析：是我的設計出了問題，還是對方今天狀態不好？','感到心意沒有被看見，覺得有點孤獨']},
+  {sc:'你即將面對一個非常重要的公開演講。',ask:'你在準備過程中最大的擔憂是？',
+   opts:['萬一哪個細節不夠完美，讓我顯得不專業？','如果表現不好，大家還會喜歡我嗎？','這個成果足以清楚代表我的能力和水準嗎？','我的表達是否真實地呈現了我內心想傳遞的東西？']},
+  {sc:'你看著自己的生活，有什麼是你最不願意失去的？',ask:'你最深層的答案是？',
+   opts:['我判斷什麼是對、什麼是錯的能力和原則感','與身邊人的深度連結，以及被需要的感受','我的成就、努力的成果和社會認可給我的定義','我獨特的身份認同——我不是「其中一個」，我是「我」']},
+  {sc:'一個陌生人批評了你一個非常在意的決定或作品。',ask:'你最想說的話是？',
+   opts:['「你知道這件事背後是什麼原則和依據嗎？」','「你知道我為這件事付出了多少心血嗎？」','「你的批評有什麼具體的根據和數據支持嗎？」','「你根本不了解這件事背後對我的深層意義。」']},
+ ],
+ score(a){const cnt=[0,0,0,0];a.forEach(v=>cnt[v-1]++);return cnt.indexOf(Math.max(...cnt))},
+ result(s){
+  const R=[
+   {emoji:'✨',name:'第一型 — 改革者 The Reformer',
+    sub:'核心動機：做正確的事、成為好人。核心恐懼：犯錯或是腐敗的。你有強烈的原則感和對完美的追求，相信世界可以更好，並為此持續努力。代表人物：甘地、納爾遜·曼德拉。',
+    traits:[{n:'原則性',v:93},{n:'自我要求',v:90},{n:'正義感',v:88},{n:'彈性',v:42}],
+    tips:['練習把「夠好了」當作一種成功的定義','研究顯示第一型在放鬆時更能展現創意','讓自己偶爾不完美，並允許身邊的人也不完美']},
+   {emoji:'💖',name:'第二型 — 助人者 The Helper',
+    sub:'核心動機：被愛、感到自己是重要的。核心恐懼：不被愛，或沒有人需要我。你在給予中找到意義，你的愛是真誠的，但也需要學習照顧自己的需求。代表人物：特蕾莎修女。',
+    traits:[{n:'同理心',v:94},{n:'給予力',v:92},{n:'連結感',v:88},{n:'自我照顧',v:36}],
+    tips:['練習說出自己的需求，這不是自私','研究顯示第二型的健康核心在於「因為愛而給予」，而非「為了被愛才給予」','你的杯子滿了，才能繼續給予']},
+   {emoji:'🏆',name:'第三型 — 成就者 The Achiever',
+    sub:'核心動機：有價值感、被認可。核心恐懼：無價值或不成功。你目標導向，充滿動力，擅長調整自己以適應所在的環境並達成目標。代表人物：歐普拉·溫芙蕾。',
+    traits:[{n:'成就驅動',v:93},{n:'適應力',v:90},{n:'行動力',v:88},{n:'真實自我連結',v:50}],
+    tips:['經常問自己：「我真正想要的是什麼，而不是別人希望我要什麼？」','放慢速度時你才能找到真實的自己','成功是手段，不是身份']},
+   {emoji:'🎭',name:'第四型 — 個人主義者 The Individualist',
+    sub:'核心動機：找到真實的身份認同，成為獨特的自己。核心恐懼：沒有意義、沒有獨特性。你深刻而富有創意，對情感和美有超越常人的感受力。代表人物：Bob Dylan、傅科。',
+    traits:[{n:'情感深度',v:92},{n:'創意力',v:90},{n:'獨特性',v:94},{n:'情緒穩定',v:38}],
+    tips:['你的獨特性不需要被「證明」，它就是你','練習感謝你現有的，不只是渴望你沒有的','讓創意成為你與世界連結的橋樑，而非牆壁']}
+  ];return R[s];
+ }
+},
+
+// ── B3. 內外向光譜 ────────────────────────────────────────
+{id:'introvert',cat:'性格',color:'ice',icon:'🌙',
+ title:'你在內外向光譜的哪個位置？',
+ theory:'Jung (1921) 的內外向概念；Eysenck (1967) 的喚醒理論（皮層喚醒水平差異）；Grant (2013) 提出的中間性格（Ambivert）概念',
+ desc:'根據 Eysenck 喚醒理論，內外向的差異源於皮層基礎喚醒水平的不同。透過情境題找出你在光譜上的真實位置。',
+ time:'約 5 分鐘',count:'8 題',tag:'內外向光譜',pop:76,cnt:75,
+ qs:[
+  {sc:'你剛結束了一整天密集的社交活動，例如公司尾牙或大型聚會。',ask:'你最需要的是什麼？',
+   opts:['繼續和人互動，這反而讓我更有精力','一個人的安靜空間，不想說任何話','和一兩個親近的人輕鬆地聊聊','好好睡一覺，明天就恢復了']},
+  {sc:'你正在一個人吃午餐，一個認識但不太熟的人過來問「可以一起坐嗎？」',ask:'你最真實的第一反應是？',
+   opts:['很歡迎，這讓午餐更有趣','有點小失落，但點頭說好','視心情，今天剛好無所謂','其實有點希望他沒來，但不會說出口']},
+  {sc:'朋友說下週有個聚會，但直到前一天才確定細節和人數。',ask:'這樣的安排對你來說是？',
+   opts:['完全 OK，我喜歡臨時靈活的感覺','有點焦慮，我需要提前知道才能放鬆','可以接受，但希望早點確認','我可能那天已經在心裡規劃了自己的獨處時間']},
+  {sc:'你在一個 10 人的晚餐聚會中，大家在輕鬆聊天。',ask:'你通常處於什麼狀態？',
+   opts:['在幾個不同的對話群中自在穿梭','主要聆聽，偶爾加入感興趣的話題','找到一個人進行較深的對話','心裡在盤算什麼時候可以優雅地離開']},
+  {sc:'你有一整個週六，沒有任何計畫或義務。',ask:'什麼樣的使用方式讓你最充實？',
+   opts:['聯繫幾個朋友，自發出去玩','一個人做喜歡的事，不需要任何人','和最親的一兩個人安靜共處','半天社交，半天獨處，完美的平衡']},
+  {sc:'你在工作上遇到了一個需要想出創意解法的問題。',ask:'你最有效的思考方式是？',
+   opts:['找人討論，在對話和刺激中產生想法','獨自思考，需要安靜的空間才能想清楚','先自己想一輪，再找人驗證','視問題性質，沒有固定的偏好']},
+  {sc:'你被介紹給一個陌生人，知道接下來你們必須聊一個小時。',ask:'你的感受是？',
+   opts:['期待——認識新朋友讓我充滿動力','有點緊張，但我有辦法找到共同話題','希望對方也想聊，不然一個人撐很累','說實話，我有點希望可以跳過這個環節']},
+  {sc:'朋友說「你在人群中看起來很自在，我以為你是個外向的人」。',ask:'你的反應是？',
+   opts:['「對啊，我確實是！我很喜歡人群。」','「表面可以，但其實很耗能，回家需要充電。」','「我在熟悉的人面前才真正放得開。」','「我學會了表現社交，但本質上是個安靜的人。」']},
+ ],
+ score(a){
+  const ext=a.filter(v=>v===1).length*3+a.filter(v=>v===2).length;
+  const intr=a.filter(v=>v===4).length*3+a.filter(v=>v===3).length;
+  const diff=ext-intr;
+  if(diff>=8)return 0;if(diff>=2)return 1;if(diff>=-6)return 2;return 3;
+ },
+ result(s){
+  const R=[
+   {emoji:'🌞',name:'外向型 Extrovert',
+    sub:'Eysenck 的理論指出，外向者的皮層基礎喚醒水平較低，因此需要外部刺激（社交、活動）來達到最佳運作狀態。你從人群互動中獲取能量，這是你神經系統的天然設計。',
+    traits:[{n:'社交能量獲取',v:92},{n:'外部刺激需求',v:88},{n:'社交主動性',v:85},{n:'獨處舒適度',v:38}],
+    tips:['注意過度社交後給身體留一點恢復時間','深度勝於廣度：培養幾段真正深厚的友誼','偶爾的獨處能讓你更認識自己']},
+   {emoji:'🌤️',name:'偏外向中間型 Ambivert-E',
+    sub:'Adam Grant 的研究顯示，約 2/3 的人屬於「中間性格」。你偏向外向，能從社交中充電，但也有需要獨處的時刻。研究顯示中間型在銷售和領導力上有獨特優勢。',
+    traits:[{n:'社交能量獲取',v:72},{n:'彈性適應',v:88},{n:'情境調節',v:85},{n:'獨處舒適度',v:60}],
+    tips:['你的彈性是一種罕見的優勢，在不同場合可以切換模式','了解什麼情境最耗你的能量，提前計畫恢復','你既能深耕又能廣交，善用這個平衡']},
+   {emoji:'🌙',name:'偏內向中間型 Ambivert-I',
+    sub:'你偏向內向，重視深度連結和個人空間，但也能在社交中表現良好。研究顯示，偏內向者通常具有更高的學習深度和更強的專注力。',
+    traits:[{n:'深度連結',v:85},{n:'獨處充電',v:78},{n:'觀察力',v:88},{n:'社交能量消耗',v:65}],
+    tips:['為自己安排明確的「充電時間」，不需要為此感到歉疚','讓身邊的人了解你的能量模式，避免誤解','你在一對一或小圈子裡最能發揮你的深度']},
+   {emoji:'⭐',name:'內向型 Introvert',
+    sub:'Eysenck 理論指出，內向者皮層基礎喚醒水平較高，因此傾向迴避過度的外部刺激，從獨處中獲取平衡。內向不是缺陷，Susan Cain 的研究顯示內向者在思考深度上有顯著優勢。',
+    traits:[{n:'獨處充電',v:92},{n:'深度思考',v:90},{n:'觀察力',v:88},{n:'社交能量消耗',v:82}],
+    tips:['你的內向是優勢，不是需要被修正的特質','學習明確告訴別人你的能量模式，減少誤解','Susan Cain 的《安靜，就是力量》是為你而寫的']}
+  ];return R[s];
+ }
+},
+
+// ── B4. 大五人格 ─────────────────────────────────────────
+{id:'bigfive',cat:'性格',color:'lilac',icon:'🌐',
+ title:'你的大五人格特質',
+ theory:'Costa & McCrae (1992) NEO-PI-R 大五人格模型（OCEAN）：開放性、盡責性、外向性、親和性、神經質，是目前學術界最廣泛認可的人格分類系統',
+ desc:'根據 Costa & McCrae 的大五人格模型（OCEAN），透過情境題評估你在五個核心人格維度上的位置，這是心理學界最有學術共識的人格系統。',
+ time:'約 8 分鐘',count:'10 題',tag:'OCEAN 大五人格',pop:74,cnt:67,
+ qs:[
+  {sc:'你發現一種以前完全不了解的藝術形式或哲學思想。',ask:'你的典型反應是？',
+   opts:['立刻深入研究，充滿好奇和興奮','感興趣，但不會特別深入研究','不太有興趣，更傾向熟悉和實用的東西','看情況，要看是哪個領域']},
+  {sc:'你被委派一個需要細心追蹤大量細節的長期計畫。',ask:'你完成任務的方式通常是？',
+   opts:['建立詳細的追蹤系統，確保沒有任何遺漏','大致掌握方向，細節隨需要才深入','依靠隊友幫助處理細節，我比較擅長大方向','視任務的重要程度調整我的嚴謹程度']},
+  {sc:'你在一個大型的社交場合，認識了許多新朋友。',ask:'這個場合結束後你的感受是？',
+   opts:['精力充沛，感到充電完畢','稍微疲憊，但整體還不錯','明顯疲憊，需要一個人待著恢復','視當天狀況，沒有固定感受']},
+  {sc:'你和一個意見完全不同的人有一場激烈爭論。',ask:'你通常的立場是？',
+   opts:['優先維持和諧，傾向尋找共同點和妥協','堅持自己的立場，用邏輯說服對方','認真聆聽後，如果對方有道理就更新觀點','視話題的重要性決定是否要堅持']},
+  {sc:'你突然面對一個完全預料之外的困難，例如突發的財務壓力。',ask:'你的情緒反應通常是？',
+   opts:['相對冷靜，開始評估怎麼解決','有明顯的焦慮感，但能夠應對','情緒波動很大，需要一段時間才能穩定','有點不安，但很快進入問題解決模式']},
+  {sc:'你的工作給了你極高的自主性，幾乎沒有明確的規定和期限。',ask:'你通常的感受和反應是？',
+   opts:['充滿活力，自由的空間讓我發揮最好','有點不安，我在有框架的環境裡效率更高','視工作的性質，有些工作需要規範，有些不需要','喜歡，但也需要設定自己的小目標']},
+  {sc:'你的好朋友告訴你他剛做了一個你認為很不明智的決定。',ask:'你的回應方式是？',
+   opts:['支持他，我尊重別人做自己選擇的權利','直接告訴他我的真實看法，即使不好聽','先了解他為什麼這樣決定，再說我的想法','委婉地表達我的疑慮，但最終尊重他']},
+  {sc:'你剛完成一件讓你感到驕傲的事，但結果沒有你預期的好。',ask:'你的自我評估方式是？',
+   opts:['努力找出優點和進步，不讓結果定義整體','客觀評估失敗的部分，思考改進方案','感到失望，且情緒會持續一段時間','接受這次的結果，下次再做得更好']},
+  {sc:'你在嘗試一件對你來說非常新奇的體驗，例如第一次做極限運動。',ask:'你面對全新體驗的態度是？',
+   opts:['充滿期待，新奇的體驗讓我興奮','有點猶豫，但願意嘗試看看','傾向謹慎，需要充分了解才願意嘗試','視活動的風險高低而定']},
+  {sc:'你在一段長期的人際關係中（朋友或伴侶）感到一些不滿。',ask:'你最可能的處理方式是？',
+   opts:['試著理解對方的角度，找到彼此都舒服的平衡','直接表達你的感受和需求，解決比維持和諧更重要','避免直接衝突，希望時間能自然化解','視問題的嚴重程度決定是否開口']},
+ ],
+ score(a){
+  const O=a[0]===1?2:a[0]===2?1:0,
+        C=a[1]===1?2:a[1]===2?1:0,
+        E=a[2]===1?2:a[2]===2?1:0,
+        A=a[3]===1||a[3]===4?2:a[3]===3?1:0,
+        N=a[4]===3?2:a[4]===2?1:0;
+  const max=Math.max(O,C,E,A,N);
+  if(O===max)return 0;if(C===max)return 1;if(E===max)return 2;if(A===max)return 3;return 4;
+ },
+ result(s){
+  const R=[
+   {emoji:'🔭',name:'開放性最高 — 探索者',
+    sub:'OCEAN 中的開放性（Openness）代表對新體驗、新想法和美的渴望。高開放性者在創意、學術和藝術領域表現突出，也對多元觀點更加包容。',
+    traits:[{n:'創意好奇',v:92},{n:'美感敏感',v:88},{n:'思維彈性',v:90},{n:'習慣依賴',v:35}],
+    tips:['繼續擁抱新奇，這是你的核心能量來源','在創意和落地執行之間，找一個互補的夥伴','高開放性者在學習新技能上有顯著優勢']},
+   {emoji:'📐',name:'盡責性最高 — 完成者',
+    sub:'OCEAN 中的盡責性（Conscientiousness）與學業成就、工作表現和長期健康行為有最強的正相關，是大五中預測成就最有力的因子。',
+    traits:[{n:'自律',v:92},{n:'目標導向',v:90},{n:'可靠性',v:93},{n:'彈性',v:45}],
+    tips:['你的自律是真實的競爭優勢，善加利用','注意「完美主義」可能帶來的疲憊感','允許自己和周圍的人有時候「夠好就好」']},
+   {emoji:'🌟',name:'外向性最高 — 連結者',
+    sub:'OCEAN 中的外向性（Extraversion）與主觀幸福感、正向情緒體驗和社交影響力有顯著正相關。你在人群中找到能量，這是你的神經系統特質。',
+    traits:[{n:'社交活力',v:92},{n:'正向情感',v:88},{n:'影響力',v:85},{n:'內部反思',v:40}],
+    tips:['在廣泛的社交之外，也深耕幾段核心關係','你的正向能量是他人的禮物，有意識地分享','定期獨處讓你更了解自己']},
+   {emoji:'💚',name:'親和性最高 — 和諧者',
+    sub:'OCEAN 中的親和性（Agreeableness）與較高的人際信任、同情心和利社會行為相關。高親和性者通常在團隊環境中受到歡迎，但可能在需要堅定立場時感到困難。',
+    traits:[{n:'同理心',v:93},{n:'合作傾向',v:90},{n:'信任他人',v:88},{n:'自我倡導',v:42}],
+    tips:['練習清楚表達自己的需求和界線，這是在照顧關係的同時也照顧自己','「溫和地堅定」是親和性高者最重要的成長方向','你的同理心是領導力的核心，善加使用']},
+   {emoji:'🌊',name:'神經質偏高 — 深感者',
+    sub:'OCEAN 中的神經質（Neuroticism）代表對負面情緒的敏感度。高神經質不等於精神問題，研究顯示它與更高的藝術敏感度和同理心相關，但也需要更多的情緒管理技巧。',
+    traits:[{n:'情緒敏感',v:90},{n:'感知深度',v:88},{n:'同理共感',v:85},{n:'情緒穩定',v:35}],
+    tips:['你的敏感是禮物，不是缺陷——學習與之共存','情緒調節技巧（CBT、DBT）對高神經質者有顯著幫助','建立一個穩固的日常例行程序，能顯著降低情緒波動']}
+  ];return R[s];
+ }
+},
+
+// ── B5. 氣質類型 ─────────────────────────────────────────
+{id:'temperament',cat:'性格',color:'sand',icon:'🌡️',
+ title:'你天生的氣質類型是什麼？',
+ theory:'Keirsey (1998) 氣質理論，將人格分為四種氣質：守護者（SJ）、工匠（SP）、理想主義者（NF）、理性者（NT）；追溯至 Hippocrates 的四體液說',
+ desc:'根據 Keirsey 氣質分類，探索你天生的思維傾向、在工作和關係中的核心驅動力與自然優勢。',
+ time:'約 7 分鐘',count:'8 題',tag:'Keirsey 氣質理論',pop:65,cnt:61,
+ qs:[
+  {sc:'你和一個你很尊重的人有了意見分歧，關於一件重要的事。',ask:'你最自然的應對方式是？',
+   opts:['引用過去有效的原則和前例支持你的立場','憑感覺和當下情境靈活應對','用理念和更大的意義來說服對方','用邏輯和數據來論證你的觀點']},
+  {sc:'你被問到：「什麼是你工作中最大的動力？」',ask:'哪個最接近你的真實答案？',
+   opts:['把事情做好、做對，維持秩序和責任感','當下的成就感和創造性的挑戰','幫助別人成長、讓社會變得更好','解決沒有人能解決的複雜問題']},
+  {sc:'你在一個新的環境，例如新公司或新城市。',ask:'你最首先關注的是什麼？',
+   opts:['了解規則、流程和期望——我需要知道遊戲規則','探索周邊有什麼有趣的事物和機會','認識人，建立連結，了解這裡的人際生態','研究這個系統的底層邏輯和運作方式']},
+  {sc:'你在做一個決策，你優先考量的是什麼？',ask:'哪個最接近你的決策核心？',
+   opts:['過去的記錄和已被驗證的方法','當下什麼感覺最對、最有活力','這個決定對人、對關係、對未來的影響','這個決定在邏輯和數據上最優化的方案']},
+  {sc:'你有一段完全自由的時間，沒有任何義務。',ask:'你最自然的使用方式是？',
+   opts:['做一件需要被完成、有具體成果的事','做一件好玩、讓當下充滿活力的事','和重要的人深度相處，或者追求有意義的活動','研究一個你一直想搞懂的複雜問題']},
+  {sc:'你帶領一個小型的團隊完成一個計畫。',ask:'你最自然的領導方式是？',
+   opts:['建立清楚的責任分工，確保每件事都有人負責','靈活分配，依現況隨時調整','激勵每個人看到這件事的更大意義','設計最有效率的系統，讓流程最優化']},
+  {sc:'你如何描述你最享受的學習方式？',ask:'哪個最像你？',
+   opts:['透過實作和有條不紊的步驟學習','透過嘗試、錯誤和即時反饋學習','透過理解人和故事，在關係中學習','透過理論和系統性的理解，先建立概念框架']},
+  {sc:'一個陌生人問你：「你生命中最在乎的是什麼？」',ask:'你最誠實的回答是？',
+   opts:['責任、可靠性、讓身邊的人可以依賴我','自由、靈活、能夠活在當下、充分體驗生命','真實的連結、成長、讓世界變得更好一點','理解、能力、解決真正有意義的複雜問題']},
+ ],
+ score(a){const cnt=[0,0,0,0];a.forEach(v=>cnt[v-1]++);return cnt.indexOf(Math.max(...cnt))},
+ result(s){
+  const R=[
+   {emoji:'🛡️',name:'守護者氣質 SJ — The Guardian',
+    sub:'Keirsey 守護者氣質（對應 ISTJ/ISFJ/ESTJ/ESFJ）：以責任感、可靠性和維護社會秩序為核心驅動力。你是社群的骨幹，追溯至傳統上的「黑膽汁」類型，重視傳統、穩定和履行義務。',
+    traits:[{n:'責任感',v:93},{n:'可靠性',v:90},{n:'秩序感',v:88},{n:'彈性',v:42}],
+    tips:['你的穩定是別人眼中最珍貴的資源','給自己一點空間擁抱改變，它不一定是威脅','平衡責任與自我關照，你也值得被照顧']},
+   {emoji:'🎯',name:'工匠氣質 SP — The Artisan',
+    sub:'Keirsey 工匠氣質（對應 ISTP/ISFP/ESTP/ESFP）：以當下的活動、自由和熟練技藝為核心驅動力。你活在感官的當下，追溯至傳統的「血液質」，充滿活力、靈活和對技術的精通。',
+    traits:[{n:'當下活力',v:93},{n:'靈活性',v:90},{n:'技術精通',v:88},{n:'計畫性',v:38}],
+    tips:['在靈活之外，建立少量的例行結構讓你更自由','你對技術的熱情是真實的競爭優勢','找到能讓你持續精進的領域，深耕']},
+   {emoji:'🌸',name:'理想主義者氣質 NF — The Idealist',
+    sub:'Keirsey 理想主義者氣質（對應 INFJ/INFP/ENFJ/ENFP）：以意義、成長和人際連結的真實性為核心驅動力。追溯至傳統的「膽汁質」，渴望理解自我和他人的深層本質。',
+    traits:[{n:'意義感',v:93},{n:'同理心',v:90},{n:'真實性',v:92},{n:'務實性',v:42}],
+    tips:['你的理想主義是世界需要的，不要讓它被磨損','在意義和現實之間找到平衡，是你的終生功課','讓你的同理心有界限，避免情緒透支']},
+   {emoji:'🔭',name:'理性者氣質 NT — The Rational',
+    sub:'Keirsey 理性者氣質（對應 INTJ/INTP/ENTJ/ENTP）：以能力、知識和理解複雜系統為核心驅動力。追溯至傳統的「黏液質」，以理性和策略思維為最高追求。',
+    traits:[{n:'邏輯嚴謹',v:93},{n:'策略思維',v:90},{n:'問題解決',v:92},{n:'情感表達',v:40}],
+    tips:['你的邏輯是武器，但關係需要情感，不只是道理','允許自己有時候「感受」多於「分析」','找到一個能讓你的智識能量充分發揮的領域']}
+  ];return R[s];
+ }
+},
+
+// ── B6. 認知風格 ─────────────────────────────────────────
+{id:'cognitive',cat:'性格',color:'sky',icon:'🧩',
+ title:'你的思維認知風格',
+ theory:'Riding & Rayner (1998) 認知風格分析（CSA）：整體vs.分析、語言vs.視覺；結合 Kolb (1984) 學習風格理論和 Gardner (1983) 多元智慧理論',
+ desc:'根據 Riding 認知風格分析和 Kolb 學習風格理論，探索你在資訊處理、問題解決和學習上的核心認知偏好。',
+ time:'約 6 分鐘',count:'8 題',tag:'認知風格理論',pop:58,cnt:59,
+ qs:[
+  {sc:'你需要理解一個複雜的新概念，例如量子物理或心理學理論。',ask:'你最有效的學習方式是？',
+   opts:['從整體的大架構開始，然後填入細節','從具體的例子和細節開始，歸納出規律','透過圖表、圖像或視覺化工具理解','透過文字、故事或比喻來理解']},
+  {sc:'你需要記住一段重要的資訊，例如演講內容或電話號碼。',ask:'你最自然的記憶方式是？',
+   opts:['在腦海中創造視覺圖像或空間地圖','用語言重複或默念','把它和我已知的某個概念連結起來','用身體動作或節奏幫助記憶']},
+  {sc:'你在解決一個多步驟的問題，例如規劃一個複雜的旅行行程。',ask:'你的思考流程通常是？',
+   opts:['先在腦子裡看到整個旅程的「地圖」，再填細節','一步一步地規劃，完成一個再進行下一個','找到幾個關鍵節點，在這些節點之間靈活填充','憑直覺和感覺，邊規劃邊修正']},
+  {sc:'你在讀一本書或看一份文件，需要快速理解核心內容。',ask:'你最有效的方式是？',
+   opts:['先看標題、摘要、結論——先有整體印象','從第一頁開始，逐字讀完','快速瀏覽找到重點段落，重點深讀','畫出概念圖，整理各部分的關係']},
+  {sc:'你需要向別人解釋一個你很了解的複雜概念。',ask:'你最自然的解釋方式是？',
+   opts:['先說結論，再解釋為什麼','從基本概念開始，一層一層建立','用類比和比喻讓對方連結到已知的事物','用圖示或在空中比劃輪廓來說明']},
+  {sc:'你在做一個創意性的工作，例如寫文章或設計提案。',ask:'你的起點通常是？',
+   opts:['先有一個整體的概念或情緒基調','先有第一個細節或開場，然後讓它自然延伸','先有結構框架，然後填入內容','先有一個核心的意象或故事']},
+  {sc:'你發現自己犯了一個邏輯上的錯誤。',ask:'你的修正方式通常是？',
+   opts:['從整個論述的結構重新看，找出哪裡根本出了問題','逐步檢查每一個步驟，找到具體的錯誤點','在腦海中用視覺化的方式「跑一次」整個流程','用語言重新說一遍論述，聽看看哪裡不對']},
+  {sc:'你需要從多個不同的選項中做出選擇，例如選擇職業或城市。',ask:'你的決策風格最接近哪個？',
+   opts:['先有整體的直覺感受，再找理由支持','系統性地比較每個選項的各個面向','在腦海中「模擬」每個選項的感覺','聽聽自己的身體反應和情緒訊號']},
+ ],
+ score(a){const cnt=[0,0,0,0];a.forEach(v=>cnt[v-1]++);return cnt.indexOf(Math.max(...cnt))},
+ result(s){
+  const R=[
+   {emoji:'🗺️',name:'整體型認知風格 Holist',
+    sub:'Riding 的整體型（Holist）思考者傾向從整體開始，先建立全局理解再關注細節。研究顯示整體型在戰略規劃、創意思維和系統性問題解決上有優勢。',
+    traits:[{n:'全局視野',v:92},{n:'策略思維',v:88},{n:'模式識別',v:90},{n:'細節耐心',v:40}],
+    tips:['和分析型（Analyst）的人合作，讓細節不被遺漏','學習在整體之後，系統性地驗證細節','你的大局觀是領導力的天然基礎']},
+   {emoji:'📊',name:'分析型認知風格 Analyst',
+    sub:'Riding 的分析型（Analyst）思考者傾向從細節和步驟開始，逐步建立整體理解。研究顯示分析型在精確工作、學術研究和質量控制上有顯著優勢。',
+    traits:[{n:'細節精確',v:93},{n:'系統性',v:90},{n:'可靠性',v:88},{n:'全局視野',v:42}],
+    tips:['定期強迫自己先看整體框架，避免見樹不見林','你的細心是稀缺的資源，善用它','和整體型思考者合作，創造最強的思維組合']},
+   {emoji:'🖼️',name:'視覺型認知風格 Imager',
+    sub:'Riding 的視覺型（Imager）優先以圖像、空間和視覺表徵來處理資訊。研究顯示視覺型在設計、建築、數學幾何和藝術領域有顯著優勢。',
+    traits:[{n:'空間思維',v:92},{n:'視覺創意',v:90},{n:'圖像記憶',v:88},{n:'語言表達',v:48}],
+    tips:['多使用心智圖（Mind Map）、圖表和視覺筆記','在需要說服別人時，把你的視覺化轉換成語言','你的空間思維在設計和建構領域是天然優勢']},
+   {emoji:'📝',name:'語言型認知風格 Verbaliser',
+    sub:'Riding 的語言型（Verbaliser）優先以語言、故事和文字表徵來處理資訊。研究顯示語言型在寫作、教學、法律和人文學科上有顯著優勢。',
+    traits:[{n:'語言精確',v:93},{n:'故事思維',v:90},{n:'文字表達',v:92},{n:'空間直覺',v:42}],
+    tips:['在解決視覺性問題時，試著畫圖幫助理解','你用語言建構現實的能力是寫作和溝通的天賦','多閱讀多元類型的文字，持續豐富你的語言資源']}
+  ];return R[s];
+ }
+},
+
+// ── B7. 價值觀取向 ────────────────────────────────────────
+{id:'values',cat:'性格',color:'coral',icon:'⚖️',
+ title:'你的核心價值觀取向',
+ theory:'Schwartz (1992) 基本人類價值觀理論（SVS），識別 10 種普世價值觀及其相互關係；是目前跨文化價值觀研究中最廣泛引用的框架',
+ desc:'根據 Schwartz 基本人類價值觀量表（SVS），透過情境題找出你最核心的價值取向，了解是什麼在驅動你的決定和行為。',
+ time:'約 6 分鐘',count:'8 題',tag:'Schwartz 價值觀理論',pop:60,cnt:60,
+ qs:[
+  {sc:'你有機會選擇兩份薪水相同的工作。A 讓你自由決定工作方式，B 有更清楚的晉升結構和工作保障。',ask:'你更傾向哪一份？',
+   opts:['A——自主和創造空間對我更重要','B——穩定和清楚的方向讓我更安心','需要更多資訊才能決定','取決於工作的內容和意義']},
+  {sc:'你有一筆可以自由運用的額外資金，你最可能怎麼使用它？',ask:'哪個最接近你的第一反應？',
+   opts:['投資或儲蓄，確保未來的安全感','去旅行或體驗我一直想做的事','捐給我認為重要的社會或環境議題','升級自己的技能、學習或設備']},
+  {sc:'你的好朋友正在為了他的夢想做一件對他有風險的事，例如辭職創業。',ask:'你的第一個反應是？',
+   opts:['支持他，只要是他真正想要的，就值得追求','擔心他的安全和穩定，建議他謹慎評估','欣賞他的勇氣，同時分析風險','希望他做的事對更多人有意義，不只是個人成就']},
+  {sc:'你被選為一個小型社群的代表，你最優先想為這個社群做什麼？',ask:'哪個最接近你的核心優先？',
+   opts:['確保每個人都有平等的機會和權利','讓這個社群有更強的凝聚力和集體身份認同','建立更清楚的規範和結構，讓一切更有秩序','激勵成員，讓每個人都能達到他們最好的狀態']},
+  {sc:'你面對一個道德上有灰色地帶的情境：你能獲得好處，但需要違反一個規則。',ask:'你的決策依據最接近哪個？',
+   opts:['原則比好處更重要，我不做違反規則的事','評估對我和相關的人有什麼實際影響','思考大多數人在這個情況下會怎麼做','問自己：這是我真正認同的做法嗎？']},
+  {sc:'你的生命走到最後，你最希望被人記得的是什麼？',ask:'哪個最觸動你的心？',
+   opts:['他是一個始終如一、值得信賴的人','他是一個活得很精彩、充分體驗生命的人','他對社會或世界做出了有意義的貢獻','他在他在意的領域達到了真正的卓越']},
+  {sc:'你正在考慮是否要接受一個需要你做出重大個人犧牲的機會。',ask:'你的決策最受哪個因素影響？',
+   opts:['這件事是否符合我的核心原則和價值觀','這件事是否會帶來足夠的成長和刺激','這件事是否對我在意的人或社群有益','這件事是否讓我感到有掌控感和選擇的自由']},
+  {sc:'你的朋友問你：「你覺得生命中最重要的事是什麼？」',ask:'你最真實的回答是？',
+   opts:['誠實、正義和做正確的事','快樂、體驗和充分活在當下','與人的連結和對更大善的貢獻','自由、成長和成為最好的自己']},
+ ],
+ score(a){const cnt=[0,0,0,0];a.forEach(v=>cnt[v-1]++);return cnt.indexOf(Math.max(...cnt))},
+ result(s){
+  const R=[
+   {emoji:'⚖️',name:'普世主義與仁善取向',
+    sub:'Schwartz 理論中最接近「普世主義（Universalism）」和「仁善（Benevolence）」的取向，強調理解、包容和為所有人福祉著想。研究顯示這種取向與更高的社會信任和利他行為正相關。',
+    traits:[{n:'正義感',v:93},{n:'原則堅持',v:90},{n:'社會責任',v:88},{n:'個人利益',v:38}],
+    tips:['你的道德羅盤是你最強的指引','在堅持原則的同時，也對人性的複雜保持理解','讓你的價值觀轉化為可以執行的行動']},
+   {emoji:'🌊',name:'刺激與享樂主義取向',
+    sub:'Schwartz 理論中的「刺激（Stimulation）」和「享樂主義（Hedonism）」取向，以生命的活力、多樣性和快樂為核心驅動力。這種取向與更高的創造力和開放性有關。',
+    traits:[{n:'活力驅動',v:92},{n:'當下享受',v:90},{n:'體驗渴望',v:88},{n:'延遲滿足',v:40}],
+    tips:['在享受當下的同時，也建立一些能讓你安心的穩定基礎','你的活力是他人的禮物，有意識地用它來激勵人','把體驗轉化為故事和智慧，這是你獨特的資產']},
+   {emoji:'💚',name:'仁善與普世主義取向',
+    sub:'你的核心取向接近 Schwartz 理論中的「仁善（Benevolence）」，以對親近的人的福祉和社群的利益為核心驅動力。研究顯示這種取向與更深的人際滿意度和主觀幸福感正相關。',
+    traits:[{n:'利他性',v:93},{n:'連結感',v:90},{n:'社群責任',v:88},{n:'個人追求',v:42}],
+    tips:['在照顧他人的同時，也記得照顧自己的需求','讓你的仁善有清楚的範圍，避免燃盡','你的愛是力量，讓它成為能持續的資源']},
+   {emoji:'🦅',name:'自主與成就取向',
+    sub:'Schwartz 理論中的「自主（Self-Direction）」和「成就（Achievement）」取向，以個人能力的展現和獨立思考為核心驅動力。研究顯示這種取向與更高的創業精神和自我實現感相關。',
+    traits:[{n:'自主性',v:93},{n:'成就驅動',v:90},{n:'獨立思考',v:92},{n:'集體意識',v:40}],
+    tips:['在自我實現的追求中，也找到如何服務他人的方式','你的成就感能帶動身邊的人，有意識地分享','確保你的目標是真正屬於你的，而非外部期待的']}
+  ];return R[s];
+ }
+},
+
+// ╔══════════════════════════════╗
+// ║  C. 職涯與能力類 (6份)       ║
+// ╚══════════════════════════════╝
+
+// ── C1. 職業性向 ─────────────────────────────────────────
+{id:'career',cat:'職涯',color:'sage',icon:'🧭',
+ title:'哪條職涯路最適合你？',
+ theory:'Holland (1959, 1997) RIASEC 職業興趣六角模型：實用型、研究型、藝術型、社會型、企業型、慣例型；是目前最廣泛使用的職業心理學工具',
+ desc:'根據 Holland RIASEC 職業類型論，透過情境題評估你的核心職業興趣取向，找到最能讓你發揮的職涯方向。',
+ time:'約 8 分鐘',count:'10 題',tag:'Holland RIASEC 模型',pop:85,cnt:81,
+ qs:[
+  {sc:'你被分配到一個完全沒有做過的專案。',ask:'什麼樣的內容讓你最有動力立刻開始？',
+   opts:['幫助真實的人解決一個迫切的問題','設計一個全新的、從未存在過的東西','找出最有效率的系統讓這件事可以規模化','深入研究這個領域，搞清楚背後的原理和邏輯']},
+  {sc:'你有一個月的完全自由時間，可以做任何你想做的事。',ask:'你最可能把精力投入在哪裡？',
+   opts:['幫助某個社區或弱勢群體做有意義的事','創作——寫作、設計、音樂或視覺藝術','建立或優化一個小型系統、產品或組織','深度學習一個你一直想搞懂的知識領域']},
+  {sc:'你的朋友圈在聊職業，問起你「如果錢不是問題，你最想做什麼工作？」',ask:'你最誠實的回答方向是？',
+   opts:['深入人心的工作——治療師、老師、社工或輔導員','創意自由的工作——設計師、作家、藝術家','帶領組織創造成果的工作——創業家或高階管理者','深度探索知識的工作——研究員、科學家或工程師']},
+  {sc:'你觀察到自己在哪種工作狀態下最有「進入心流」的感覺？',ask:'哪個情境最能讓你完全投入忘記時間？',
+   opts:['和需要幫助的人進行深度對話','創作或設計一件有美感的東西','分析數據或解決邏輯複雜的問題','設計流程或讓一個系統變得更高效']},
+  {sc:'你和同事在聊工作中最讓你感到疲憊的事情。',ask:'哪個最讓你感到消耗？',
+   opts:['需要假裝不在意別人的感受','不斷重複同樣的事，沒有創意空間','沒有實際成果可以看見的工作','過多的不確定性和模糊不清的指示']},
+  {sc:'你有機會去四個完全不同的部門實習三個月，你最想去哪個？',ask:'哪個讓你最好奇和期待？',
+   opts:['人資、輔導或公益部門','創意、品牌或設計部門','策略、商業發展或新創部門','研究、數據或技術開發部門']},
+  {sc:'別人說「你天生就適合做某件事」，你最常聽到的是哪種讚美？',ask:'哪個最接近你收到的回饋？',
+   opts:['「你很會傾聽和理解別人，讓人感到被支持。」','「你的創意和品味真的與眾不同，很有特色。」','「你的分析和邏輯非常清晰，總是能找到問題核心。」','「你很有執行力，交給你的事一定做得好。」']},
+  {sc:'你完成一個讓你非常驕傲的工作，回顧這個過程，你最享受的部分是？',ask:'哪個讓你感到最有成就感？',
+   opts:['看到這件事真實地幫助了某個人的生活','看到這件作品在美感或創意上的完整性','看到數據或結果確認了我的分析是正確的','看到系統有條不紊地運作並產生成果']},
+  {sc:'你正在寫求職信，你最能真實描述自己的獨特優勢是？',ask:'哪個最能代表你？',
+   opts:['我能夠深刻理解和影響他人，建立真誠的連結','我能創造讓人驚艷的視覺或概念，帶來獨特的視角','我能設計並優化系統，讓複雜的事情變得有秩序','我能深入分析問題，找出別人看不到的根本原因']},
+  {sc:'你的夢想工作出現了一個職缺，但你還沒有所有需要的條件。',ask:'你最可能怎麼做？',
+   opts:['投，並附上一封真誠的信說明我能帶來什麼','準備一份展示我獨特創意的非傳統申請作品集','先快速評估差距，設計最短的補強計畫再投','深度研究這家公司，用最完整的分析打動面試官']},
+ ],
+ score(a){const cnt=[0,0,0,0];a.forEach(v=>cnt[v-1]++);return cnt.indexOf(Math.max(...cnt))},
+ result(s){
+  const R=[
+   {emoji:'💚',name:'社會型 S — Social',
+    sub:'Holland RIASEC 中的社會型（S），核心是「透過幫助、教導和關心他人來表達自己」。研究顯示 S 型在教育、心理健康、社會服務和人力資源領域有最高的工作滿意度和績效。',
+    traits:[{n:'同理傾聽',v:93},{n:'教導影響',v:90},{n:'關係建立',v:88},{n:'技術分析',v:40}],
+    tips:['教育類：教師、教育顧問、課程設計師','心理健康：諮商師、心理師、社工師','人力資源：招募、培訓、企業文化','醫療照護：護理師、職能治療師、照服員']},
+   {emoji:'💜',name:'藝術型 A — Artistic',
+    sub:'Holland RIASEC 中的藝術型（A），核心是「透過創意表達、美感和原創性來表達自己」。A 型在需要獨立思考和美感判斷的環境中最能發揮，研究顯示在高 A 型職業中工作滿意度與個人價值觀一致性最強。',
+    traits:[{n:'創意表達',v:95},{n:'美感直覺',v:92},{n:'獨創性',v:90},{n:'結構規範',v:32}],
+    tips:['設計類：UI/UX、品牌設計、時尚、室內設計','媒體類：創意總監、導演、攝影、動畫','內容類：作家、編輯、行銷創意、廣告文案','藝術類：音樂人、視覺藝術家、插畫家']},
+   {emoji:'🧡',name:'企業型 E — Enterprising',
+    sub:'Holland RIASEC 中的企業型（E），核心是「透過領導、說服和帶動他人達成目標來表達自己」。研究顯示 E 型在商業、法律和管理職位中有最高的收入和晉升速度。',
+    traits:[{n:'領導說服',v:92},{n:'目標執行',v:90},{n:'商業直覺',v:88},{n:'耐心細節',v:42}],
+    tips:['商業類：創業家、產品經理、業務發展','法律類：律師、談判顧問、公關','管理類：專案經理、部門主管、顧問','金融類：投資分析、財富管理、創投']},
+   {emoji:'💙',name:'研究型 I — Investigative',
+    sub:'Holland RIASEC 中的研究型（I），核心是「透過研究、分析和解決複雜問題來表達自己」。研究顯示 I 型在需要深度專業知識的領域有最高的工作持久度和學術成就。',
+    traits:[{n:'邏輯分析',v:94},{n:'問題解決',v:92},{n:'深度專注',v:90},{n:'社交互動',v:38}],
+    tips:['科技類：軟體工程師、AI 研究員、資安專家','自然科學：生物學家、化學家、物理學家','數據類：數據科學家、統計學家、精算師','學術研究：大學研究員、政策分析師、智庫']}
+  ];return R[s];
+ }
+},
+
+// ── C2. 領導力風格 ────────────────────────────────────────
+{id:'leader',cat:'職涯',color:'sky',icon:'🌊',
+ title:'你是哪種類型的領導者？',
+ theory:'Burns (1978) 轉型 vs. 交易型領導；Bass (1985) 全距領導模型（Full Range Leadership Model）；Goleman et al. (2002) 六種情緒領導風格',
+ desc:'根據 Bass 的全距領導模型和 Goleman 的六種情緒領導風格，透過情境題識別你的天然領導風格和最強的影響力策略。',
+ time:'約 7 分鐘',count:'10 題',tag:'全距領導模型',pop:71,cnt:64,
+ qs:[
+  {sc:'你的團隊面對一個緊急的客戶危機，必須在 2 小時內給出解決方案。',ask:'你最自然的領導反應是？',
+   opts:['快速集合，我主導決策，給出清楚的行動指令','蒐集大家的意見，讓共識帶動行動','把危機重新框架為機會，激勵團隊士氣','把問題分解，把各個部分分配給最適合的人']},
+  {sc:'你觀察到一個重要同事的表現明顯下滑，開始影響整體進度。',ask:'你傾向怎麼處理這個情況？',
+   opts:['私下直接談，明確說明表現問題和期望','先深入了解他最近遭遇了什麼，從人的角度出發','告訴他這個低谷只是暫時的，激勵他找回狀態','設計一個結構化的改善計畫，給予具體反饋']},
+  {sc:'新的一季開始，你需要為團隊設定季度目標。',ask:'你的設定方式是？',
+   opts:['我設定清楚的數字和 KPI，讓大家對齊','先讓大家一起討論，再整合成共識性的目標','先描繪出讓人激動的大願景，再談具體數字','讓每個人先提出自己的目標，再整合進框架']},
+  {sc:'一個有潛力的年輕成員自信心明顯不足，在公開場合幾乎不發言。',ask:'你會怎麼幫助他成長？',
+   opts:['給他一個稍微超出能力的挑戰，讓他在完成後建立信心','先花時間了解他的心理障礙，從情感支持開始','在公開場合多次主動肯定他的貢獻，讓他被看見','設計一個有明確步驟的成長計畫和里程碑']},
+  {sc:'你的上司給了你的團隊一個你認為不合理的指示。',ask:'你傾向如何處理？',
+   opts:['直接向上反映我的疑慮，提出替代方案','先和團隊解釋背景，確保大家理解並支持','與上司深入討論，了解決策背後的考量再決定','接受並執行，同時找方法讓負面影響最小化']},
+  {sc:'你的團隊最近完成了一個非常艱難的里程碑。',ask:'你最想怎麼回應這個成就？',
+   opts:['公開宣告，清楚說明每個人的貢獻','辦一個讓大家放鬆和聯繫感情的慶祝活動','在下次計畫會議分析「什麼做對了」，複製成功','讓每個人自己選擇如何慶祝，尊重個人偏好']},
+  {sc:'有人告訴你你的領導方式「有時讓人感到壓力很大」。',ask:'你的第一反應是？',
+   opts:['認真反思，也想了解具體是哪些行為讓人有壓力','感到意外，因為我認為自己以人為本','把這當作需要解決的問題，找出具體的改善方法','感謝對方說出來，這是我需要的反饋']},
+  {sc:'一個新的商業機會出現了，但帶有相當的風險和不確定性。',ask:'你面對機會和風險的傾向是？',
+   opts:['快速決策，先行動再調整——機會不等人','充分諮詢團隊，讓集體智慧做決定','用大局觀評估：這是否符合更長遠的方向？','系統性分析所有的資訊，制定最優化的方案']},
+  {sc:'你帶領的團隊出現了明顯的內部摩擦，影響了合作效率。',ask:'你的第一個行動是？',
+   opts:['直接界定問題，制定解決規則','分別和相關成員深度對話，理解各方感受','讓大家看到這個衝突如果解決，對所有人的好處','設計一個有結構的衝突解決流程']},
+  {sc:'一年後你離開了這個團隊，你最希望成員如何記得你？',ask:'哪個最符合你理想的領導形象？',
+   opts:['「在他帶領下，我們完成了以為做不到的事。」','「他真的在乎我們每一個人作為人的感受。」','「他讓我相信我們做的事是有意義和價值的。」','「在他的帶領下，一切都有清楚的方向和效率。」']},
+ ],
+ score(a){const cnt=[0,0,0,0];a.forEach(v=>cnt[v-1]++);return cnt.indexOf(Math.max(...cnt))},
+ result(s){
+  const R=[
+   {emoji:'⚡',name:'指揮型 Commanding',
+    sub:'對應 Goleman 的「指揮型」領導風格，以及 Bass 模型中的「交易型領導」元素。果斷、高效、目標清晰。研究顯示此風格在危機和緊急情況下最有效，但長期使用可能影響團隊的自主性。',
+    traits:[{n:'決策速度',v:93},{n:'執行力',v:90},{n:'目標清晰',v:92},{n:'關係建立',v:48}],
+    tips:['在緊急之外，也建立日常的情感連結和信任','讓團隊理解「為什麼」，而不只是「要做什麼」','Bass 的研究顯示：加入轉型元素能讓指揮型領導者效果倍增']},
+   {emoji:'💚',name:'關係型 Affiliative',
+    sub:'對應 Goleman 的「關係型」領導風格。你把人放在第一位，以建立信任和情感連結為核心。研究顯示此風格在需要療癒裂痕或激勵受傷的團隊時效果最佳。',
+    traits:[{n:'同理心',v:94},{n:'信任建立',v:90},{n:'衝突化解',v:88},{n:'績效要求',v:50}],
+    tips:['在關心人的同時，保持對目標的清晰度','練習在必要時做出不受歡迎的困難決定','Goleman 建議搭配「教練型」使用，以平衡關係和績效']},
+   {emoji:'🌟',name:'願景型 Visionary',
+    sub:'對應 Goleman 的「願景型」領導風格，也是 Bass 轉型領導的核心。你能描繪讓人信服的未來圖像，並讓人相信這是可能的。研究顯示這是六種風格中對組織氣候影響最正面的。',
+    traits:[{n:'大局願景',v:93},{n:'激勵能力',v:90},{n:'影響力',v:92},{n:'細節執行',v:45}],
+    tips:['願景要清晰，同時也要有可執行的路徑圖','找一個擅長落地執行的夥伴，形成互補','定期確認願景和現實之間的差距']},
+   {emoji:'📐',name:'教練型 Coaching',
+    sub:'對應 Goleman 的「教練型」領導風格。你以幫助個人發展和長期成長為核心，是培育人才最有效的領導風格之一。研究顯示教練型領導顯著提升成員的工作投入度和保留率。',
+    traits:[{n:'人才發展',v:93},{n:'個別化關注',v:90},{n:'長期思維',v:88},{n:'短期效率',v:50}],
+    tips:['在個別發展之外，確保有清楚的團隊目標','教練型需要時間，在緊急時刻搭配其他風格','ICF 教練認證能系統性強化你的天然教練能力']}
+  ];return R[s];
+ }
+},
+
+// ── C3. 溝通風格 ─────────────────────────────────────────
+{id:'comm',cat:'職涯',color:'coral',icon:'💬',
+ title:'你的職場溝通風格',
+ theory:'Thomas-Kilmann (1974) 衝突模式工具（TKI）：競爭、協作、妥協、迴避、順應五種衝突處理模式；結合 Rosenberg (2003) 非暴力溝通（NVC）框架',
+ desc:'根據 Thomas-Kilmann 衝突模式工具和 Rosenberg 非暴力溝通理論，透過職場情境評估你的溝通和衝突處理風格。',
+ time:'約 6 分鐘',count:'10 題',tag:'TKI 溝通風格',pop:77,cnt:72,
+ qs:[
+  {sc:'在一場重要的決策討論中，你的觀點和多數人不同。',ask:'你最可能採取的做法是？',
+   opts:['清楚堅定地表達我的立場，並用邏輯說明','聽完所有人的觀點後，找到共識的最大公約數','考慮讓步一部分，以維持關係和推進決策','等待更好的時機，這次先不特別表態']},
+  {sc:'一個同事的工作方式一直讓你感到困擾，影響了你的效率。',ask:'你傾向怎麼處理這個問題？',
+   opts:['直接找他談，清楚說明這如何影響了你的工作','找機會提出共同改進的方案，讓雙方都獲益','默默調整自己的方式，降低彼此的摩擦','向主管反映，讓第三方介入解決']},
+  {sc:'你在表達一個對你非常重要的立場，但對方似乎沒有認真在聽。',ask:'你的下一步通常是？',
+   opts:['換一種更直接的方式再說一次，確保被聽見','嘗試了解對方為什麼不專注，從他的角度出發','讓步，也許這次不那麼重要','感到挫敗，選擇不再深談']},
+  {sc:'你在一個激烈的會議中被對方用情緒化的語言攻擊。',ask:'你最可能的回應方式是？',
+   opts:['冷靜地回到事實和邏輯，不被情緒帶走','先說出我理解他的感受，再表達我的立場','暫時退出，讓大家冷靜後再繼續','接受，先讓對方說完，不在當下反應']},
+  {sc:'你有一個建議，但你知道提出來會讓某個資深同事感到不舒服。',ask:'你通常怎麼做？',
+   opts:['還是提——真相和改進比面子更重要','找到一個讓雙方都能接受的方式呈現','讓想法先停在心裡，等更好的時機','請一個第三方幫忙轉達，減少直接衝突']},
+  {sc:'你在給一個同事做績效反饋，需要說一些他可能不想聽的話。',ask:'你的給予方式通常是？',
+   opts:['直接清楚地說出觀察，用具體事實支持','先建立正面基礎，再提出需要改進的地方','非常謹慎地選詞，確保不傷害對方的感受','只說好的部分，避免觸發防禦性反應']},
+  {sc:'你和一個重要的合作夥伴對一個關鍵問題有根本性的不同意見。',ask:'你傾向的解決路徑是？',
+   opts:['堅持自己的立場，直到其中一方說服另一方','深入探討為什麼各自有不同的出發點，找到共同的價值','找到一個雙方都能接受的折衷解法','讓這個問題暫時擱置，聚焦在能達成共識的部分']},
+  {sc:'你在開放式的討論中，有人提出了一個你認為有瑕疵的計畫。',ask:'你的反應方式是？',
+   opts:['直接指出計畫的問題和風險','先認可計畫的優點，再提出疑慮和改進方向','問問題引導對方自己發現問題：「你怎麼看 X 這個風險？」','先私下和提案者聊，不在公開場合讓對方難堪']},
+  {sc:'你感到在一個重要關係中（主管或夥伴）你的貢獻沒有被認可。',ask:'你通常如何應對這個感受？',
+   opts:['主動提出來：「我想了解你是否有注意到…」','先自我評估，也許認可的方式不同','用更突出的成果來爭取認可','感到失落，但選擇繼續忍耐']},
+  {sc:'你被要求在一個短時間內整合多方意見做出一個團隊決策。',ask:'你的策略是？',
+   opts:['快速整合意見後做決定，決策者的責任是推進','帶領大家找到真正的共識，即使需要更多時間','建議多數決，這是最有效率的做法','讓意見最強的人來做最後決定']},
+ ],
+ score(a){const cnt=[0,0,0,0];a.forEach(v=>cnt[v-1]++);return cnt.indexOf(Math.max(...cnt))},
+ result(s){
+  const R=[
+   {emoji:'🔥',name:'競爭型 Competing',
+    sub:'Thomas-Kilmann 模型中的「競爭型（Competing）」：高堅持、低配合。你在需要快速決策或維護重要原則時非常有效。研究顯示此風格在緊急情境下和需要高標準時最有幫助，但長期使用可能影響關係品質。',
+    traits:[{n:'立場清晰',v:93},{n:'決策速度',v:90},{n:'結果導向',v:88},{n:'關係妥協',v:38}],
+    tips:['在高堅持之前，先確認自己真的理解了對方','NVC 的「觀察、感受、需求、請求」框架能讓你的堅定更有效','選擇你的戰場：不是每件事都值得全力堅持']},
+   {emoji:'💚',name:'協作型 Collaborating',
+    sub:'Thomas-Kilmann 模型中的「協作型（Collaborating）」：高堅持、高配合。你傾向尋找能真正滿足雙方需求的解決方案。研究顯示此風格在複雜問題和長期關係中能產生最高品質的解決方案，但需要較多時間。',
+    traits:[{n:'深度理解',v:93},{n:'創意整合',v:88},{n:'關係品質',v:90},{n:'決策速度',v:48}],
+    tips:['在時間充裕時，你的協作能力是最強的優勢','學習在緊急時刻快速切換到其他模式','你的協作風格需要對方也願意協作才能發揮']},
+   {emoji:'🌊',name:'妥協型 Compromising',
+    sub:'Thomas-Kilmann 模型中的「妥協型（Compromising）」：中等堅持、中等配合。你善於找到雙方都能接受的中間地帶。研究顯示此風格在時間壓力下和雙方旗鼓相當時最有效，但有時結果對任何一方都不是最優的。',
+    traits:[{n:'靈活性',v:90},{n:'務實性',v:88},{n:'效率',v:85},{n:'最優化',v:52}],
+    tips:['在「夠好的妥協」和「真正的解決方案」之間多一點探索','確保妥協是雙方真正願意的，而非其中一方的讓步','在重要議題上，嘗試用協作取代妥協']},
+   {emoji:'🏡',name:'順應型 Accommodating',
+    sub:'Thomas-Kilmann 模型中的「順應型（Accommodating）」：低堅持、高配合。你重視關係和諧，傾向讓對方優先。研究顯示此風格在你確實認為對方是對的時候最適合，但過度使用可能導致自我需求長期被忽視。',
+    traits:[{n:'關係和諧',v:93},{n:'包容性',v:90},{n:'靈活配合',v:88},{n:'自我倡導',v:38}],
+    tips:['練習 Rosenberg NVC 的需求表達，讓自己的聲音被聽見','「溫和但清楚」是你需要發展的溝通技能','你的貢獻和觀點有真正的價值，練習說出來']}
+  ];return R[s];
+ }
+},
+
+// ── C4. 多元智慧 ─────────────────────────────────────────
+{id:'intelligence',cat:'職涯',color:'gold',icon:'🌈',
+ title:'你的多元智慧優勢',
+ theory:'Gardner (1983, 1999) 多元智慧理論（Theory of Multiple Intelligences），識別 8 種不同的智慧類型，挑戰傳統單一 IQ 的智慧概念',
+ desc:'根據 Howard Gardner 的多元智慧理論（MI），透過情境題找出你最突出的智慧強項，以及它如何在你的思考和學習中發揮作用。',
+ time:'約 7 分鐘',count:'8 題',tag:'Gardner 多元智慧',pop:68,cnt:63,
+ qs:[
+  {sc:'你需要向一個 10 歲的孩子解釋一個複雜的概念，例如「為什麼天空是藍色的」。',ask:'你最自然的解釋方式是？',
+   opts:['用一個有趣的故事來說明','用手畫出光線折射的示意圖','哼一段旋律或節奏來類比這個現象','用身體動作模擬粒子如何散射']},
+  {sc:'你在解決一個邏輯謎題，例如數獨或邏輯推理。',ask:'這種類型的活動對你來說是？',
+   opts:['充滿樂趣，我喜歡找到規律和推導邏輯','還好，我能做但不特別享受','感到枯燥，我更喜歡有人文和情感元素的活動','我能做，但比較喜歡視覺化的空間謎題']},
+  {sc:'你在一個陌生的城市，沒有地圖，需要找到你要去的地方。',ask:'你最自然的方式是？',
+   opts:['在腦海中建立一個方位感和空間地圖','問路，透過與人互動來找方向','憑直覺和「感覺」走，通常能找到','注意周圍的自然標誌，例如太陽的位置']},
+  {sc:'你在聆聽一首完全陌生的歌曲。',ask:'你通常最先注意到的是什麼？',
+   opts:['歌詞的意象和故事','和聲的結構和旋律的邏輯','節奏如何讓你想動身體','這首歌讓你想到了誰或什麼感覺']},
+  {sc:'你在一個需要和很多不同類型的人合作的環境。',ask:'你通常在哪個角色最得心應手？',
+   opts:['說故事的人，用語言連結大家','分析問題，找出最合理的解決架構','連結不同的人，理解每個人的需求和動機','在空間或設計上讓環境更有效率']},
+  {sc:'你在戶外的山林中走了兩小時，你的注意力通常在哪裡？',ask:'哪個最接近你的體驗？',
+   opts:['觀察植物、動物和生態系統的運作','感受身體在地形中移動的節奏感','和同行的人深度聊天，享受連結','在腦海中構圖或想像這個場景的意義']},
+  {sc:'你需要學習一門新的語言，你最有效的學習方式是？',ask:'哪個讓你進步最快？',
+   opts:['用故事和情境記憶詞彙','透過邏輯規律理解語法結構','透過歌曲和節奏記憶發音和句子','透過和真人互動，在對話中學習']},
+  {sc:'你被問到：「你在哪種活動中感到最「活著」、最有活力？」',ask:'哪個最真實？',
+   opts:['在說故事、閱讀或寫作時','在解題、思考邏輯或數字時','在與他人深度連結和理解他人時','在身體移動、舞蹈或運動時']},
+ ],
+ score(a){const cnt=[0,0,0,0];a.forEach(v=>cnt[v-1]++);return cnt.indexOf(Math.max(...cnt))},
+ result(s){
+  const R=[
+   {emoji:'📖',name:'語言智慧最強 Linguistic Intelligence',
+    sub:'Gardner 多元智慧中的語言智慧（Linguistic Intelligence），指對語言的高度敏感性，包括語意、語法、語音和語用。研究顯示語言智慧強者在寫作、演講、法律和教學領域有突出表現。',
+    traits:[{n:'語言敏感',v:93},{n:'故事思維',v:90},{n:'語言記憶',v:88},{n:'空間視覺',v:45}],
+    tips:['善用你的語言天賦：寫作、演講或教學','多元閱讀持續豐富你的語言庫','嘗試用語言以外的方式（視覺、音樂）表達，擴展思維']},
+   {emoji:'🔢',name:'邏輯數學智慧最強 Logical-Mathematical',
+    sub:'Gardner 多元智慧中的邏輯數學智慧（Logical-Mathematical Intelligence），指對模式、推理和因果關係的敏感性。在科學、工程、法律論證和財務分析領域有顯著優勢。',
+    traits:[{n:'邏輯推理',v:93},{n:'模式識別',v:90},{n:'系統思維',v:92},{n:'情感表達',v:42}],
+    tips:['讓你的邏輯能力服務人的問題，而不只是抽象的謎題','在純邏輯之外，也練習理解情感和人際動態','跨領域學習能讓你的邏輯能力有更廣泛的應用']},
+   {emoji:'💞',name:'人際智慧最強 Interpersonal Intelligence',
+    sub:'Gardner 多元智慧中的人際智慧（Interpersonal Intelligence），指理解他人的感受、動機和意圖的能力。在教育、心理諮詢、領導力和銷售領域有顯著優勢。',
+    traits:[{n:'同理理解',v:94},{n:'關係建立',v:92},{n:'社交洞察',v:90},{n:'獨處反思',v:42}],
+    tips:['你的人際智慧是最稀缺的領導力資本','確保在高度社交的同時留時間獨處和反思','把你的人際洞察轉化為有系統的教導或輔導能力']},
+   {emoji:'🏃',name:'身體動覺智慧最強 Bodily-Kinesthetic',
+    sub:'Gardner 多元智慧中的身體動覺智慧（Bodily-Kinesthetic Intelligence），指透過身體控制和操作物件來解決問題和創造的能力。在運動、舞蹈、外科、工藝和戲劇領域有顯著優勢。',
+    traits:[{n:'身體覺察',v:93},{n:'動覺記憶',v:90},{n:'空間協調',v:88},{n:'抽象思維',v:45}],
+    tips:['讓身體參與你的學習和工作，這是你的天然優勢','探索運動、表演藝術或手工藝領域的創作可能','在需要靜態工作的環境，設計能讓你定期移動的例行程序']}
+  ];return R[s];
+ }
+},
+
+// ── C5. 創意思維 ─────────────────────────────────────────
+{id:'creative',cat:'職涯',color:'lilac',icon:'🎨',
+ title:'你的創意思維模式',
+ theory:'Guilford (1967) 發散思維理論（流暢性、靈活性、獨創性、精緻性）；Amabile (1983) 創意組成模型；結合 IDEO 設計思考框架',
+ desc:'根據 Guilford 的發散思維理論和 Amabile 的創意組成模型，評估你的創意潛力、聯想能力和在限制條件下的創造性應對方式。',
+ time:'約 6 分鐘',count:'8 題',tag:'創意思維理論',pop:65,cnt:61,
+ qs:[
+  {sc:'你被要求為「一個普通的磚塊」想出 20 種非常規的使用方式。',ask:'這種開放式的創意挑戰對你來說是？',
+   opts:['充滿樂趣，這種問題讓我進入興奮的狀態','有趣，但想到第 10 個後就開始卡住','能想出幾個，但覺得有點無意義','不太有感，我更喜歡有具體目標的問題']},
+  {sc:'你在解決一個工作問題，但用了三種常規方法都行不通。',ask:'你的第四個嘗試方向通常是？',
+   opts:['從完全不同的領域或類比找靈感','把問題拆成更小的部分，重新審視每一個假設','問有類似經驗的人，看看別人怎麼做','繼續嘗試，換更多細節上的調整']},
+  {sc:'你正在進行一個創意的個人項目，突然遇到嚴格的資源或時間限制。',ask:'這個限制對你的創意過程的影響是？',
+   opts:['反而激發了更多創意——限制讓我更有創意','感到沮喪，限制扼殺了可能性','需要一段時間調整，然後找到新的路徑','限制幫助我更快聚焦在最重要的事上']},
+  {sc:'你有一個新奇的想法，但你知道它很可能會被別人覺得「太奇怪」。',ask:'你通常怎麼對待這個想法？',
+   opts:['還是大膽說出來，最壞的情況就是被否定','先把它在腦子裡打磨到更有說服力再說','分享給一個信任的人，先試試水溫','把它寫在筆記本裡，留著等更好的時機']},
+  {sc:'你最近在「那個讓你靈感最容易出現」的狀態是什麼？',ask:'哪個最接近你產生最好想法的時候？',
+   opts:['在放鬆的狀態：淋浴、散步、半睡半醒時','在深度專注一個問題之後的休息期間','在和某個啟發你的人進行對話的時候','在接觸到一個完全不相關領域的新知識之後']},
+  {sc:'你在做一個需要創意的工作，但感到完全沒有靈感。',ask:'你最有效的「打破創意瓶頸」方式是？',
+   opts:['去做一件完全不相關的事，讓大腦放空','強迫自己產出 20 個糟糕的點子，然後從中找寶','和不同背景的人聊天，吸收新的觀點','改變工作環境，例如換個咖啡店或在戶外工作']},
+  {sc:'你回顧你過去最有創意的想法或作品，它通常是怎麼誕生的？',ask:'哪個描述最準確？',
+   opts:['在意外的聯想中，把兩個不相關的事物連結起來','在長時間的深度沉浸之後，突然有了突破','在與他人的合作或對話中被激發出來','在某個限制或問題讓我不得不找新方法的時候']},
+  {sc:'你認為自己最強的創意能力是？',ask:'哪個最接近你的創意優勢？',
+   opts:['聯想力——把看似無關的事物連結起來','發散思維——快速產出大量的可能性','深度挖掘——把一個想法探索到非常深的層次','跨域整合——融合不同領域的知識創造新東西']},
+ ],
+ score(a){const w=[3,2,1,0];let s=0;[0,2,3].forEach(i=>s+=w[a[i]-1]);[1,4,5,6,7].forEach(i=>s+=a[i]<=2?2:0);return s},
+ result(s){
+  if(s>=14)return{emoji:'🎆',name:'高度創意思考者',
+   sub:'根據 Guilford 的發散思維指標，你在流暢性（快速產出想法）、靈活性（從多角度思考）和獨創性（不尋常的連結）上都展現出高度能力。Amabile 的研究顯示，內在動機是創意的最強預測因子——而你顯然有。',
+   traits:[{n:'聯想力',v:93},{n:'發散思維',v:90},{n:'好奇心',v:92},{n:'執行落地',v:55}],
+   tips:['給你的想法一個「落地計畫」，創意需要執行才有影響力','找一個擅長執行的夥伴，讓你的創意實現','記錄所有的想法，包括看起來糟糕的——它們是原材料']}
+  if(s>=7)return{emoji:'🌟',name:'均衡創意型',
+   sub:'你兼具創意思維和分析能力，在「想像力」和「可行性」之間能找到平衡。這是設計思考框架中最有效的創意類型之一——你既能發散也能收斂。',
+   traits:[{n:'創意力',v:75},{n:'分析力',v:72},{n:'靈活度',v:78},{n:'執行力',v:76}],
+   tips:['刻意練習「腦力激盪」，在評估之前讓想法自由流動','試試設計思考（Design Thinking）工具和流程','接觸更多不同領域，跨域知識是創意的最佳原料']}
+  return{emoji:'🔧',name:'實踐執行型',
+   sub:'你的優勢在於把事情做好，在明確問題的框架下，你的創意往往是務實而可落地的。Amabile 的研究顯示，這種有目標導向的創意在商業環境中往往最有效果。',
+   traits:[{n:'執行力',v:92},{n:'務實創意',v:65},{n:'問題分析',v:88},{n:'開放性',v:50}],
+   tips:['嘗試「刻意創意練習」：每天記錄 3 個新觀察或靈感','接觸藝術、音樂或不同文化，拓展你的感知邊界','在限制條件下（預算、時間、規則）找到的解法，往往是最有價值的創意']}
+ }
+},
+
+// ── C6. 決策風格 ─────────────────────────────────────────
+{id:'decision',cat:'職涯',color:'mint',icon:'🧭',
+ title:'你的決策風格是什麼？',
+ theory:'Scott & Bruce (1995) 決策風格問卷（GDMS）五種風格：理性、直覺、依賴、迴避、自發；結合 Kahneman (2011) 系統一（快思）vs. 系統二（慢想）理論',
+ desc:'根據 Scott & Bruce 的一般決策風格問卷（GDMS）和 Kahneman 的雙歷程理論，探索你在重要和日常決策中的偏好模式。',
+ time:'約 6 分鐘',count:'8 題',tag:'GDMS 決策風格',pop:62,cnt:60,
+ qs:[
+  {sc:'你需要在兩個工作機會之間做選擇，薪水相近，但文化和方向不同。',ask:'你的決策過程最接近哪個？',
+   opts:['系統性地列出所有面向並評分，讓數據說話','信任直覺——第一個「感覺對」的選項','和幾個信任的人深度討論，讓他們的意見幫助我','先推遲，等更多資訊浮現再做決定']},
+  {sc:'你在超市看到一個沒計畫購買的東西，但感覺很想要。',ask:'你通常的反應是？',
+   opts:['快速評估：是否在預算內、是否真的需要','當下感覺想要就買，反正也不貴','先放下，如果過幾天還在想就回來買','放入籃子，但結帳前可能又放回去']},
+  {sc:'你在工作上需要快速做出一個影響較大的決策，沒有太多時間思考。',ask:'你的快速決策依據通常是？',
+   opts:['最快速的利弊分析——把核心因素寫下來','過去在類似情況下什麼有效','詢問最近的人：「你覺得呢？」','選擇最保守的選項，降低犯錯的風險']},
+  {sc:'你被要求在今天結束之前做一個你還沒準備好的重要決定。',ask:'你的感受和反應是？',
+   opts:['壓力但能應對，快速收集關鍵資訊後決定','焦慮，但還是依靠直覺推進','向決策者爭取更多時間，或尋求指導','感到明顯的不安，可能做了決定也後悔']},
+  {sc:'你做了一個決定，但執行後發現它似乎不是最好的選擇。',ask:'你通常如何應對這個情況？',
+   opts:['評估是否需要調整，以當前的最佳判斷繼續','感到很後悔，反覆想當初是否應該選另一個','問問別人，看看他們怎麼看','繼續執行，做了就做了，不回頭想']},
+  {sc:'你和朋友在餐廳，菜單有 30 種選項，服務生正在等你點菜。',ask:'你點菜的方式是？',
+   opts:['快速掃過菜單，用邏輯過濾（類型、價格）後決定','看到感覺對眼的就點，靠直覺','問朋友「你推薦哪個？」','花比較多時間，不確定時傾向點熟悉的東西']},
+  {sc:'你在一個重要的人生路口，沒有人可以幫你決定。',ask:'你最終做決定的方式通常是？',
+   opts:['把所有可能性的後果清楚地推演出來','讓自己靜下來，聆聽內心最深的聲音','找所有我尊重的人談，整合他們的觀點','等到某個「時機」，感覺對了就做']},
+  {sc:'你回顧過去你做過的重要決定，哪個說法最準確？',ask:'哪個最像你的決策特徵？',
+   opts:['我通常需要相對充分的分析才能有信心','我的直覺通常比我以為的更準確','我很重視別人的意見和外部的回饋','我傾向晚一點做決定，等確定時再說']},
+ ],
+ score(a){const cnt=[0,0,0,0];a.forEach(v=>cnt[v-1]++);return cnt.indexOf(Math.max(...cnt))},
+ result(s){
+  const R=[
+   {emoji:'📊',name:'理性分析型 Rational',
+    sub:'Scott & Bruce GDMS 中的理性型，傾向系統性地蒐集和評估資訊後做決定。Kahneman 的「系統二」（慢思考）是你的主要決策路徑。研究顯示理性型在複雜決策中的準確率較高，但在時間壓力下需要練習更快切換。',
+    traits:[{n:'決策品質',v:88},{n:'分析嚴謹',v:93},{n:'資訊需求',v:90},{n:'決策速度',v:48}],
+    tips:['練習設定決策的「截止時間」，避免過度分析','在非重要決策中，刻意練習用直覺，建立對直覺的信心','Kahneman 的《快思慢想》是為你而寫的']},
+   {emoji:'⚡',name:'直覺型 Intuitive',
+    sub:'Scott & Bruce GDMS 中的直覺型，依靠感受和直覺做決定。Kahneman 的「系統一」（快思考）是你的主要路徑。研究顯示，直覺在熟悉領域中非常有效，但在陌生或複雜情境需要更謹慎。',
+    traits:[{n:'決策速度',v:93},{n:'情境適應',v:88},{n:'經驗整合',v:90},{n:'複雜分析',v:48}],
+    tips:['在高風險決策中，搭配一些有意識的分析作為檢核','記錄你的直覺決策和結果，持續校正你的直覺','你的直覺在熟悉的領域最可靠，在全新領域需要更謹慎']},
+   {emoji:'🫂',name:'依賴型 Dependent',
+    sub:'Scott & Bruce GDMS 中的依賴型，傾向在做重要決定前尋求他人的指導和支持。研究顯示此風格者有強烈的社交網絡整合能力，但有時可能因為過度依賴外部而延誤決策。',
+    traits:[{n:'社群整合',v:92},{n:'外部視角',v:88},{n:'謙遜開放',v:90},{n:'決策自主',v:45}],
+    tips:['練習在做決定之前先自己想清楚，再諮詢別人','建立對自己判斷的信任，從小決定開始','你的集體智慧能力是珍貴的，在團隊決策中善加利用']},
+   {emoji:'⏳',name:'迴避型 Avoidant',
+    sub:'Scott & Bruce GDMS 中的迴避型，傾向推遲決策或轉移決策責任。研究顯示此風格在決策品質上有較高的不確定性，但有時「等待」確實能帶來更多資訊。',
+    traits:[{n:'謹慎性',v:85},{n:'風險迴避',v:90},{n:'耐心',v:88},{n:'決策效率',v:35}],
+    tips:['為每個重要決定設定一個明確的「決策日期」','辨別「需要更多資訊」和「迴避做決定」的差異','練習接受：完美的決定不存在，夠好的決定才有價值']}
+  ];return R[s];
+ }
+},
+
+// ╔══════════════════════════════╗
+// ║  D. 生活風格類 (5份)         ║
+// ╚══════════════════════════════╝
+
+// ── D1. 愛情語言 ─────────────────────────────────────────
+{id:'love',cat:'生活',color:'peach',icon:'💌',
+ title:'你的愛情語言是什麼？',
+ theory:'Chapman (1992) 五種愛情語言理論：肯定語言、優質時光、服務行動、收受禮物、身體接觸；基於 25 年的婚姻輔導實踐',
+ desc:'根據 Gary Chapman《愛之語》中的五種愛情語言理論，透過真實的情感情境，找出你給予和接收愛的主要方式。',
+ time:'約 5 分鐘',count:'10 題',tag:'Chapman 五種愛情語言',pop:91,cnt:95,
+ qs:[
+  {sc:'你剛度過了一個非常糟糕的一天，伴侶感受到了你的狀態。',ask:'他/她做了什麼讓你感到「最被愛到」？',
+   opts:['說「你已經做得很好了，我真的很欽佩你的努力」','什麼都不做，只是靜靜地陪在你旁邊','默默地把你今天不想做的家事或雜事全部處理好','帶了你最喜歡的東西回來，沒有任何特別的原因']},
+  {sc:'你們之間有了一些誤解，還沒有解決。',ask:'什麼讓你感到關係真的回到了原點？',
+   opts:['他/她說了一段真心話：「對不起，我愛你，我在乎我們」','他/她靜靜坐在你旁邊，不說話，只是存在','他/她默默做了一件讓你輕鬆一點的事','他/她準備了一個小東西送你']},
+  {sc:'你有一個重要的生日即將到來。',ask:'什麼樣的慶祝方式讓你感到最被重視？',
+   opts:['伴侶說了一段真心的感謝和讚美','伴侶安排了只有你們兩個的完整一天','伴侶默默把你提過想要的事情準備好了','伴侶精心挑選了一份讓你驚喜的禮物']},
+  {sc:'你在工作上有一個重要的突破，感到非常驕傲。',ask:'你最渴望伴侶怎麼回應？',
+   opts:['認真聽你說，然後告訴你他/她有多為你驕傲','帶你去慶祝，全程把注意力放在你身上','幫你把接下來的雜事都打理好，讓你盡情享受','送你一個象徵這個里程碑意義的禮物']},
+  {sc:'你感到孤獨和不被理解，需要被愛的確認。',ask:'什麼能讓你感到最安心？',
+   opts:['一句「我懂你，你不是一個人，我在這裡」','對方靜靜地坐在你身邊，讓你感覺到他/她的存在','對方主動幫你解決讓你困擾的一件事','一個長長的、真實的擁抱']},
+  {sc:'你的伴侶最近很忙，不能常常陪你。',ask:'什麼讓你感到你們之間的連結還在？',
+   opts:['一條訊息說「我在想你，謝謝你這段時間的體諒」','他/她安排了一個固定的「只有我們的時間」','他/她在百忙中幫你處理了一件你一直想做的事','他/她寄來一個小包裹，說「看到這個就想到你」']},
+  {sc:'你向伴侶表達愛意時，你最自然的方式是什麼？',ask:'哪個最像你？',
+   opts:['直接說出來——「我愛你，你今天很好看，我很感謝你」','把時間給他/她——計畫一個專注在他/她身上的活動','默默行動——幫他/她做一件他/她不喜歡做的事','選一個他/她提到過想要的東西送給他/她']},
+  {sc:'爭吵後，什麼最能讓你感到完全釋懷？',ask:'哪個對你最有療癒效果？',
+   opts:['對方說出一段真誠的道歉，包含對你感受的理解','對方靜靜地陪在你旁邊，不需要任何言語','對方主動承擔一些讓你輕鬆的事情','對方準備了你喜歡吃的食物或一個小禮物']},
+  {sc:'你感察到伴侶有點心情不好，但他/她沒有說出來。',ask:'你最自然的回應是？',
+   opts:['說「你還好嗎？你看起來有點不對勁，跟我說說」','默默坐在他/她身邊，讓他/她感覺到你在','幫他/她把今天要做的事情都處理好','輕輕把手放在他/她肩上']},
+  {sc:'你被問到：「你最需要的是哪種愛的表達？」',ask:'你最誠實的回答是？',
+   opts:['被看見、被說出來——言語上的肯定和認可','完整的時間和注意力——你在我心中的優先位置','被行動照顧——你注意到我的需要，並主動去做','身體的溫暖——擁抱、牽手、靠近的感覺']},
+ ],
+ score(a){const cnt=[0,0,0,0];a.forEach(v=>cnt[v-1]++);return cnt.indexOf(Math.max(...cnt))},
+ result(s){
+  const R=[
+   {emoji:'💬',name:'肯定語言 Words of Affirmation',
+    sub:'Chapman 的第一種愛情語言：你最需要透過言語表達的愛。真誠的讚美、感謝、鼓勵和愛的告白，對你來說比任何行動都更深入內心。研究顯示，不同語言的人在關係中最常出現的誤解是：用自己的語言愛對方，但對方卻感受不到。',
+    traits:[{n:'語言接受',v:93},{n:'情感確認需求',v:90},{n:'認可敏感度',v:88},{n:'非語言接受',v:50}],
+    tips:['清楚告訴伴侶你需要更多言語上的確認，這不是要求，是溝通','學習「翻譯」對方的其他語言表達，找到其中的愛','多向身邊的人說出你的欣賞，這也是一種練習']},
+   {emoji:'⏰',name:'優質時光 Quality Time',
+    sub:'Chapman 的第二種愛情語言：你最需要的是「全神貫注的陪伴」。放下手機、眼神接觸、完整地在一起，對你來說是愛最直接的表達。研究顯示優質時光型的人對「被打斷」和「心不在焉」的伴侶最敏感。',
+    traits:[{n:'陪伴需求',v:94},{n:'注意力敏感',v:92},{n:'連結感需求',v:90},{n:'物質表達接受',v:40}],
+    tips:['和伴侶計畫固定的「無手機約會」時光','清楚說出：對你而言，陪伴的「質」比任何禮物都重要','欣賞對方用其他語言表達的愛，而非只感受到缺失']},
+   {emoji:'🙏',name:'服務行動 Acts of Service',
+    sub:'Chapman 的第三種愛情語言：「行動勝於千言萬語」是你的愛情哲學。你透過行動來愛人，也渴望對方用實際行動證明愛。研究顯示服務行動型的人在伴侶「說到做不到」時感受最強烈的愛的缺失。',
+    traits:[{n:'行動感知',v:93},{n:'體貼度',v:90},{n:'實際照顧',v:92},{n:'語言接受',v:50}],
+    tips:['具體告訴伴侶「當你___的時候，我感到被愛」','記得行動的出發點比結果的完美更重要','學習接受對方用言語或禮物表達的愛，哪怕那不是你的主要語言']},
+   {emoji:'🤗',name:'身體接觸 Physical Touch',
+    sub:'Chapman 的第五種愛情語言（但在此測驗是你的主要語言）：身體的溫度讓你感受到最直接的安全感和連結。研究顯示身體接觸型的人在缺乏肢體互動時，感受到的被愛程度下降最快。',
+    traits:[{n:'觸覺敏感',v:94},{n:'親密連結',v:92},{n:'安全感需求',v:90},{n:'語言接受',v:50}],
+    tips:['讓伴侶了解身體接觸對你的深層重要性','注意並尊重彼此的肢體接觸邊界，清楚溝通','在日常中增加小的肢體互動：牽手、擁抱、輕碰']}
+  ];return R[s];
+ }
+},
+
+// ── D2. 人際互動風格 ──────────────────────────────────────
+{id:'social',cat:'生活',color:'lilac',icon:'🫂',
+ title:'你的人際互動風格',
+ theory:'Leary (1957) 人際環形模型（Interpersonal Circumplex）：支配-服從、友善-敵對兩個維度；結合 Horney (1945) 人際取向三方向：趨近、對抗、退縮',
+ desc:'根據 Leary 人際環形模型和 Horney 的人際取向理論，透過情境題探索你在人際關係中的核心互動模式。',
+ time:'約 6 分鐘',count:'10 題',tag:'Leary 人際環形模型',pop:77,cnt:72,
+ qs:[
+  {sc:'你加入了一個全新的群體——新工作、新社團或新課程。',ask:'你融入的方式通常是？',
+   opts:['主動打招呼，快速認識大多數人','先觀察一段時間，慢慢找到感覺合的人','讓別人先來找我，我很少主動發起','找到一兩個感覺對的人，深入認識就好']},
+  {sc:'聚會結束後，你發現自己很不喜歡某個人說話的方式。',ask:'你通常怎麼處理這種感受？',
+   opts:['直接或間接讓對方感受到，我不太會隱藏','告訴親近的朋友，說說自己的感受','把感受留給自己，繼續表面和平相處','試著理解對方，也許他有原因']},
+  {sc:'你需要拒絕一個朋友的邀請，你知道他非常期待你去。',ask:'你最可能怎麼處理？',
+   opts:['直接說：「這次沒辦法，但謝謝你的邀請」','拖延回覆，希望自然化解','說出真實的原因，然後道歉','編一個讓對方比較容易接受的理由']},
+  {sc:'你在群體中，有人說了一個讓你感到很不舒服的玩笑。',ask:'你的反應通常是？',
+   opts:['直接說：「這個玩笑讓我有點不舒服」','沒有說出口，但心裡記住了','笑著略過，之後找機會私下說','默默承受，不想讓氣氛變尷尬']},
+  {sc:'你和一個重要的朋友之間有了衝突，還沒解決。',ask:'你最傾向怎麼面對？',
+   opts:['主動找他談，把話說清楚','等對方先開口，我不擅長主動提這些','讓時間沖淡，不特別處理','透過第三方間接傳達你的感受']},
+  {sc:'你認識了一個你非常欣賞的人，想和他成為朋友。',ask:'你通常如何建立這段關係？',
+   opts:['主動約，直接說「我想更認識你」','製造自然的相處機會','等待緣分，合適的話自然會靠近','先在社群媒體互動，熱身後再私下聯繫']},
+  {sc:'你和一個說話比你多很多的朋友聊天，你幾乎沒有機會發言。',ask:'你的感受和反應是？',
+   opts:['找機會插話，表達我的觀點','感到有點被忽視，但不說出來','享受聽對方說話，我不需要很多發言空間','直接說「我也想說幾句」']},
+  {sc:'朋友問你：「你是一個容易交心的人嗎？」',ask:'你最誠實的回答是？',
+   opts:['是的，我很快就能建立深度連結','看人——遇到對的人快，遇到不對的人很慢','需要時間，但一旦開了就是真的','不太容易，我的心是個很私密的地方']},
+  {sc:'你想到你最好的朋友，你最珍視這段友誼的哪個部分？',ask:'哪個對你最重要？',
+   opts:['我們可以說任何話，彼此完全誠實','我們不需要每天聯絡，但感情永遠在','我們做了很多事在一起，有豐富的共同記憶','對方真的懂我，甚至懂得我說不出口的部分']},
+  {sc:'你的一個好朋友突然從你的生命中漸漸消失，沒有明顯的原因。',ask:'你通常如何面對這種失落？',
+   opts:['主動聯繫，直接問對方怎麼了','感到難過，但讓對方有空間，等他回來','讓時間決定，如果緣分到了自然會重新連結','在心裡感到受傷，但不讓對方知道']},
+ ],
+ score(a){const cnt=[0,0,0,0];a.forEach(v=>cnt[v-1]++);return cnt.indexOf(Math.max(...cnt))},
+ result(s){
+  const R=[
+   {emoji:'🌞',name:'主動友善型 Dominant-Friendly',
+    sub:'Leary 人際環形模型中的「主動友善」象限：高支配性、高友善性。你在人際中充滿活力，主動建立連結。研究顯示此類型在社交影響力和領導力上有天然優勢，但有時需要注意是否給了別人足夠的空間。',
+    traits:[{n:'主動連結',v:92},{n:'社交廣度',v:90},{n:'影響力',v:88},{n:'傾聽空間',v:52}],
+    tips:['在廣度之外，也投資幾段真正深刻的友誼','練習有時候讓別人先來，觀察誰真的在乎','你的開放是禮物，也需要辨別有毒關係的能力']},
+   {emoji:'🌿',name:'選擇深耕型 Low-Dominant-Friendly',
+    sub:'Leary 模型中的「低支配、高友善」象限：你傾向在關係中配合而非主導，重視少數但深度的連結。Horney 的「趨近型」取向——透過靠近他人獲得安全感和意義。',
+    traits:[{n:'深度友誼',v:93},{n:'忠誠度',v:90},{n:'選擇性',v:88},{n:'主動倡導',v:40}],
+    tips:['讓你在乎的人知道你在乎，不只是放在心裡','偶爾主動打破你的圈子，可能有驚喜','你的高友善性是真實的資產，確保它有清楚的界線']},
+   {emoji:'🏡',name:'和諧維持型 Low-Dominant-Low-Hostility',
+    sub:'Leary 模型中偏向中心的類型，傾向維持現狀和迴避衝突。Horney 的「退縮型」傾向：透過保持距離來維持舒適感。',
+    traits:[{n:'和諧維持',v:92},{n:'衝突容忍',v:85},{n:'適應彈性',v:88},{n:'自我倡導',v:38}],
+    tips:['溫和地說出不舒服是對自己和對方的誠實','你的感受值得被表達，不只是被吞下去','不舒服的感受若不說出來，常常以更大的形式出現']},
+   {emoji:'🌙',name:'深度私密型 High-Introverted',
+    sub:'Leary 模型中偏向內縮的類型：你的人際關係以深度和真實為核心，在真正安全的情況下才願意開放。這不是距離，而是對真實連結的高要求。',
+    traits:[{n:'真實性需求',v:93},{n:'深度連結',v:90},{n:'選擇性',v:92},{n:'初期開放',v:35}],
+    tips:['讓新認識的人有機會了解你——給他們多一點時間','你不需要讓所有人都懂你，但要確保有幾個人真的懂','偶爾主動表達你的喜愛，對方可能在等你開口']}
+  ];return R[s];
+ }
+},
+
+// ── D3. 生活節奏 ─────────────────────────────────────────
+{id:'rhythm',cat:'生活',color:'sand',icon:'🌅',
+ title:'你的生活節奏與幸福感來源',
+ theory:'Seligman (2011) PERMA 幸福理論：正向情緒、投入、關係、意義、成就；結合 Csikszentmihalyi (1990) 心流理論',
+ desc:'根據 Seligman 的 PERMA 幸福理論和 Csikszentmihalyi 的心流理論，找出你最主要的幸福感來源和最適合你的生活節奏類型。',
+ time:'約 5 分鐘',count:'8 題',tag:'PERMA 幸福理論',pop:64,cnt:59,
+ qs:[
+  {sc:'你有一個完整的假期，完全屬於你，沒有任何義務。',ask:'什麼樣的使用方式讓你事後感到最充實？',
+   opts:['充實地完成幾件我一直想做的事','隨興而走，讓當下決定','精選幾件慢慢享受，不趕不急','把時間給最重要的幾個人，好好相處']},
+  {sc:'你回顧某一天，感覺「今天真的過得很好」。',ask:'那一天通常是什麼樣子？',
+   opts:['我完成了一件有挑戰性但有意義的事','有一個讓我感到幸福和享受的當下時刻','我和某個重要的人有了深度的連結','我做了一件讓我感到這份努力有意義的事']},
+  {sc:'你在找一個新的工作或生活方向，最重要的優先考量是？',ask:'哪個對你來說最不能妥協？',
+   opts:['能讓我不斷進步、達成新目標的環境','能讓我完全投入、忘記時間的內容','能讓我與人深度連結的工作性質','能讓我感到真正有貢獻和意義的方向']},
+  {sc:'你的朋友問你：「你最近最快樂的時刻是什麼？」',ask:'你最可能說的是？',
+   opts:['「達成了一個我努力很久的目標」','「有一個讓我完全沉浸的下午」','「和某個重要的人有了一段很深的對話」','「做了一件真的對某人有幫助的事」']},
+  {sc:'你感到人生有點空洞，缺少某種東西。',ask:'通常是什麼讓這種感覺最強烈？',
+   opts:['感覺自己原地踏步，沒有成長和進展','找不到讓我完全投入的事情','和重要的人之間的連結變淺了','感到做的事沒有更大的意義和目的']},
+  {sc:'你描述自己「人生巔峰」的時刻，那通常是什麼情境？',ask:'哪個最接近你的「人生巔峰」感？',
+   opts:['克服了一個巨大的挑戰，感到自己真的成長了','完全沉浸在一件熱愛的事中，時間消失了','和某人有了讓我一生難忘的真實連結','做了一件超越自己的事，對更大的事有了貢獻']},
+  {sc:'你最近感到特別有活力和動力，是因為什麼？',ask:'哪個最能喚起你的生命力？',
+   opts:['一個清楚的目標，讓我知道要往哪裡走','一個讓我完全投入的挑戰或活動','一段深度的對話或連結','一件讓我感到真正有意義的事情']},
+  {sc:'你被問到：「你的生命中什麼讓你感到最值得？」',ask:'你最誠實的回答是？',
+   opts:['我持續地成長，成為更好的自己','我充分地體驗了生命的美好和深度','我與我在乎的人有了真實而深刻的連結','我的存在對某些人或某件事真的有意義']},
+ ],
+ score(a){const cnt=[0,0,0,0];a.forEach(v=>cnt[v-1]++);return cnt.indexOf(Math.max(...cnt))},
+ result(s){
+  const R=[
+   {emoji:'🚀',name:'成就與成長導向 Achievement',
+    sub:'你的幸福感主要來自 Seligman PERMA 模型中的「A（Accomplishment）」——成就感和持續的成長。Csikszentmihalyi 的研究顯示，挑戰與技能匹配時產生的心流狀態，對你來說是幸福的核心體驗。',
+    traits:[{n:'成就動機',v:93},{n:'成長導向',v:90},{n:'目標感',v:92},{n:'當下享受',v:50}],
+    tips:['設定目標的同時，也記得慶祝過程中的小里程碑','PERMA 研究顯示：只有成就而沒有關係和意義，幸福感難以持久','偶爾問自己：「我在成長的方向，是我真正想去的地方嗎？」']},
+   {emoji:'🌊',name:'投入與心流導向 Engagement',
+    sub:'你的幸福感主要來自 PERMA 中的「E（Engagement）」和 Csikszentmihalyi 的心流（Flow）——完全沉浸在有挑戰性的活動中的忘我狀態。研究顯示心流是最純粹的主觀幸福感來源之一。',
+    traits:[{n:'投入深度',v:94},{n:'心流體驗',v:92},{n:'專注力',v:90},{n:'多重任務',v:38}],
+    tips:['識別哪些活動最容易讓你進入心流，刻意增加這些時間','保護你的深度專注時間，不讓碎片化破壞心流','Csikszentmihalyi 建議：讓挑戰略高於你目前的技能，才能維持心流']},
+   {emoji:'💞',name:'關係與連結導向 Relationships',
+    sub:'你的幸福感主要來自 PERMA 中的「R（Relationships）」——與他人深度連結的品質。研究（包括哈佛成人發展研究）顯示，關係品質是長期幸福感和健康的最強預測因子。',
+    traits:[{n:'連結深度',v:94},{n:'同理共感',v:92},{n:'關係投入',v:90},{n:'個人成就',v:48}],
+    tips:['投資在少數但深度的關係上，這是回報最高的幸福投資','「高質量的孤獨」也很重要，確保你也有時間和自己在一起','哈佛 80 年研究結論：讓你幸福的不是財富或名聲，而是關係品質']},
+   {emoji:'🌟',name:'意義與目的導向 Meaning',
+    sub:'你的幸福感主要來自 PERMA 中的「M（Meaning）」——相信自己的存在和行動對更大的事物有貢獻。研究顯示意義感是人在逆境中最強的心理保護因子，也是老年時生命滿足感的最重要預測因素。',
+    traits:[{n:'意義感',v:94},{n:'目的感',v:92},{n:'超越自我',v:90},{n:'即時享受',v:50}],
+    tips:['找到你的「為什麼」（Why），這是你幸福的根基','Frankl 的《活出意義來》是為你而寫的','即使在日常的小事中，也試著找到它如何連結到你的更大意義']}
+  ];return R[s];
+ }
+},
+
+// ── D4. 戀愛觀 ────────────────────────────────────────────
+{id:'romance',cat:'生活',color:'blush',icon:'🌹',
+ title:'你的戀愛觀與感情模式',
+ theory:'Lee (1973, 1977) 愛情色彩理論（六種愛情風格）：激情型（Eros）、遊戲型（Ludus）、友誼型（Storge）、佔有型（Mania）、現實型（Pragma）、無私型（Agape）',
+ desc:'根據 Lee 的愛情色彩理論（Love Styles）和後續 Hendrick & Hendrick 的量表研究，透過情境題找出你在感情關係中的核心愛情風格。',
+ time:'約 7 分鐘',count:'9 題',tag:'Lee 愛情色彩理論',pop:80,cnt:78,
+ qs:[
+  {sc:'你和一個讓你心動的人才認識不久，第一次約會結束後。',ask:'你的內心狀態最接近哪個？',
+   opts:['充滿美好的感受和期待，有一種「對了」的感覺','保持輕鬆，享受過程，不急著定義這是什麼','感到確實喜歡，但更想先了解我們是否真的合','感到不安，很想確認對方也同樣喜歡我']},
+  {sc:'你和伴侶在一起了一段時間，感情漸漸趨向穩定平靜。',ask:'你如何看待這個轉變？',
+   opts:['有點失落激情，希望保持一些刺激和新鮮感','感到自在，穩定本來就是我想要的','感到滿足，我們已經建立了真正的友誼','擔心對方是不是不再那麼喜歡我了']},
+  {sc:'你在感情中最享受哪種時刻？',ask:'哪個讓你感到最幸福？',
+   opts:['彼此深深吸引，充滿熱情和渴望的時刻','輕鬆自在地相處，沒有任何壓力的日常','像老朋友一樣，什麼都可以說的深度連結','感受到對方的愛和在乎，確認彼此是重要的']},
+  {sc:'你和伴侶對一件重要的事有不同的想法，例如未來的計畫。',ask:'你的處理方式是？',
+   opts:['認真討論，如果真的不合，感情再好也難走下去','不想製造緊張，保持輕鬆態度，看情況發展','耐心地溝通，試圖找到彼此都能接受的方向','非常擔心這個分歧會影響我們之間的連結']},
+  {sc:'你在選擇一個長期伴侶時，什麼對你來說最重要？',ask:'哪個是你真正的優先考量？',
+   opts:['強烈的吸引力和化學反應，感情就要有火花','對方是有趣、輕鬆、不會給我壓力的人','我們真的合得來，有共同的價值觀和生活目標','對方非常在意我，讓我感到被珍視和重要']},
+  {sc:'你的伴侶說他/她需要一段時間的個人空間。',ask:'你的第一個感受是？',
+   opts:['有點失落，但理解——每個人都需要自己的時間','完全沒問題，我也喜歡自己的空間','好的，我也趁這個時間做自己的事','感到有點不安，擔心這是什麼信號']},
+  {sc:'你回顧一段深刻的愛情關係，你認為它最珍貴的是什麼？',ask:'哪個讓你最觸動？',
+   opts:['那種從未有過的激情和深度的情感投入','那段輕鬆快樂、沒有壓力的共處時光','我們之間真正的了解和接納','那份讓我感到被完整地愛著的安全感']},
+  {sc:'你如何看待「愛情會隨時間改變」這件事？',ask:'哪個最接近你的感受？',
+   opts:['難以完全接受，愛情應該有持久的熱情','很正常，感情的形式本來就會改變','期待的——從激情轉為深度的友誼式的愛','讓我有點焦慮——改變代表愛有可能消失']},
+  {sc:'你對伴侶最深的期待是？',ask:'哪個最觸及你心中對感情最深的渴望？',
+   opts:['成為彼此最深的熱情和渴望','成為彼此最快樂、最自在的存在','成為彼此最真實的自己，被完整接受','成為彼此最重要、最不可或缺的人']},
+ ],
+ score(a){const cnt=[0,0,0,0];a.forEach(v=>cnt[v-1]++);return cnt.indexOf(Math.max(...cnt))},
+ result(s){
+  const R=[
+   {emoji:'🔥',name:'激情型 Eros — 熱情的愛',
+    sub:'Lee 的激情型（Eros）以強烈的身體吸引力和情感熱情為核心。Hendrick & Hendrick 的研究顯示，Eros 型者在關係初期的滿意度最高，但也需要學習如何在激情消退後維持深度的連結。',
+    traits:[{n:'情感強度',v:93},{n:'吸引力重視',v:90},{n:'投入深度',v:88},{n:'長期穩定',v:55}],
+    tips:['熱情是開始，不是終點——學習如何在激情之後建立更深的連結','在伴侶選擇上，確保「相容性」和「吸引力」都存在','定期為關係注入新的體驗，維持一定的新鮮感']},
+   {emoji:'🎈',name:'遊戲型 Ludus — 輕鬆的愛',
+    sub:'Lee 的遊戲型（Ludus）以輕鬆、自在和不把感情看得太嚴肅為特徵。研究顯示 Ludus 型者的長期關係滿意度與對方的溝通能力高度相關，需要找到同樣重視輕鬆感的夥伴。',
+    traits:[{n:'自在感',v:93},{n:'壓力迴避',v:88},{n:'靈活性',v:90},{n:'情感深度',v:50}],
+    tips:['確保「輕鬆」不是你在迴避深度連結的方式','找一個願意以你的節奏走入感情的人','有時候允許感情變得認真，那可能是它真正開始的地方']},
+   {emoji:'🌿',name:'友誼型 Storge — 深耕的愛',
+    sub:'Lee 的友誼型（Storge）以深厚的友誼和共同的價值觀為愛情的基礎。研究顯示 Storge 型者的長期關係滿意度最高，且離婚率最低——他們把伴侶視為最好的朋友。',
+    traits:[{n:'深度連結',v:93},{n:'相容性',v:90},{n:'長期穩定',v:92},{n:'初期吸引',v:55}],
+    tips:['相容性確實是長期幸福的最好預測因子，你的直覺是對的','也要注意感情中是否有足夠的吸引力，友誼和愛情的平衡','這種愛情風格需要時間建立，不要被「沒有立刻的化學反應」嚇跑']},
+   {emoji:'💫',name:'佔有型 Mania — 濃烈的愛',
+    sub:'Lee 的佔有型（Mania）以強烈的情感需求和對失去的恐懼為特徵，往往與焦慮型依附風格有所重疊。這種愛情風格情感最深刻，但也最容易受傷，自我照顧和清晰的溝通特別重要。',
+    traits:[{n:'情感強度',v:94},{n:'在乎深度',v:92},{n:'連結渴望',v:90},{n:'情緒穩定',v:38}],
+    tips:['練習讓愛的源頭也包含自我——對自己的愛是最穩固的基礎','溝通你的需求，而不是透過焦慮行為來試探','CBT 或依附取向的治療對 Mania 型者有顯著幫助']}
+  ];return R[s];
+ }
+},
+
+// ── D5. 理財心理 ─────────────────────────────────────────
+{id:'money',cat:'生活',color:'gold',icon:'💰',
+ title:'你的金錢心理與財務行為',
+ theory:'Klontz & Klontz (2011) 金錢腳本理論（Money Scripts）：金錢迴避、金錢崇拜、金錢地位、金錢警惕；結合 Kahneman & Thaler 行為經濟學的損失厭惡和心理帳戶概念',
+ desc:'根據 Klontz 的金錢腳本理論和行為經濟學的相關研究，透過情境題探索你對金錢的深層信念和財務行為模式。',
+ time:'約 6 分鐘',count:'8 題',tag:'Klontz 金錢腳本',pop:70,cnt:66,
+ qs:[
+  {sc:'你意外地收到一筆額外的資金，比如年終獎金或意外之財。',ask:'你的第一個直覺是？',
+   opts:['儲蓄或投資，增加安全感','犒賞自己，做一件一直想做的事','快速算好分配比例：多少存、多少用','研究如何讓這筆錢有最好的成長']},
+  {sc:'你在一家餐廳，看到一道你很想吃但要價不菲的菜。',ask:'你的內心對話是？',
+   opts:['這超出了我通常的消費水準，選便宜一點的','想吃就點，這種享受值得','評估一下今天整體消費，如果在預算內就點','人生苦短，享受當下']},
+  {sc:'你的朋友說「你好省，為什麼不捨得花錢享受生活？」',ask:'你的內心真實感受是？',
+   opts:['有點刺傷，但我真的覺得節省是對的','也許我確實可以對自己好一點','我不是「省」，是「有計畫地花」','我有我自己的財務邏輯，不需要他人認可']},
+  {sc:'你在考慮一個高風險高報酬的投資機會。',ask:'你的決策心理是？',
+   opts:['謹慎評估後，用我可以承受損失的金額嘗試','太有風險了，我寧可選低風險的選項','做足功課後，如果邏輯可行就進入','如果這次失敗了我會很難受，所以不做']},
+  {sc:'你注意到你在某個類別的消費很容易超出預算（例如餐飲、衣服）。',ask:'你通常如何看待這件事？',
+   opts:['嚴格控制，這是紀律的問題','接受這是我喜歡的，允許自己在這裡多花一點','設定這個類別的上限，有意識地控制','感到有點罪惡感，但還是繼續']},
+  {sc:'你的好朋友向你借一筆對你來說不小的金額。',ask:'你最可能的反應是？',
+   opts:['謹慎評估自己的財務狀況後決定','朋友開口，我很難說不，傾向借出','清楚說明我的條件，確保雙方都清楚','感到兩難，怕傷感情，但也擔心財務']},
+  {sc:'你在規劃財務時，最主要的動機是什麼？',ask:'哪個最接近你的財務核心驅動力？',
+   opts:['對抗不確定性——有足夠的儲備讓我安心','為了某個具體的目標——旅行、買房、退休','讓錢增長——投資和複利是我的目標','給身邊的人提供保障——家人或我在乎的人']},
+  {sc:'你被問到：「你對錢的感情是什麼？」',ask:'你最誠實的回答是？',
+   opts:['錢是安全感，沒有錢讓我焦慮','錢是一種工具，讓我能過我想過的生活','錢是一種反映能力和成就的度量','錢不那麼重要，我更在乎生活的其他面向']},
+ ],
+ score(a){const cnt=[0,0,0,0];a.forEach(v=>cnt[v-1]++);return cnt.indexOf(Math.max(...cnt))},
+ result(s){
+  const R=[
+   {emoji:'🏦',name:'金錢警惕型 Money Vigilance',
+    sub:'Klontz 金錢腳本中的「金錢警惕型（Money Vigilance）」：相信金錢需要被謹慎管理，儲蓄是重要的美德。研究顯示此類型者有較低的財務焦慮，但有時可能過度節省而影響生活品質。',
+    traits:[{n:'儲蓄傾向',v:93},{n:'財務紀律',v:90},{n:'安全感追求',v:88},{n:'消費享受',v:38}],
+    tips:['設定一個「享樂預算」，允許自己不帶罪惡感消費','研究顯示：主動的投資比單純的儲蓄更能對抗通膨','安全感是習慣，不只是帳戶金額，練習在合理範圍內放鬆']},
+   {emoji:'🛍️',name:'享樂消費型 Money Worship',
+    sub:'Klontz 金錢腳本中「金錢崇拜型（Money Worship）」的消費取向：相信錢是用來讓生活更好的，活在當下。行為經濟學的研究顯示，「體驗性消費」帶來的幸福感確實比「物質性消費」更持久。',
+    traits:[{n:'當下享受',v:92},{n:'生活品質',v:88},{n:'衝動性',v:80},{n:'長期規劃',v:42}],
+    tips:['嘗試「先自動轉帳儲蓄，再消費剩下的」的策略','每季回顧一次支出，找出不知不覺消失的錢','Thaler 的心理帳戶理論：給每一筆支出一個「账戶」，更能有意識地控制']},
+   {emoji:'📈',name:'理性規劃型 Money Status',
+    sub:'你的財務行為結合了計畫性消費和投資成長的取向。行為經濟學研究顯示，有明確財務計畫的人其退休資產平均比沒有計畫的人高出 250%。',
+    traits:[{n:'財務規劃',v:92},{n:'投資意識',v:88},{n:'目標導向',v:90},{n:'靈活消費',v:55}],
+    tips:['繼續你的計畫習慣，它是最有效的財務策略','確保緊急備用金在開始投資之前已到位（建議 3-6 個月支出）','讓財務計畫也包含「享受生活」的預算，這是均衡的財務心理']},
+   {emoji:'💚',name:'關係優先型 Altruistic Money',
+    sub:'你的金錢觀以照顧他人和維護關係為核心。研究顯示，為他人花錢（親社會性消費）確實比為自己花錢帶來更高的幸福感（Dunn et al., 2008），但也需要確保自己的基本財務安全。',
+    traits:[{n:'利他傾向',v:93},{n:'關係維護',v:90},{n:'慷慨',v:88},{n:'個人財務保護',v:45}],
+    tips:['確保你的善意有清楚的界線，不影響自己的基本財務安全','「在飛機上，先戴上自己的氧氣罩」是最好的比喻','設定一個「捐贈/助人預算」，讓慷慨成為有計畫的習慣']}
+  ];return R[s];
+ }
+},
+
+]; // END DB
+
+// ════════════════════════════════════════════════════════
+//  TRACKER — Google 試算表記錄系統 v2
+//  記錄：網站訪問、測驗點閱、測驗完成、完成時間、裝置類型
+//  ⚠️ 部署 Apps Script 後，將網址貼到 TRACKER_URL
+// ════════════════════════════════════════════════════════
+const TRACKER_URL = 'https://script.google.com/macros/s/AKfycbxChr3EIVFRSWLbtV3yLMZWzpFNmEfVqYVPWWrJWcGFq28xh_7p96RIJB1YKvyBb780QQ/exec';
+
+// ── 裝置偵測 ──────────────────────────────────────────
+function getDevice() {
+  return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ? '手機' : '電腦';
+}
+
+// ── 核心發送函數（使用 Image ping，相容 file:// 本機與所有上線環境）──
+function sendToSheets(payload) {
+  if (!TRACKER_URL) return;
+  try {
+    // 方法：把資料編碼成 GET 參數，用 Image 標籤發送
+    // 優點：完全繞過跨域限制，file:// 本機也能用，不需要 CORS
+    const params = Object.keys(payload)
+      .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(payload[k]))
+      .join('&');
+    const img = new Image();
+    img.src = TRACKER_URL + '?' + params;
+    // 不需要插入 DOM，瀏覽器會自動發出請求
+  } catch(e) {
+    console.warn('[Tracker] 傳送失敗：', e);
+  }
+}
+
+// ── 事件追蹤函數 ───────────────────────────────────────
+// action: 'site_visit' | 'quiz_view' | 'quiz_complete'
+function track(action, quizId) {
+  sendToSheets({
+    action:    action,
+    quiz_id:   quizId || '',
+    device:    getDevice(),
+    timestamp: new Date().toISOString()
+  });
+}
+
+// ── 頁面載入時：記錄網站訪問 ──────────────────────────
+track('site_visit', '');
+
+// ── JSONP 讀取真實完成數，更新卡片顯示 ────────────────
+function loadRealCounts() {
+  if (!TRACKER_URL) return;
+  const script = document.createElement('script');
+  script.src = TRACKER_URL + '?callback=onCountsLoaded';
+  document.head.appendChild(script);
+  setTimeout(() => { try { document.head.removeChild(script); } catch(e){} }, 5000);
+}
+
+function onCountsLoaded(data) {
+  if (!data || !data.data) return;
+  DB.forEach(q => {
+    const info = data.data[q.id];
+    if (info && info.completes > 0) {
+      q.cnt = info.completes;
+      const el = document.querySelector('[data-quiz-cnt="' + q.id + '"]');
+      if (el) el.textContent = info.completes.toLocaleString();
+    }
+  });
+}
+
+// ════════════════════
+//  STATE & ROUTING
+// ════════════════════
+let curQuiz=null,curQ=0,ans=[];
+function goHome(){show('home');renderCards('all');window.scrollTo({top:0,behavior:'smooth'})}
+function show(p){
+  ['home','quiz','result'].forEach(id=>document.getElementById('pg-'+id).style.display=p===id?'block':'none');
+}
+
+// ════════════════════
+//  RENDER CARDS
+// ════════════════════
+function renderCards(cat){
+  const g=document.getElementById('qgrid');g.innerHTML='';
+  const list=cat==='all'?DB:DB.filter(q=>q.cat===cat);
+  list.forEach((q,i)=>{
+    const el=document.createElement('div');
+    el.className=`qcard cc-${q.color}`;
+    el.style.animationDelay=`${i*55}ms`;
+    el.innerHTML=`
+      <div class="qcard-top">
+        <div class="qcard-icon ic-${q.color}">${q.icon}</div>
+        <span class="qcard-badge bd-${q.color}">${q.cat}</span>
+      </div>
+      <div class="qcard-title">${q.title}</div>
+      <div class="qcard-desc">${q.desc}</div>
+      <div class="qcard-meta">
+        <span class="qpill">⏱ ${q.time}</span>
+        <span class="qpill">📋 ${q.count}</span>
+        <span class="qpill">🎯 ${q.tag}</span>
+      </div>
+      <div class="qcard-footer">
+        <span class="qcard-count">已有 <strong data-quiz-cnt="${q.id}">${q.cnt.toLocaleString()}</strong> 人完成</span>
+        <button class="qcard-start bs-${q.color}" onclick="startQuiz('${q.id}')">開始 →</button>
+      </div>`;
+    g.appendChild(el);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('show')));
+  });
+}
+
+// TABS
+document.getElementById('cat-tabs').addEventListener('click',e=>{
+  const t=e.target.closest('.ctab');if(!t)return;
+  document.querySelectorAll('.ctab').forEach(b=>b.classList.remove('on'));
+  t.classList.add('on');renderCards(t.dataset.c);
+});
+renderCards('all');
+
+// ════════════════════
+//  QUIZ FLOW
+// ════════════════════
+function startQuiz(id){
+  curQuiz=DB.find(q=>q.id===id);
+  curQ=0;ans=new Array(curQuiz.qs.length).fill(null);
+  show('quiz');window.scrollTo({top:0,behavior:'instant'});
+  renderQ();
+  // ── 記錄測驗點閱（點閱數 +1，寫入事件記錄）──
+  track('quiz_view', curQuiz.id);
+}
+
+function renderQ(){
+  const q=curQuiz.qs[curQ],n=curQuiz.qs.length;
+  const pct=Math.round((curQ/n)*100+100/n);
+  document.getElementById('prog-lbl').textContent=`第 ${curQ+1} 題`;
+  document.getElementById('prog-frac').textContent=`${curQ+1} / ${n}`;
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('q-prev').disabled=curQ===0;
+  const nxtBtn=document.getElementById('q-next');
+  nxtBtn.disabled=ans[curQ]===null;
+  nxtBtn.textContent=curQ===n-1?'查看結果 ✨':'下一題 →';
+
+  const _showInter=(curQ===AD_IMAGES.interAfterQ);
+  document.getElementById('q-box-wrap').innerHTML=`
+    <div class="q-box">
+      <div class="q-scene">情境 ${curQ+1}</div>
+      ${q.sc?`<div class="q-situation">${q.sc}</div>`:''}
+      <div class="q-ask">${q.ask}</div>
+      <div class="opts">
+        ${'ABCD'.split('').slice(0,q.opts.length).map((k,i)=>`
+          <div class="opt ${ans[curQ]===i+1?'sel':''}" onclick="pick(${i+1})">
+            <span class="opt-key">${k}</span>
+            <span class="opt-body">${q.opts[i]}</span>
+          </div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function pick(v){
+  ans[curQ]=v;
+  document.querySelectorAll('.opt').forEach((o,i)=>{o.classList.toggle('sel',i+1===v);o.querySelector('.opt-key').style.background=i+1===v?'var(--rose-d)':'';o.querySelector('.opt-key').style.color=i+1===v?'#fff':'';o.querySelector('.opt-key').style.borderColor=i+1===v?'var(--rose-d)':'';});
+  document.getElementById('q-next').disabled=false;
+}
+function nextQ(){
+  if(ans[curQ]===null)return;
+  if(curQ===curQuiz.qs.length-1){showResult();return;}
+  const wasInterQ=(curQ===AD_IMAGES.interAfterQ);
+  curQ++;renderQ();
+  if(wasInterQ){
+    setTimeout(()=>{
+      const wrap=document.getElementById('q-box-wrap');
+      if(wrap&&!wrap.querySelector('.ad-inter')){
+        wrap.insertAdjacentHTML('afterend',buildInterAd());
+        trackAd('inter','view');
+      }
+    },100);
+  }
+}
+function prevQ(){if(curQ>0){curQ--;renderQ();}}
+
+// ════════════════════
+//  RESULT
+// ════════════════════
+function showResult(){
+  const score=curQuiz.score(ans);
+  const r=curQuiz.result(score);
+  show('result');window.scrollTo({top:0,behavior:'instant'});
+  // ── 記錄測驗完成（完成數 +1，含時間戳記與裝置）──
+  track('quiz_complete', curQuiz.id);
+  curQuiz.cnt = (curQuiz.cnt || 0) + 1; // 本 session 內卡片數字立即 +1
+  document.getElementById('res-shell').innerHTML=`
+    <div class="res-hero">
+      <div class="res-orb">${r.emoji}</div>
+      <div class="res-cat">${curQuiz.cat} · ${curQuiz.tag}</div>
+      <h2 class="res-name">${r.name}</h2>
+      <p class="res-sub">${r.sub}</p>
+      <div style="display:inline-block;font-size:.68rem;color:var(--muted);background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.35rem .8rem;margin-bottom:.5rem;line-height:1.5;max-width:480px;text-align:left">
+        <span style="font-weight:700;color:var(--rose-d)">📚 理論依據</span><br>${curQuiz.theory}
+      </div>
+    </div>
+    <div class="res-card">
+      <div class="res-card-title">📊 特質分析</div>
+      ${r.traits.map(t=>`
+        <div class="trait-row">
+          <span class="trait-name">${t.n}</span>
+          <div class="trait-track"><div class="trait-fill" data-v="${t.v}"></div></div>
+          <span class="trait-val">${t.v}%</span>
+        </div>`).join('')}
+    </div>
+    <div class="res-card">
+      <div class="res-card-title">✦ 給你的建議</div>
+      <ul class="tips-list">${r.tips.map(t=>`<li>${t}</li>`).join('')}</ul>
+    </div>
+    ${buildResultAd()}
+    <div class="res-actions">
+      <button class="ra-main" onclick="shareResult()">分享結果 💌</button>
+      <button class="ra-sec" onclick="startQuiz('${curQuiz.id}')">重新測驗</button>
+      <button class="ra-sec" onclick="goHome()">選其他測驗</button>
+    </div>`;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    document.querySelectorAll('.trait-fill').forEach(b=>{b.style.width=b.dataset.v+'%'});
+  }));
+}
+
+function shareResult(){
+  if(navigator.share){navigator.share({title:'Kentarry 測驗結果',text:`我完成了「${curQuiz.title}」！`})}
+  else{alert('📋 結果已複製！分享給你的朋友吧 🌸');}
+}
+
+// 頁面載入後讀取真實完成數，更新卡片顯示
+loadRealCounts();
+
+// scroll reveal
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+// ╔══════════════════════════════════════════════════════════════╗
+// ║              ★  廣告圖片設定區  ★                           ║
+// ║  在這裡修改圖片網址和點擊連結，三個位置各自獨立設定           ║
+// ╚══════════════════════════════════════════════════════════════╝
+
+const AD_IMAGES = {
+
+  // ╔══════════════════════════════════════════════════════════════╗
+  // ║  廣告清單 — 三個位置共用同一組廣告，自動輪播                  ║
+  // ║  新增廣告：在 ads 陣列中加一個 { name, img, url } 物件       ║
+  // ║  移除廣告：刪掉對應的物件即可                                 ║
+  // ╚══════════════════════════════════════════════════════════════╝
+  ads: [
+    {
+      name: '多功能工具箱',                                    // 廣告名稱（顯示在圖片下方）
+      img:  'advertise/advertise1.jpeg',                      // 圖片路徑（相對路徑或完整URL）
+      url:  'https://kentarry.github.io/100-tools-box/',      // 點擊連結
+    },
+    {
+      name: '台灣AI新聞',
+      img:  'advertise/advertise2.jpg',
+      url:  'https://www.twainews.com.tw/3325835069235672403720855',
+    },
+    {
+      name: '輕量化露營協作平台',
+      img:  'advertise/advertise3.jpg',
+      url:  'https://molly40920-design.github.io/camping/',
+    },
+  ],
+
+  // ── 時間設定 ──────────────────────────────────────────────────
+  stickyDelay:    4000,   // 底部橫幅：幾毫秒後出現（4000 = 4 秒）
+  stickyInterval: 6000,   // 底部橫幅：幾毫秒自動換一張（6000 = 6 秒）
+  interAfterQ:    3,      // 插頁廣告：第幾題答完後出現（3 = 第 4 題後）
+
+  // ── 由程式自動產生三個位置的廣告陣列，不需手動修改 ──────────
+  get sticky(){ return this.ads; },
+  get inter(){  return this.ads; },
+  get result(){ return this.ads; },
+
+};
+// ╚══════════════════════════════════════════════════════════════╝
+// ║  以上是廣告設定區，下方是程式邏輯，一般不需要修改            ║
+// ╚══════════════════════════════════════════════════════════════╝
+
+// ── 追蹤函數 ──────────────────────────────────────────────────
+function trackAd(pos, action){
+  // 接 GA4: gtag('event','ad_'+action,{ad_position:pos});
+  // 接 FB Pixel: fbq('trackCustom','AdClick',{position:pos});
+  console.log('[Kentarry Ad]', pos, action);
+}
+
+// ── 輔助：建立輪播圓點 ────────────────────────────────────────
+function buildDots(count, onClickFn){
+  if(count <= 1) return '';
+  const dots = Array.from({length:count}, (_,i) =>
+    `<button class="ad-dot ${i===0?'on':''}" onclick="${onClickFn}(${i})" aria-label="廣告 ${i+1}"></button>`
+  ).join('');
+  return `<div class="ad-dots">${dots}</div>`;
+}
+
+// ════════════════════════════════════════════════════════════════
+//  位置一：底部常駐橫幅 — 輪播邏輯
+// ════════════════════════════════════════════════════════════════
+let _stickyIdx=0, _stickyTimer=null, _stickyClosed=false;
+
+function initSticky(){
+  if(_stickyClosed) return;
+  const el = document.getElementById('ad-sticky');
+  if(!el || AD_IMAGES.sticky.length===0) return;
+
+  renderStickyAd(_stickyIdx);
+
+  // 多張才啟動自動輪播
+  if(AD_IMAGES.sticky.length > 1){
+    _stickyTimer = setInterval(()=>{
+      _stickyIdx = (_stickyIdx + 1) % AD_IMAGES.sticky.length;
+      renderStickyAd(_stickyIdx);
+    }, AD_IMAGES.stickyInterval);
+  }
+
+  setTimeout(()=>{
+    el.classList.add('visible');
+    document.body.classList.add('ad-on');
+  }, AD_IMAGES.stickyDelay);
+}
+
+function renderStickyAd(idx){
+  const ad  = AD_IMAGES.sticky[idx];
+  const el  = document.getElementById('ad-sticky');
+  const wrap= el.querySelector('.sticky-img-wrap');
+  if(!wrap) return;
+  wrap.href = ad.url;
+  const img = wrap.querySelector('img');
+  if(img){ img.src = ad.img; img.alt = ad.name || '廣告'; }
+  // 更新圓點
+  el.querySelectorAll('.ad-dot').forEach((d,i)=>d.classList.toggle('on', i===idx));
+}
+
+function jumpStickyAd(idx){
+  _stickyIdx = idx;
+  renderStickyAd(idx);
+  // 重置計時器
+  if(_stickyTimer){ clearInterval(_stickyTimer); }
+  if(AD_IMAGES.sticky.length > 1){
+    _stickyTimer = setInterval(()=>{
+      _stickyIdx = (_stickyIdx + 1) % AD_IMAGES.sticky.length;
+      renderStickyAd(_stickyIdx);
+    }, AD_IMAGES.stickyInterval);
+  }
+}
+
+function closeSticky(){
+  if(_stickyTimer) clearInterval(_stickyTimer);
+  document.getElementById('ad-sticky').classList.remove('visible');
+  document.body.classList.remove('ad-on');
+  _stickyClosed = true;
+  trackAd('sticky','close');
+}
+
+initSticky();
+
+// ════════════════════════════════════════════════════════════════
+//  位置二：答題中間插頁 — 隨機抽一張 + 可 X 關閉
+// ════════════════════════════════════════════════════════════════
+let _interIdx = 0;
+
+function buildInterAd(){
+  if(AD_IMAGES.inter.length === 0) return '';
+  const ad = AD_IMAGES.inter[_interIdx % AD_IMAGES.inter.length];
+  _interIdx++;
+  const dots = buildDots(AD_IMAGES.inter.length, 'jumpInterAd');
+  return `<div class="ad-inter" id="ad-inter-box">
+    <span class="ad-badge-img">廣告</span>
+    <button class="ad-close-btn" onclick="closeInterAd()" aria-label="關閉廣告">✕</button>
+    <a class="inter-img-link" href="${ad.url}" target="_blank" rel="noopener"
+       onclick="trackAd('inter','click')">
+      <img src="${ad.img}" alt="${ad.name}" loading="lazy">
+    </a>
+    <div class="ad-name-bar">
+      <span class="ad-name-text">✦ ${ad.name}</span>
+      <span class="ad-name-cta">前往了解 →</span>
+    </div>
+    ${dots}
+  </div>`;
+}
+
+function closeInterAd(){
+  const el = document.getElementById('ad-inter-box');
+  if(el){ el.style.display='none'; }
+  trackAd('inter','close');
+}
+
+function jumpInterAd(idx){
+  _interIdx = idx;
+  const ad  = AD_IMAGES.inter[idx];
+  const box = document.getElementById('ad-inter-box');
+  if(!box) return;
+  const img = box.querySelector('.inter-img-link img');
+  const lnk = box.querySelector('.inter-img-link');
+  if(img) img.src = ad.img;
+  if(lnk) lnk.href = ad.url;
+  box.querySelectorAll('.ad-dot').forEach((d,i)=>d.classList.toggle('on', i===idx));
+  trackAd('inter','dot_click');
+}
+
+// ════════════════════════════════════════════════════════════════
+//  位置三：結果頁推廣卡 — 輪播 + 可 X 關閉
+// ════════════════════════════════════════════════════════════════
+let _resultIdx = 0;
+
+function buildResultAd(){
+  if(AD_IMAGES.result.length === 0) return '';
+  const ad   = AD_IMAGES.result[_resultIdx % AD_IMAGES.result.length];
+  _resultIdx++;
+  const dots = buildDots(AD_IMAGES.result.length, 'jumpResultAd');
+  return `<div class="ad-res-card" id="ad-result-box">
+    <span class="ad-badge-img">廣告</span>
+    <button class="ad-close-btn" onclick="closeResultAd()" aria-label="關閉廣告">✕</button>
+    <a class="result-img-link" href="${ad.url}" target="_blank" rel="noopener"
+       onclick="trackAd('result','click')">
+      <img src="${ad.img}" alt="${ad.name}" loading="lazy">
+    </a>
+    <div class="ad-name-bar">
+      <span class="ad-name-text">✦ ${ad.name}</span>
+      <span class="ad-name-cta">前往了解 →</span>
+    </div>
+    ${dots}
+  </div>`;
+}
+
+function closeResultAd(){
+  const el = document.getElementById('ad-result-box');
+  if(el){ el.style.display='none'; }
+  trackAd('result','close');
+}
+
+function jumpResultAd(idx){
+  _resultIdx = idx;
+  const ad  = AD_IMAGES.result[idx];
+  const box = document.getElementById('ad-result-box');
+  if(!box) return;
+  const img = box.querySelector('.result-img-link img');
+  const lnk = box.querySelector('.result-img-link');
+  if(img) img.src = ad.img;
+  if(lnk) lnk.href = ad.url;
+  box.querySelectorAll('.ad-dot').forEach((d,i)=>d.classList.toggle('on', i===idx));
+  trackAd('result','dot_click');
+}
+</script>
+
+<!-- ════════════════════════════════════════════════════
+     底部常駐橫幅 — 圖片由 AD_IMAGES.sticky 控制
+     initSticky() 會自動填入圖片和連結，不需在此修改
+════════════════════════════════════════════════════ -->
+<div id="ad-sticky" role="complementary" aria-label="廣告">
+  <span class="sticky-ad-label">廣告</span>
+  <button class="sticky-close" onclick="closeSticky()" aria-label="關閉廣告">✕</button>
+  <a class="sticky-img-wrap" href="#" target="_blank" rel="noopener"
+     onclick="trackAd('sticky','click')">
+    <img src="" alt="橫幅廣告" loading="lazy">
+  </a>
+</div>
+
+</body>
+</html>
